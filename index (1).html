@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="logo.png">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111315">
+  <title>Violet Fast — Typing Practice</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #111315;
+      --panel: #191c1f;
+      --panel-2: #202428;
+      --text: hsl(249, 43%, 56%);
+      --muted: #777f86;
+      --accent: lch(99.26% 3.51 191.03);
+      --green: #a8d7a0;
+      --red: #ef7c7c;
+      --border: #30353a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
+      font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    button, select, textarea { font: inherit; }
+    button, select {
+      color: var(--text); background: var(--panel-2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 9px 13px;
+    }
+    button { cursor: pointer; transition: border-color .15s, background .15s; }
+    button:hover, select:hover { border-color: var(--accent); }
+    button:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    .wrap { width: min(1040px, calc(100% - 32px)); margin: 0 auto; }
+    header { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 24px 0 34px; }
+    .brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.brand img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+.brand-name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  background: linear-gradient(90deg, #8b5cf6, #e8c46a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+    .brand span { color: var(--accent); }
+    .subbrand { color: var(--muted); font-size: .78rem; margin-top: -5px; }
+    .top-actions { display: flex; gap: 8px; align-items: center; }
+    main { padding-bottom: 50px; }
+    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 24px; }
+    .toolbar label { color: var(--muted); font-size: .9rem; }
+    .toolbar select { margin-left: 6px; }
+    .mode-tabs { display: flex; gap: 7px; margin-left: auto; }
+    .mode-tabs button.active { color: var(--accent); border-color: var(--accent); }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
+    .stat { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; }
+    .stat-label { color: var(--muted); font-size: .82rem; }
+    .stat-value { font-size: 1.65rem; font-weight: 750; line-height: 1.35; color: var(--accent); font-variant-numeric: tabular-nums; }
+    .test-card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: clamp(18px, 4vw, 32px); }
+    .test-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .test-head h1 { font-size: 1.05rem; margin: 0; font-weight: 650; }
+    .timer { color: var(--accent); font-variant-numeric: tabular-nums; font-weight: 750; }
+    
+#prompt {
+  height: 5.7em;
+  min-height: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+  color: #737b83;
+  font-size: clamp(1.15rem, 2.3vw, 1.55rem);
+  line-height: 1.9;
+  letter-spacing: .015em;
+  overflow-wrap: anywhere;
+  user-select: none;
+}
+
+#prompt::-webkit-scrollbar {
+  display: none;
+}
+
+    #prompt .correct { color: var(--green); }
+    #prompt .incorrect { color: var(--red); background: #48292b; border-radius: 3px; }
+    #prompt .current { border-left: 2px solid var(--accent); margin-left: -2px; }
+    #typingInput {
+      display: block; width: 100%; min-height: 82px; resize: vertical; margin-top: 18px;
+      background: #121416; color: var(--text); border: 1px solid var(--border);
+      border-radius: 10px; padding: 15px; line-height: 1.7;
+    }
+    #typingInput::placeholder { color: #687078; }
+    .hint { color: var(--muted); font-size: .84rem; margin: 10px 0 0; }
+    .controls { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .primary { background: var(--accent); color: #171717; border-color: var(--accent); font-weight: 750; }
+    .primary:hover { background: #f0d384; }
+    .keyboard { margin-top: 24px; padding: 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 14px; }
+    .keyboard-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .keyboard h2 { margin: 0; font-size: .95rem; }
+    .keyboard small { color: var(--muted); }
+    .key-row { display: flex; justify-content: center; gap: 5px; margin: 5px 0; }
+    .key { min-width: 0; flex: 1; max-width: 58px; height: 39px; border: 1px solid #353b40; border-radius: 6px; background: #24292d; color: #aeb5ba; display: grid; place-items: center; font-size: .8rem; }
+    .key.wide { flex: 1.6; max-width: 90px; }
+    .key.space { flex: 6; max-width: 360px; }
+    .key.next { background: #4b4227; border-color: var(--accent); color: #ffe7a0; }
+    .key.pressed { background: #28513d; border-color: var(--green); }
+    .results { display: none; margin-top: 20px; padding: 22px; background: #20251f; border: 1px solid #43543e; border-radius: 14px; }
+    .results.show { display: block; }
+    .results h2 { margin: 0 0 12px; }
+    .result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .result-item { background: #171b17; padding: 13px; border-radius: 9px; }
+    .result-item strong { display: block; font-size: 1.4rem; color: var(--green); }
+    footer { text-align: center; color: var(--muted); font-size: .82rem; padding: 26px 0; }
+    @media (max-width: 640px) {
+      header { align-items: flex-start; padding-bottom: 24px; }
+      .top-actions { flex-direction: column; align-items: flex-end; }
+      .mode-tabs { margin-left: 0; width: 100%; }
+      .mode-tabs button { flex: 1; }
+      .stats { gap: 7px; }
+      .stat { padding: 10px; }
+      .stat-value { font-size: 1.3rem; }
+      .key-row { gap: 3px; }
+      .key { height: 30px; font-size: .65rem; border-radius: 4px; }
+      .keyboard { padding: 10px; }
+      .result-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        
+<div class="brand">
+  <img src="logo.png" alt="Violet Fast logo">
+  <span class="brand-name">Violet Fast</span>
+</div>
+
+        <div class="subbrand">A little practice. A lot more speed.</div>
+      </div>
+      <div class="top-actions">
+        <button id="restartTop" type="button" title="Restart test">↻ Restart</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="toolbar">
+        <label>Language
+          <select id="language">
+            <option value="english">English</option>
+            <option value="hindi">Hindi</option>
+            <option value="punjabi">Punjabi</option>
+          </select>
+        </label>
+        <label>Duration
+          <select id="duration">
+            <option value="30">30 seconds</option>
+            <option value="60" selected>60 seconds</option>
+            <option value="120">120 seconds</option>
+          </select>
+        </label>
+        <div class="mode-tabs" aria-label="Practice mode">
+          <button class="active" type="button" data-mode="words">Words</button>
+          <button type="button" data-mode="sentences">Sentences</button>
+        </div>
+      </div>
+
+      <section class="stats" aria-label="Live statistics">
+        <div class="stat"><div class="stat-label">WPM</div><div class="stat-value" id="wpm">0</div></div>
+        <div class="stat"><div class="stat-label">Accuracy</div><div class="stat-value" id="accuracy">100%</div></div>
+        <div class="stat"><div class="stat-label">Time left</div><div class="stat-value" id="time">60s</div></div>
+      </section>
+
+      <section class="test-card">
+        <div class="test-head">
+          <h1 id="testTitle">Type the text below</h1>
+          <div class="timer" id="status">Ready</div>
+        </div>
+        <div id="prompt" aria-label="Text to type"></div>
+        <textarea id="typingInput" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Click here and start typing…" aria-label="Type the displayed text here"></textarea>
+        <p class="hint" id="hint">The timer starts with your first keystroke. For Hindi and Punjabi, use your preferred keyboard/input method.</p>
+        <div class="controls">
+          <button class="primary" id="startBtn" type="button">Start typing</button>
+          <button id="restartBtn" type="button">Restart test</button>
+        </div>
+      </section>
+
+      <section class="results" id="results" aria-live="polite">
+        <h2>Test complete ✨</h2>
+        <div class="result-grid">
+          <div class="result-item">Speed<strong id="finalWpm">0 WPM</strong></div>
+          <div class="result-item">Accuracy<strong id="finalAccuracy">100%</strong></div>
+          <div class="result-item">Correct characters<strong id="finalCorrect">0 / 0</strong></div>
+        </div>
+        <div class="controls"><button class="primary" id="againBtn" type="button">Try again</button></div>
+      </section>
+
+      <section class="keyboard" aria-label="Visual keyboard">
+        <div class="keyboard-top"><h2>Keyboard guide</h2><small>Highlights the next English key</small></div>
+        <div id="keyboardRows"></div>
+      </section>
+    </main>
+    <footer>keySprint · Practice at your own pace · Your typing stays in this browser</footer>
+  </div>
+
+  <script>
+    const passages = {
+      english: {
+        words: [
+          "oceans are areas of salty water that fill enormous basins on the earth's surface. even though Earth has one continuous body of saltwater, scientists and geographers divide it into five different sections. from biggest to smallest, they are the pacific, the atlantic, the indian, the southern, and the arctic aceans. Oceans are deep as well as wide. on average an ocean is a little over two miles deep. But about two hundred miles southwest of guam in the pacific ocean, the water in the mariana trench is almost seven miles deep. that's the deepest part of the ocean.",
+          "practice focus improve speed accuracy daily words learn build create think code write read type quick smart skill progress steady calm work. learning to type without looking at the keyboard helps you work faster and stay focused. the quick brown fox jumps over the lazy dog and then runs across the green field. small steps every day can turn a beginner into a confident and careful typist",
+          "a computer is an electronic device that was discovered by charles babbage. he is known as the father of computers. there are various parts to a computer. the four major parts of a computer are the mouse, keyboard, monitor and cpu. with computers, we can send and receive messages through emails and save important information. it helps to store and modify data. nowadays, computers are used in schools, banks, offices, etc., and it is now impossible to survive without computers in order to run any organisation, institution, or any other office, a computer is a must. computers have made life easier for people of different age groups.",
+          " russia is the largest country in the world. It stretches from europe to the pacific Ocean in asia. russia is so large that it has nine different time zones. a time zone is an area in which all the countries have the same time on their clocks. the people in russia are called russians and the language they speak is called russian. russian has its own special alphabet and symbols that it uses for each letter. this special alphabet is called cyrillic. unlike the English alphabet which has twenty six letters, the russian alphabet has thirty three. the russian language is the eighth most spoken language in the world. this is probably because of how large russia is and how much Russia's history influenced the countries around it. russian rulers kings, queens, emperors, and empresses spent a lot of time trying to expand and grow russia and make it a big country. Over time, they succeeded. one of the most successful empresses was catherine the great.",
+          
+        ],
+        sentences: [
+          
+          "Good typing comes from regular practice, relaxed hands, and steady accuracy. A little practice each day can make a big difference over time. Build something useful, test it carefully, and improve it one step at a time. ",
+          "Video provides a powerful way to help you prove your point. When you click Online Video, you can paste in the embed code for the video you want to add. You can also type a keyword to search online for the video that best fits your document. To make your document look professionally produced, Word provides header, footer, cover page, and text box designs that complement each other. For example, you can add a matching cover page, header, and sidebar. Click Insert and then choose the elements you want from the different galleries. Themes and styles also help keep your document coordinated. When you click Design and choose a new Theme, the pictures, charts, and SmartArt graphics change to match your new theme. When you apply styles, your headings change to match the new theme. Save time in Word with new buttons that show up where you need them. To change the way a picture fits in your document, click it and a button for layout options appears next to it. When you work on a table, click where you want to add a row or a column, and then click the plus sign. Reading is easier, too, in the new Reading view. You can collapse parts of the document and focus on the text you want. If you need to stop reading before you reach the end, Word remembers where you left off - even on another device.",
+          
+        ]
+      },
+      hindi: {
+        words: [
+          "नमस्ते अभ्यास मेहनत सफलता सीखना लिखना पढ़ना गति सही ध्यान समय काम कौशल विकास लक्ष्य प्रयास",
+          "हर दिन थोड़ा अभ्यास करने से आपकी टाइपिंग की गति और सटीकता बेहतर हो सकती है",
+          "धीरे धीरे सही टाइप करना सीखें फिर अपनी गति बढ़ाने पर ध्यान दें",
+          "नई चीजें सीखते रहें और हर दिन खुद को बेहतर बनाने की कोशिश करें"
+        ],
+        sentences: [
+          "हर दिन अभ्यास करने से टाइपिंग की गति और सटीकता बेहतर होती है।",
+          "पहले सही टाइप करना सीखें, फिर धीरे धीरे अपनी गति बढ़ाएँ।",
+          "मेहनत और धैर्य से आप अपने लक्ष्य तक पहुँच सकते हैं।"
+        ]
+      },
+      punjabi: {
+        words: [
+          "ਸਤ ਸ੍ਰੀ ਅਕਾਲ ਅਭਿਆਸ ਮਿਹਨਤ ਸਫਲਤਾ ਸਿੱਖਣਾ ਲਿਖਣਾ ਪੜ੍ਹਨਾ ਗਤੀ ਧਿਆਨ ਸਮਾਂ ਕੰਮ ਹੁਨਰ",
+          "ਹਰ ਰੋਜ਼ ਥੋੜ੍ਹਾ ਅਭਿਆਸ ਕਰਨ ਨਾਲ ਤੁਹਾਡੀ ਟਾਈਪਿੰਗ ਦੀ ਗਤੀ ਅਤੇ ਸ਼ੁੱਧਤਾ ਵਧ ਸਕਦੀ ਹੈ",
+          "ਪਹਿਲਾਂ ਸਹੀ ਟਾਈਪ ਕਰਨਾ ਸਿੱਖੋ ਫਿਰ ਆਪਣੀ ਗਤੀ ਵਧਾਉਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ",
+          "ਨਵੀਆਂ ਚੀਜ਼ਾਂ ਸਿੱਖਦੇ ਰਹੋ ਅਤੇ ਹਰ ਦਿਨ ਆਪਣੇ ਆਪ ਨੂੰ ਬਿਹਤਰ ਬਣਾਓ"
+        ],
+        sentences: [
+          "ਹਰ ਰੋਜ਼ ਅਭਿਆਸ ਕਰਨ ਨਾਲ ਟਾਈਪਿੰਗ ਦੀ ਗਤੀ ਅਤੇ ਸ਼ੁੱਧਤਾ ਵਧਦੀ ਹੈ।",
+          "ਪਹਿਲਾਂ ਸਹੀ ਟਾਈਪ ਕਰਨਾ ਸਿੱਖੋ, ਫਿਰ ਹੌਲੀ ਹੌਲੀ ਗਤੀ ਵਧਾਓ।",
+          "ਮਿਹਨਤ ਅਤੇ ਲਗਨ ਨਾਲ ਤੁਸੀਂ ਆਪਣਾ ਟੀਚਾ ਹਾਸਲ ਕਰ ਸਕਦੇ ਹੋ।"
+        ]
+      }
+    };
+
+    const $ = (id) => document.getElementById(id);
+    const input = $("typingInput");
+    const promptEl = $("prompt");
+    const languageEl = $("language");
+    const durationEl = $("duration");
+    const modeButtons = [...document.querySelectorAll("[data-mode]")];
+    const keyboardRows = $("keyboardRows");
+    const keyRows = [
+      ["`","1","2","3","4","5","6","7","8","9","0","-","=","Backspace"],
+      ["Tab","q","w","e","r","t","y","u","i","o","p","[","]","\\"],
+      ["Caps","a","s","d","f","g","h","j","k","l",";","'","Enter"],
+      ["Shift","z","x","c","v","b","n","m",",",".","/","Shift"],
+      ["Ctrl","Alt","Space","Alt","←","↓","↑","→"]
+    ];
+    let mode = "words", target = "", startedAt = null, timerId = null;
+    let duration = 60, finished = false;
+
+    function buildKeyboard() {
+      keyboardRows.innerHTML = "";
+      keyRows.forEach(row => {
+        const rowEl = document.createElement("div");
+        rowEl.className = "key-row";
+        row.forEach(label => {
+          const key = document.createElement("div");
+          key.className = "key";
+          key.dataset.key = label.toLowerCase();
+          key.textContent = label === "Space" ? " " : label;
+          if (["Backspace","Enter","Shift","Caps","Tab","Ctrl","Alt"].includes(label)) key.classList.add("wide");
+          if (label === "Space") key.classList.add("space");
+          rowEl.appendChild(key);
+        });
+        keyboardRows.appendChild(rowEl);
+      });
+    }
+
+    function choosePassage() {
+      const pool = passages[languageEl.value][mode];
+      return pool[Math.floor(Math.random() * pool.length)];
+    }
+
+    function renderPrompt() {
+      const typed = Array.from(input.value);
+      const targetChars = Array.from(target);
+      promptEl.innerHTML = "";
+      targetChars.forEach((char, i) => {
+        const span = document.createElement("span");
+        span.textContent = char;
+        if (i < typed.length) span.className = typed[i] === char ? "correct" : "incorrect";
+        else if (i === typed.length && !finished) span.className = "current";
+        promptEl.appendChild(span);
+      });
+      
+const current = promptEl.querySelector(".current");
+if (current) {
+  current.scrollIntoView({ block: "nearest" });
+}
+highlightNextKey();
+    }
+
+    function highlightNextKey() {
+      document.querySelectorAll(".key").forEach(k => k.classList.remove("next"));
+      if (languageEl.value !== "english") return;
+      const next = Array.from(target)[Array.from(input.value).length];
+      if (!next) return;
+      const key = next === " " ? "space" : next.toLowerCase();
+      const el = [...document.querySelectorAll(".key")].find(k => k.dataset.key === key);
+      if (el) el.classList.add("next");
+    }
+
+    function stats() {
+      const typed = Array.from(input.value);
+      const targetChars = Array.from(target);
+      let correct = 0;
+      typed.forEach((char, i) => { if (char === targetChars[i]) correct++; });
+      const elapsedSeconds = startedAt ? Math.max(1, (Date.now() - startedAt) / 1000) : 0;
+      const words = input.value.trim() ? input.value.trim().split(/\s+/u).length : 0;
+      const wpm = elapsedSeconds ? Math.round(words / (elapsedSeconds / 60)) : 0;
+      const accuracy = typed.length ? Math.round((correct / typed.length) * 100) : 100;
+      $("wpm").textContent = wpm;
+      $("accuracy").textContent = accuracy + "%";
+      return { wpm, accuracy, correct, typed: typed.length };
+    }
+
+    function finishTest() {
+      if (finished) return;
+      finished = true;
+      clearInterval(timerId);
+      input.disabled = true;
+      $("status").textContent = "Complete";
+      const s = stats();
+      $("finalWpm").textContent = s.wpm + " WPM";
+      $("finalAccuracy").textContent = s.accuracy + "%";
+      $("finalCorrect").textContent = s.correct + " / " + s.typed;
+      $("results").classList.add("show");
+      renderPrompt();
+    }
+
+    function startTimer() {
+      if (startedAt || finished) return;
+      startedAt = Date.now();
+      $("status").textContent = "Testing";
+      timerId = setInterval(() => {
+        const elapsed = (Date.now() - startedAt) / 1000;
+        const left = Math.max(0, duration - elapsed);
+        $("time").textContent = Math.ceil(left) + "s";
+        stats();
+        if (left <= 0) finishTest();
+      }, 100);
+    }
+
+    function resetTest() {
+      clearInterval(timerId);
+      duration = Number(durationEl.value);
+      target = choosePassage();
+      input.value = "";
+      input.disabled = false;
+      startedAt = null;
+      finished = false;
+      $("time").textContent = duration + "s";
+      $("wpm").textContent = "0";
+      $("accuracy").textContent = "100%";
+      $("status").textContent = "Ready";
+      $("results").classList.remove("show");
+      $("hint").textContent = languageEl.value === "english"
+        ? "The timer starts with your first keystroke. Type the displayed text as accurately as you can."
+        : "Use your Hindi/Punjabi keyboard or input method. The timer starts with your first keystroke.";
+      renderPrompt();
+      input.focus();
+    }
+
+    input.addEventListener("input", () => {
+      if (finished) return;
+      if (input.value.length > 0) startTimer();
+      renderPrompt();
+      stats();
+      if (Array.from(input.value).length >= Array.from(target).length) finishTest();
+    });
+    input.addEventListener("keydown", e => {
+      const keyName = e.key.toLowerCase();
+      document.querySelectorAll(".key").forEach(k => k.classList.toggle("pressed", k.dataset.key === keyName || (e.code === "Space" && k.dataset.key === "space")));
+    });
+    input.addEventListener("keyup", () => document.querySelectorAll(".key").forEach(k => k.classList.remove("pressed")));
+    $("startBtn").addEventListener("click", () => input.focus());
+    $("restartBtn").addEventListener("click", resetTest);
+    $("restartTop").addEventListener("click", resetTest);
+    $("againBtn").addEventListener("click", resetTest);
+    languageEl.addEventListener("change", resetTest);
+    durationEl.addEventListener("change", resetTest);
+    modeButtons.forEach(btn => btn.addEventListener("click", () => {
+      mode = btn.dataset.mode;
+      modeButtons.forEach(b => b.classList.toggle("active", b === btn));
+      resetTest();
+    }));
+    buildKeyboard();
+    resetTest();
+  </script>
+</body>
+</html>
