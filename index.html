@@ -1,419 +1,414 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="icon" type="image/png" href="logo.png">
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#111315">
-  <title>Violet Fast — Typing Practice</title>
-  <style>
-    :root {
-      color-scheme: dark;
-      --bg: #111315;
-      --panel: #191c1f;
-      --panel-2: #202428;
-      --text: hsl(249, 43%, 56%);
-      --muted: #777f86;
-      --accent: lch(99.26% 3.51 191.03);
-      --green: #a8d7a0;
-      --red: #ef7c7c;
-      --border: #30353a;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0; min-height: 100vh; background: var(--bg); color: var(--text);
-      font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-    button, select, textarea { font: inherit; }
-    button, select {
-      color: var(--text); background: var(--panel-2); border: 1px solid var(--border);
-      border-radius: 8px; padding: 9px 13px;
-    }
-    button { cursor: pointer; transition: border-color .15s, background .15s; }
-    button:hover, select:hover { border-color: var(--accent); }
-    button:focus-visible, select:focus-visible, textarea:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
-    .wrap { width: min(1040px, calc(100% - 32px)); margin: 0 auto; }
-    header { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 24px 0 34px; }
-    .brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 1.8rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
+<meta charset="utf-8">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13.5 2 5 13.5h6L9.5 22 19 9.5h-6.2z' fill='%237c4dff'/%3E%3C/svg%3E">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Violet Fast — Typing Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f6f8fb; --surface:#ffffff; --ink:#1b2333; --mute:#9aa4b5; --line:#e3e8f0;
+  --accent:#3b5bff; --good:#1b2333; --bad:#e5484d; --badbg:#fde8e9;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
 }
-
-.brand img {
-  width: 34px;
-  height: 34px;
-  object-fit: contain;
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){--bg:#0f131b;--surface:#171c27;--ink:#e8ecf4;--mute:#5d6778;--line:#242b39;--accent:#7b8cff;--good:#e8ecf4;--bad:#ff6b70;--badbg:#3a1d21}
 }
-.brand-name {
-  font-size: 1.8rem;
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  background: linear-gradient(90deg, #8b5cf6, #e8c46a);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-    .brand span { color: var(--accent); }
-    .subbrand { color: var(--muted); font-size: .78rem; margin-top: -5px; }
-    .top-actions { display: flex; gap: 8px; align-items: center; }
-    main { padding-bottom: 50px; }
-    .toolbar { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 24px; }
-    .toolbar label { color: var(--muted); font-size: .9rem; }
-    .toolbar select { margin-left: 6px; }
-    .mode-tabs { display: flex; gap: 7px; margin-left: auto; }
-    .mode-tabs button.active { color: var(--accent); border-color: var(--accent); }
-    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
-    .stat { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 14px 18px; }
-    .stat-label { color: var(--muted); font-size: .82rem; }
-    .stat-value { font-size: 1.65rem; font-weight: 750; line-height: 1.35; color: var(--accent); font-variant-numeric: tabular-nums; }
-    .test-card { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: clamp(18px, 4vw, 32px); }
-    .test-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 20px; }
-    .test-head h1 { font-size: 1.05rem; margin: 0; font-weight: 650; }
-    .timer { color: var(--accent); font-variant-numeric: tabular-nums; font-weight: 750; }
-    
-#prompt {
-  height: 5.7em;
-  min-height: 0;
-  overflow-y: auto;
-  scrollbar-width: none;
-  color: #737b83;
-  font-size: clamp(1.15rem, 2.3vw, 1.55rem);
-  line-height: 1.9;
-  letter-spacing: .015em;
-  overflow-wrap: anywhere;
-  user-select: none;
-}
-
-#prompt::-webkit-scrollbar {
-  display: none;
-}
-
-    #prompt .correct { color: var(--green); }
-    #prompt .incorrect { color: var(--red); background: #48292b; border-radius: 3px; }
-    #prompt .current { border-left: 2px solid var(--accent); margin-left: -2px; }
-    #typingInput {
-      display: block; width: 100%; min-height: 82px; resize: vertical; margin-top: 18px;
-      background: #121416; color: var(--text); border: 1px solid var(--border);
-      border-radius: 10px; padding: 15px; line-height: 1.7;
-    }
-    #typingInput::placeholder { color: #687078; }
-    .hint { color: var(--muted); font-size: .84rem; margin: 10px 0 0; }
-    .controls { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-    .primary { background: var(--accent); color: #171717; border-color: var(--accent); font-weight: 750; }
-    .primary:hover { background: #f0d384; }
-    .keyboard { margin-top: 24px; padding: 16px; background: var(--panel); border: 1px solid var(--border); border-radius: 14px; }
-    .keyboard-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }
-    .keyboard h2 { margin: 0; font-size: .95rem; }
-    .keyboard small { color: var(--muted); }
-    .key-row { display: flex; justify-content: center; gap: 5px; margin: 5px 0; }
-    .key { min-width: 0; flex: 1; max-width: 58px; height: 39px; border: 1px solid #353b40; border-radius: 6px; background: #24292d; color: #aeb5ba; display: grid; place-items: center; font-size: .8rem; }
-    .key.wide { flex: 1.6; max-width: 90px; }
-    .key.space { flex: 6; max-width: 360px; }
-    .key.next { background: #4b4227; border-color: var(--accent); color: #ffe7a0; }
-    .key.pressed { background: #28513d; border-color: var(--green); }
-    .results { display: none; margin-top: 20px; padding: 22px; background: #20251f; border: 1px solid #43543e; border-radius: 14px; }
-    .results.show { display: block; }
-    .results h2 { margin: 0 0 12px; }
-    .result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-    .result-item { background: #171b17; padding: 13px; border-radius: 9px; }
-    .result-item strong { display: block; font-size: 1.4rem; color: var(--green); }
-    footer { text-align: center; color: var(--muted); font-size: .82rem; padding: 26px 0; }
-    @media (max-width: 640px) {
-      header { align-items: flex-start; padding-bottom: 24px; }
-      .top-actions { flex-direction: column; align-items: flex-end; }
-      .mode-tabs { margin-left: 0; width: 100%; }
-      .mode-tabs button { flex: 1; }
-      .stats { gap: 7px; }
-      .stat { padding: 10px; }
-      .stat-value { font-size: 1.3rem; }
-      .key-row { gap: 3px; }
-      .key { height: 30px; font-size: .65rem; border-radius: 4px; }
-      .keyboard { padding: 10px; }
-      .result-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+:root[data-theme="dark"]{--bg:#0f131b;--surface:#171c27;--ink:#e8ecf4;--mute:#5d6778;--line:#242b39;--accent:#7b8cff;--good:#e8ecf4;--bad:#ff6b70;--badbg:#3a1d21}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font-family:Manrope,system-ui,sans-serif;display:flex;flex-direction:column;align-items:center}
+header{width:100%;max-width:860px;display:flex;justify-content:space-between;align-items:center;padding:28px 24px 0}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:1.4rem;letter-spacing:-.02em}
+.logo span{background:linear-gradient(90deg,#7c4dff,#b794ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+@keyframes blink{50%{opacity:0}}
+.tag{margin:4px 0 0;font-size:.8rem;font-weight:600;color:var(--mute)}
+.theme{background:none;border:1px solid var(--line);color:var(--mute);border-radius:10px;padding:7px 12px;font:600 .85rem Manrope,sans-serif;cursor:pointer}
+.theme:hover{color:var(--ink)}
+main{width:100%;max-width:860px;padding:0 24px;flex:1;display:flex;flex-direction:column;justify-content:center;gap:28px;margin-bottom:8vh}
+.bar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.modes{display:flex;gap:4px;background:var(--surface);border:1px solid var(--line);padding:4px;border-radius:12px}
+.modes button{border:0;background:none;color:var(--mute);font:600 .9rem Manrope,sans-serif;padding:8px 16px;border-radius:9px;cursor:pointer}
+.modes button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.modes button:hover:not([aria-pressed="true"]){color:var(--ink)}
+.live{display:flex;gap:28px;font-weight:600;color:var(--mute);font-size:.95rem}
+.live b{color:var(--ink);font-size:1.5rem;font-weight:800;margin-left:6px;font-variant-numeric:tabular-nums}
+.stage{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:28px 32px;cursor:text}
+.view{height:calc(1.9em * 3);overflow:hidden;font:400 1.6rem/1.9 "JetBrains Mono",ui-monospace,monospace;position:relative}
+.words{transition:transform .15s ease;word-break:keep-all;position:relative}
+.words span{color:var(--mute);position:relative}
+.words span.ok{color:var(--good)}
+.words span.no{color:var(--bad);background:var(--badbg);border-radius:3px}
+.words span.cur::before{content:"";position:absolute;left:-1px;top:.18em;bottom:.18em;width:2px;background:var(--accent);border-radius:2px;animation:blink 1s steps(1) infinite}
+.stage.run .words span.cur::before{animation:none}
+.hint{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--surface) 80%,transparent);backdrop-filter:blur(3px);border-radius:20px;color:var(--mute);font-weight:600;transition:opacity .2s}
+.stage.focus .hint,.stage.run .hint{opacity:0;pointer-events:none}
+.foot{color:var(--mute);font-size:.9rem;text-align:center}
+kbd{font:500 .8rem "JetBrains Mono",monospace;border:1px solid var(--line);border-radius:6px;padding:2px 7px;background:var(--surface)}
+.result{display:none;flex-direction:column;align-items:center;gap:24px;text-align:center}
+.result.show{display:flex}
+.big{font-size:clamp(4rem,14vw,7rem);font-weight:800;letter-spacing:-.04em;line-height:1}
+.big small{font-size:1.1rem;color:var(--mute);font-weight:600;letter-spacing:0;margin-left:8px}
+.stats{display:flex;gap:40px;flex-wrap:wrap;justify-content:center}
+.stats div{display:flex;flex-direction:column;gap:2px;color:var(--mute);font-weight:600;font-size:.9rem}
+.stats strong{color:var(--ink);font-size:1.6rem;font-weight:800}
+.again{background:var(--accent);color:#fff;border:0;border-radius:12px;padding:12px 26px;font:700 1rem Manrope,sans-serif;cursor:pointer}
+.again:hover{filter:brightness(1.08)}
+.cert{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.cert input,.pin{font:600 .95rem Manrope,sans-serif;padding:12px 16px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);width:260px;max-width:100%}
+.cert input:focus-visible{outline:2px solid var(--accent)}
+.dl{background:var(--surface);color:var(--accent);border:1px solid var(--accent);border-radius:12px;padding:12px 20px;font:700 .95rem Manrope,sans-serif;cursor:pointer}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.panel{display:flex;flex-direction:column;gap:18px}
+.ph{margin:0;font-size:1.3rem;font-weight:800}
+.tw{max-height:300px;overflow:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{width:100%;border-collapse:collapse;font-size:.9rem}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
+th{color:var(--mute);font-weight:600;position:sticky;top:0;background:var(--surface)}
+.vf{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+textarea{width:100%;font:500 .9rem "JetBrains Mono",monospace;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+#vr{font-weight:600}
+dialog{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:20px;padding:24px;width:min(420px,92vw)}
+dialog::backdrop{background:#0009}
+dialog[open]{display:flex;flex-direction:column;gap:12px}
+dialog .pin{width:100%}
+#aform,.phone{display:flex;flex-direction:column;gap:10px}
+.ah{display:flex;justify-content:space-between;align-items:center}
+.soc{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:12px;font:700 .95rem Manrope,sans-serif;cursor:pointer}
+.soc{display:flex;align-items:center;justify-content:center;gap:10px}
+.soc:hover{border-color:var(--accent)}
+.hide{display:none!important}
+#cap{position:fixed;opacity:0;pointer-events:none;left:0;top:0;width:1px;height:1px}
+@media (max-width:560px){.view{font-size:1.2rem}.stage{padding:20px}.live{gap:18px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div>
-        
-<div class="brand">
-  <img src="logo.png" alt="Violet Fast logo">
-  <span class="brand-name">Violet Fast</span>
-</div>
+<header>
+  <div><div class="logo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path d="M13.5 2 5 13.5h6L9.5 22 19 9.5h-6.2z" fill="#7c4dff"/></svg><span>Violet Fast</span></div><p class="tag">A little practice. A lot more speed.</p></div>
+  <div style="display:flex;gap:8px"><span id="who" class="foot"></span><button class="theme" id="abtn">Sign in</button><button class="theme" id="hbtn">History</button><button class="theme" id="theme" aria-label="Toggle theme">Theme</button></div>
+</header>
 
-        <div class="subbrand">A little practice. A lot more speed.</div>
+<main>
+  <section id="game">
+    <div class="modes" id="kinds" role="group" aria-label="Test type" style="margin-bottom:16px;flex-wrap:wrap;width:fit-content"><button data-k="words" aria-pressed="true">Words</button><button data-k="sentences" aria-pressed="false">Sentences</button><button data-k="punctuation" aria-pressed="false">Punctuation</button><button data-k="numbers" aria-pressed="false">Numbers</button></div>
+    <div class="bar">
+      <div class="modes" id="modes" role="group" aria-label="Test length">
+        <button data-t="15" aria-pressed="false">15s</button>
+        <button data-t="30" aria-pressed="false">30s</button>
+        <button data-t="60" aria-pressed="true">60s</button>
+        <button data-t="120" aria-pressed="false">120s</button>
       </div>
-      <div class="top-actions">
-        <button id="restartTop" type="button" title="Restart test">↻ Restart</button>
-      </div>
-    </header>
+      <div class="live"><span>Time<b id="time">60</b></span><span>WPM<b id="wpm">0</b></span></div>
+    </div>
+    <div class="stage" id="stage" style="margin-top:28px">
+      <div class="view" id="view"><div class="words" id="words"></div></div>
+      <div class="hint">Click here or just start typing</div>
+    </div>
+    <p class="foot" style="margin-top:24px"><kbd>Tab</kbd> restart anytime</p>
+  </section>
 
-    <main>
-      <div class="toolbar">
-        <label>Language
-          <select id="language">
-            <option value="english">English</option>
-            <option value="hindi">Hindi</option>
-            <option value="punjabi">Punjabi</option>
-          </select>
-        </label>
-        <label>Duration
-          <select id="duration">
-            <option value="30">30 seconds</option>
-            <option value="60" selected>60 seconds</option>
-            <option value="120">120 seconds</option>
-          </select>
-        </label>
-        <div class="mode-tabs" aria-label="Practice mode">
-          <button class="active" type="button" data-mode="words">Words</button>
-          <button type="button" data-mode="sentences">Sentences</button>
-        </div>
-      </div>
+  <section class="panel hide" id="hp">
+    <div class="bar"><h2 class="ph">Your results</h2><button class="theme" id="hback">Back to typing</button></div>
+    <div class="vf"><h3 class="ph">Profile</h3><input class="pin" id="pn" type="text" maxlength="30" placeholder="Your name" aria-label="Your name"></div>
+    <div class="stats" id="hs"></div>
+    <div class="tw"><table id="ht"></table></div>
+    <button class="theme" id="hclr" style="align-self:flex-start">Clear history</button>
+    <div class="vf"><h3 class="ph">Verify a certificate</h3><p class="foot" style="margin:0">Scan the QR code on a certificate, then paste the text you see here.</p><textarea id="vi" rows="3" aria-label="Certificate code"></textarea><button class="dl" id="vb">Verify</button><div id="vr"></div></div>
+  </section>
 
-      <section class="stats" aria-label="Live statistics">
-        <div class="stat"><div class="stat-label">WPM</div><div class="stat-value" id="wpm">0</div></div>
-        <div class="stat"><div class="stat-label">Accuracy</div><div class="stat-value" id="accuracy">100%</div></div>
-        <div class="stat"><div class="stat-label">Time left</div><div class="stat-value" id="time">60s</div></div>
-      </section>
+  <section class="result" id="result" aria-live="polite">
+    <div class="big"><span id="rWpm">0</span><small>words per minute</small></div>
+    <div class="stats">
+      <div>Time<strong id="rTime">0s</strong></div>
+      <div>Accuracy<strong id="rAcc">0%</strong></div>
+      <div>Characters<strong id="rChars">0</strong></div>
+      <div>Mistakes<strong id="rErr">0</strong></div>
+    </div>
+    <div class="cert"><input id="nm" type="text" maxlength="30" placeholder="Your name for the certificate" aria-label="Your name"><button class="dl" id="dl">Download certificate</button></div>
+    <button class="again" id="again">Try again</button>
+  </section>
+</main>
 
-      <section class="test-card">
-        <div class="test-head">
-          <h1 id="testTitle">Type the text below</h1>
-          <div class="timer" id="status">Ready</div>
-        </div>
-        <div id="prompt" aria-label="Text to type"></div>
-        <textarea id="typingInput" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Click here and start typing…" aria-label="Type the displayed text here"></textarea>
-        <p class="hint" id="hint">The timer starts with your first keystroke. For Hindi and Punjabi, use your preferred keyboard/input method.</p>
-        <div class="controls">
-          <button class="primary" id="startBtn" type="button">Start typing</button>
-          <button id="restartBtn" type="button">Restart test</button>
-        </div>
-      </section>
+<input id="cap" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="Typing input">
 
-      <section class="results" id="results" aria-live="polite">
-        <h2>Test complete ✨</h2>
-        <div class="result-grid">
-          <div class="result-item">Speed<strong id="finalWpm">0 WPM</strong></div>
-          <div class="result-item">Accuracy<strong id="finalAccuracy">100%</strong></div>
-          <div class="result-item">Correct characters<strong id="finalCorrect">0 / 0</strong></div>
-        </div>
-        <div class="controls"><button class="primary" id="againBtn" type="button">Try again</button></div>
-      </section>
+<script>
+const WORDS="the of and to in is you that it he was for on are as with his they at be this from have or by one had not but what all were when we there can an your which their said if do will each about how up out them then she many some so these would other into has more her two like him see time could no make than first been its who now people my made over did down only way find use may water long little very after words called just where most know get through back much before go good new write our used me man too any day same right look think also around another came come work three word must because does part even place well such here take why things help put years different away again off went old number great tell men say small every found still between name should home big give air line set own under read last never us left end along while might next sound below saw something thought both few those always looked show large often together asked house don't world going want school important until form food keep children feet land side without boy once animals life enough took sometimes four head above kind began almost live page got earth need far hand high year mother light country father let night picture being study second soon story since white ever paper hard near sentence better best across during today however sure knew try told young sun thing whole hear example heard several change answer room sea against top turned learn point city play toward five using himself usually".split(" ");
 
-      <section class="keyboard" aria-label="Visual keyboard">
-        <div class="keyboard-top"><h2>Keyboard guide</h2><small>Highlights the next English key</small></div>
-        <div id="keyboardRows"></div>
-      </section>
-    </main>
-    <footer>keySprint · Practice at your own pace · Your typing stays in this browser</footer>
-  </div>
+const $=id=>document.getElementById(id);
+const stage=$('stage'),wordsEl=$('words'),cap=$('cap');
+let dur=60,kind="words",last={},text="",spans=[],pos=0,started=false,startT=0,tick=null,done=false,keys=0,hits=0,errs=0,line0=0;
 
-  <script>
-    const passages = {
-      english: {
-        words: [
-          "oceans are areas of salty water that fill enormous basins on the earth's surface. even though Earth has one continuous body of saltwater, scientists and geographers divide it into five different sections. from biggest to smallest, they are the pacific, the atlantic, the indian, the southern, and the arctic aceans. Oceans are deep as well as wide. on average an ocean is a little over two miles deep. But about two hundred miles southwest of guam in the pacific ocean, the water in the mariana trench is almost seven miles deep. that's the deepest part of the ocean.",
-          "practice focus improve speed accuracy daily words learn build create think code write read type quick smart skill progress steady calm work. learning to type without looking at the keyboard helps you work faster and stay focused. the quick brown fox jumps over the lazy dog and then runs across the green field. small steps every day can turn a beginner into a confident and careful typist",
-          "a computer is an electronic device that was discovered by charles babbage. he is known as the father of computers. there are various parts to a computer. the four major parts of a computer are the mouse, keyboard, monitor and cpu. with computers, we can send and receive messages through emails and save important information. it helps to store and modify data. nowadays, computers are used in schools, banks, offices, etc., and it is now impossible to survive without computers in order to run any organisation, institution, or any other office, a computer is a must. computers have made life easier for people of different age groups.",
-          " russia is the largest country in the world. It stretches from europe to the pacific Ocean in asia. russia is so large that it has nine different time zones. a time zone is an area in which all the countries have the same time on their clocks. the people in russia are called russians and the language they speak is called russian. russian has its own special alphabet and symbols that it uses for each letter. this special alphabet is called cyrillic. unlike the English alphabet which has twenty six letters, the russian alphabet has thirty three. the russian language is the eighth most spoken language in the world. this is probably because of how large russia is and how much Russia's history influenced the countries around it. russian rulers kings, queens, emperors, and empresses spent a lot of time trying to expand and grow russia and make it a big country. Over time, they succeeded. one of the most successful empresses was catherine the great.",
-          
-        ],
-        sentences: [
-          
-          "Good typing comes from regular practice, relaxed hands, and steady accuracy. A little practice each day can make a big difference over time. Build something useful, test it carefully, and improve it one step at a time. ",
-          "Video provides a powerful way to help you prove your point. When you click Online Video, you can paste in the embed code for the video you want to add. You can also type a keyword to search online for the video that best fits your document. To make your document look professionally produced, Word provides header, footer, cover page, and text box designs that complement each other. For example, you can add a matching cover page, header, and sidebar. Click Insert and then choose the elements you want from the different galleries. Themes and styles also help keep your document coordinated. When you click Design and choose a new Theme, the pictures, charts, and SmartArt graphics change to match your new theme. When you apply styles, your headings change to match the new theme. Save time in Word with new buttons that show up where you need them. To change the way a picture fits in your document, click it and a button for layout options appears next to it. When you work on a table, click where you want to add a row or a column, and then click the plus sign. Reading is easier, too, in the new Reading view. You can collapse parts of the document and focus on the text you want. If you need to stop reading before you reach the end, Word remembers where you left off - even on another device.",
-          
-        ]
-      },
-      hindi: {
-        words: [
-          "नमस्ते अभ्यास मेहनत सफलता सीखना लिखना पढ़ना गति सही ध्यान समय काम कौशल विकास लक्ष्य प्रयास",
-          "हर दिन थोड़ा अभ्यास करने से आपकी टाइपिंग की गति और सटीकता बेहतर हो सकती है",
-          "धीरे धीरे सही टाइप करना सीखें फिर अपनी गति बढ़ाने पर ध्यान दें",
-          "नई चीजें सीखते रहें और हर दिन खुद को बेहतर बनाने की कोशिश करें"
-        ],
-        sentences: [
-          "हर दिन अभ्यास करने से टाइपिंग की गति और सटीकता बेहतर होती है।",
-          "पहले सही टाइप करना सीखें, फिर धीरे धीरे अपनी गति बढ़ाएँ।",
-          "मेहनत और धैर्य से आप अपने लक्ष्य तक पहुँच सकते हैं।"
-        ]
-      },
-      punjabi: {
-        words: [
-          "ਸਤ ਸ੍ਰੀ ਅਕਾਲ ਅਭਿਆਸ ਮਿਹਨਤ ਸਫਲਤਾ ਸਿੱਖਣਾ ਲਿਖਣਾ ਪੜ੍ਹਨਾ ਗਤੀ ਧਿਆਨ ਸਮਾਂ ਕੰਮ ਹੁਨਰ",
-          "ਹਰ ਰੋਜ਼ ਥੋੜ੍ਹਾ ਅਭਿਆਸ ਕਰਨ ਨਾਲ ਤੁਹਾਡੀ ਟਾਈਪਿੰਗ ਦੀ ਗਤੀ ਅਤੇ ਸ਼ੁੱਧਤਾ ਵਧ ਸਕਦੀ ਹੈ",
-          "ਪਹਿਲਾਂ ਸਹੀ ਟਾਈਪ ਕਰਨਾ ਸਿੱਖੋ ਫਿਰ ਆਪਣੀ ਗਤੀ ਵਧਾਉਣ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ",
-          "ਨਵੀਆਂ ਚੀਜ਼ਾਂ ਸਿੱਖਦੇ ਰਹੋ ਅਤੇ ਹਰ ਦਿਨ ਆਪਣੇ ਆਪ ਨੂੰ ਬਿਹਤਰ ਬਣਾਓ"
-        ],
-        sentences: [
-          "ਹਰ ਰੋਜ਼ ਅਭਿਆਸ ਕਰਨ ਨਾਲ ਟਾਈਪਿੰਗ ਦੀ ਗਤੀ ਅਤੇ ਸ਼ੁੱਧਤਾ ਵਧਦੀ ਹੈ।",
-          "ਪਹਿਲਾਂ ਸਹੀ ਟਾਈਪ ਕਰਨਾ ਸਿੱਖੋ, ਫਿਰ ਹੌਲੀ ਹੌਲੀ ਗਤੀ ਵਧਾਓ।",
-          "ਮਿਹਨਤ ਅਤੇ ਲਗਨ ਨਾਲ ਤੁਸੀਂ ਆਪਣਾ ਟੀਚਾ ਹਾਸਲ ਕਰ ਸਕਦੇ ਹੋ।"
-        ]
-      }
-    };
+function rnd(n){let o=[],last="";for(let i=0;i<n;i++){let w;do{w=WORDS[Math.floor(Math.random()*WORDS.length)]}while(w===last);o.push(w);last=w}return o.join(" ")}
 
-    const $ = (id) => document.getElementById(id);
-    const input = $("typingInput");
-    const promptEl = $("prompt");
-    const languageEl = $("language");
-    const durationEl = $("duration");
-    const modeButtons = [...document.querySelectorAll("[data-mode]")];
-    const keyboardRows = $("keyboardRows");
-    const keyRows = [
-      ["`","1","2","3","4","5","6","7","8","9","0","-","=","Backspace"],
-      ["Tab","q","w","e","r","t","y","u","i","o","p","[","]","\\"],
-      ["Caps","a","s","d","f","g","h","j","k","l",";","'","Enter"],
-      ["Shift","z","x","c","v","b","n","m",",",".","/","Shift"],
-      ["Ctrl","Alt","Space","Alt","←","↓","↑","→"]
-    ];
-    let mode = "words", target = "", startedAt = null, timerId = null;
-    let duration = 60, finished = false;
-
-    function buildKeyboard() {
-      keyboardRows.innerHTML = "";
-      keyRows.forEach(row => {
-        const rowEl = document.createElement("div");
-        rowEl.className = "key-row";
-        row.forEach(label => {
-          const key = document.createElement("div");
-          key.className = "key";
-          key.dataset.key = label.toLowerCase();
-          key.textContent = label === "Space" ? " " : label;
-          if (["Backspace","Enter","Shift","Caps","Tab","Ctrl","Alt"].includes(label)) key.classList.add("wide");
-          if (label === "Space") key.classList.add("space");
-          rowEl.appendChild(key);
-        });
-        keyboardRows.appendChild(rowEl);
-      });
-    }
-
-    function choosePassage() {
-      const pool = passages[languageEl.value][mode];
-      return pool[Math.floor(Math.random() * pool.length)];
-    }
-
-    function renderPrompt() {
-      const typed = Array.from(input.value);
-      const targetChars = Array.from(target);
-      promptEl.innerHTML = "";
-      targetChars.forEach((char, i) => {
-        const span = document.createElement("span");
-        span.textContent = char;
-        if (i < typed.length) span.className = typed[i] === char ? "correct" : "incorrect";
-        else if (i === typed.length && !finished) span.className = "current";
-        promptEl.appendChild(span);
-      });
-      
-const current = promptEl.querySelector(".current");
-if (current) {
-  current.scrollIntoView({ block: "nearest" });
+const SENT=["The quick brown fox jumps over the lazy dog.","Practice every day and your speed will grow.","A good habit is built one small step at a time.","Typing without looking at the keys is a useful skill.","Computers help us learn, work and share ideas.","The best way to learn is to keep trying.","Fast hands come from a calm and focused mind.","Rain fell softly on the quiet town last night.","Every expert was once a beginner.","Read a little, write a little, and learn a lot.","Accuracy first, then speed will follow naturally.","Good things come to those who work hard."];
+function gen(){
+  if(kind==="sentences"){let o=[],l=-1,n=0;while(n<2600){let i;do{i=Math.floor(Math.random()*SENT.length)}while(i===l);l=i;o.push(SENT[i]);n+=SENT[i].length+1}return o.join(" ")}
+  if(kind==="numbers")return Array.from({length:500},()=>Math.floor(Math.random()*10**(1+Math.floor(Math.random()*5)))).join(" ");
+  const w=rnd(400).split(" ");
+  if(kind==="punctuation"){let cap=true;return w.map(x=>{if(cap){x=x[0].toUpperCase()+x.slice(1);cap=false}const r=Math.random();if(r<.1){x+=".";cap=true}else if(r<.2)x+=",";else if(r<.23){x+="?";cap=true}return x}).join(" ")}
+  return w.join(" ");
 }
-highlightNextKey();
-    }
+function setup(){
+  clearInterval(tick);
+  started=false;done=false;pos=0;keys=0;hits=0;errs=0;line0=0;
+  text=gen();
+  wordsEl.innerHTML="";wordsEl.style.transform="";
+  spans=[...text].map(c=>{const s=document.createElement('span');s.textContent=c;wordsEl.appendChild(s);return s});
+  spans[0].className="cur";
+  $('time').textContent=dur;$('wpm').textContent=0;
+  stage.classList.remove('run');
+  $('result').classList.remove('show');$('game').classList.remove('hide');
+  cap.value="\u200b";
+  cap.focus({preventScroll:true});
+}
 
-    function highlightNextKey() {
-      document.querySelectorAll(".key").forEach(k => k.classList.remove("next"));
-      if (languageEl.value !== "english") return;
-      const next = Array.from(target)[Array.from(input.value).length];
-      if (!next) return;
-      const key = next === " " ? "space" : next.toLowerCase();
-      const el = [...document.querySelectorAll(".key")].find(k => k.dataset.key === key);
-      if (el) el.classList.add("next");
-    }
+function liveWpm(){
+  const m=(Date.now()-startT)/60000;
+  return m>0?Math.round(hits/5/m):0;
+}
 
-    function stats() {
-      const typed = Array.from(input.value);
-      const targetChars = Array.from(target);
-      let correct = 0;
-      typed.forEach((char, i) => { if (char === targetChars[i]) correct++; });
-      const elapsedSeconds = startedAt ? Math.max(1, (Date.now() - startedAt) / 1000) : 0;
-      const words = input.value.trim() ? input.value.trim().split(/\s+/u).length : 0;
-      const wpm = elapsedSeconds ? Math.round(words / (elapsedSeconds / 60)) : 0;
-      const accuracy = typed.length ? Math.round((correct / typed.length) * 100) : 100;
-      $("wpm").textContent = wpm;
-      $("accuracy").textContent = accuracy + "%";
-      return { wpm, accuracy, correct, typed: typed.length };
-    }
+function begin(){
+  started=true;startT=Date.now();stage.classList.add('run');
+  tick=setInterval(()=>{
+    const left=Math.max(0,dur-Math.round((Date.now()-startT)/1000));
+    $('time').textContent=left;$('wpm').textContent=liveWpm();
+    if(left<=0)finish();
+  },250);
+}
 
-    function finishTest() {
-      if (finished) return;
-      finished = true;
-      clearInterval(timerId);
-      input.disabled = true;
-      $("status").textContent = "Complete";
-      const s = stats();
-      $("finalWpm").textContent = s.wpm + " WPM";
-      $("finalAccuracy").textContent = s.accuracy + "%";
-      $("finalCorrect").textContent = s.correct + " / " + s.typed;
-      $("results").classList.add("show");
-      renderPrompt();
-    }
+function finish(){
+  if(done)return;done=true;clearInterval(tick);
+  const m=Math.max((Date.now()-startT)/60000,1/60);
+  last={w:Math.round(hits/5/m),a:keys?Math.round(hits/keys*100):0};
+  $('dl').textContent='Download certificate';
+  saveH(loadH().concat({t:Date.now(),w:last.w,a:last.a,d:dur,k:kind}));
+  $('rWpm').textContent=last.w;
+  $('rAcc').textContent=(keys?Math.round(hits/keys*100):0)+'%';
+  $('rChars').textContent=hits;
+  $('rErr').textContent=errs;
+  $('rTime').textContent=Math.min(dur,Math.round((Date.now()-startT)/1000))+'s';
+  $('game').classList.add('hide');
+  $('result').classList.add('show');
+  cap.blur();
+}
 
-    function startTimer() {
-      if (startedAt || finished) return;
-      startedAt = Date.now();
-      $("status").textContent = "Testing";
-      timerId = setInterval(() => {
-        const elapsed = (Date.now() - startedAt) / 1000;
-        const left = Math.max(0, duration - elapsed);
-        $("time").textContent = Math.ceil(left) + "s";
-        stats();
-        if (left <= 0) finishTest();
-      }, 100);
-    }
+function type(ch){
+  if(done||pos>=spans.length)return;
+  if(!started)begin();
+  keys++;
+  const ok=ch===text[pos];
+  if(ok)hits++;else errs++;
+  spans[pos].className=ok?"ok":"no";
+  pos++;
+  spans[pos]&&(spans[pos].className="cur");
+  scroll();
+  if(pos>=spans.length)finish();
+}
 
-    function resetTest() {
-      clearInterval(timerId);
-      duration = Number(durationEl.value);
-      target = choosePassage();
-      input.value = "";
-      input.disabled = false;
-      startedAt = null;
-      finished = false;
-      $("time").textContent = duration + "s";
-      $("wpm").textContent = "0";
-      $("accuracy").textContent = "100%";
-      $("status").textContent = "Ready";
-      $("results").classList.remove("show");
-      $("hint").textContent = languageEl.value === "english"
-        ? "The timer starts with your first keystroke. Type the displayed text as accurately as you can."
-        : "Use your Hindi/Punjabi keyboard or input method. The timer starts with your first keystroke.";
-      renderPrompt();
-      input.focus();
-    }
+function back(){
+  if(done||pos===0)return;
+  spans[pos].className="";
+  pos--;
+  if(spans[pos].className==="ok")hits--;
+  spans[pos].className="cur";
+  scroll();
+}
 
-    input.addEventListener("input", () => {
-      if (finished) return;
-      if (input.value.length > 0) startTimer();
-      renderPrompt();
-      stats();
-      if (Array.from(input.value).length >= Array.from(target).length) finishTest();
-    });
-    input.addEventListener("keydown", e => {
-      const keyName = e.key.toLowerCase();
-      document.querySelectorAll(".key").forEach(k => k.classList.toggle("pressed", k.dataset.key === keyName || (e.code === "Space" && k.dataset.key === "space")));
-    });
-    input.addEventListener("keyup", () => document.querySelectorAll(".key").forEach(k => k.classList.remove("pressed")));
-    $("startBtn").addEventListener("click", () => input.focus());
-    $("restartBtn").addEventListener("click", resetTest);
-    $("restartTop").addEventListener("click", resetTest);
-    $("againBtn").addEventListener("click", resetTest);
-    languageEl.addEventListener("change", resetTest);
-    durationEl.addEventListener("change", resetTest);
-    modeButtons.forEach(btn => btn.addEventListener("click", () => {
-      mode = btn.dataset.mode;
-      modeButtons.forEach(b => b.classList.toggle("active", b === btn));
-      resetTest();
-    }));
-    buildKeyboard();
-    resetTest();
-  </script>
+function scroll(){
+  const lh=parseFloat(getComputedStyle($('view')).lineHeight);
+  const row=Math.round(spans[Math.min(pos,spans.length-1)].offsetTop/lh);
+  if(row>1)wordsEl.style.transform=`translateY(${-(row-1)*lh}px)`;
+  else wordsEl.style.transform="";
+}
+
+function backWord(){
+  while(pos>0&&text[pos-1]===' ')back();
+  while(pos>0&&text[pos-1]!==' ')back();
+}
+cap.addEventListener('input',e=>{
+  if(e.inputType==='deleteContentBackward')back();
+  else if(e.data)for(const c of e.data)type(c);
+  cap.value="\u200b";
+});
+document.addEventListener('keydown',e=>{
+  if(done)return;
+  if(e.key==='Tab'){e.preventDefault();setup();return}
+  if(e.key==='Backspace'&&!done){e.preventDefault();(e.ctrlKey||e.altKey)?backWord():back();return}
+  if(e.target!==cap&&!done&&!e.ctrlKey&&!e.metaKey)cap.focus({preventScroll:true});
+});
+stage.addEventListener('click',()=>cap.focus({preventScroll:true}));
+cap.addEventListener('focus',()=>stage.classList.add('focus'));
+cap.addEventListener('blur',()=>stage.classList.remove('focus'));
+
+$('modes').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  dur=+b.dataset.t;
+  [...$('modes').children].forEach(x=>x.setAttribute('aria-pressed',x===b));
+  setup();
+});
+$('again').addEventListener('click',setup);
+$('kinds').addEventListener('click',e=>{
+  const b=e.target.closest('button');if(!b)return;
+  kind=b.dataset.k;
+  [...$('kinds').children].forEach(x=>x.setAttribute('aria-pressed',x===b));
+  setup();
+});
+const SALT='vf-violet-2026';
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function h(s){let x=2166136261;for(const c of s+SALT){x^=c.charCodeAt(0);x=Math.imul(x,16777619)}return (x>>>0).toString(36).toUpperCase()}
+function pack(r){const p=[r.n,r.w,r.a,r.d,r.k,r.t].join('|');return btoa(unescape(encodeURIComponent(p)))+'.'+h(p)}
+function unpack(code){try{const [b,c]=code.split('.');const p=decodeURIComponent(escape(atob(b)));if(!c||h(p)!==c)return null;const [n,w,a,d,k,t]=p.split('|');return{n,w,a,d,k,t}}catch(e){return null}}
+let HK='vf-hist';
+function loadH(){try{return JSON.parse(localStorage.getItem(HK)||'[]')}catch(e){return[]}}
+function saveH(a){try{localStorage.setItem(HK,JSON.stringify(a.slice(-200)))}catch(e){}}
+function renderH(){
+  const a=loadH().slice().reverse();
+  const best=a.reduce((m,x)=>Math.max(m,x.w),0),avg=a.length?Math.round(a.reduce((s,x)=>s+x.w,0)/a.length):0;
+  $('hs').innerHTML=`<div>Tests<strong>${a.length}</strong></div><div>Best WPM<strong>${best}</strong></div><div>Average WPM<strong>${avg}</strong></div>`;
+  $('ht').innerHTML='<tr><th>Date</th><th>Mode</th><th>Time</th><th>WPM</th><th>Accuracy</th></tr>'+(a.map(x=>`<tr><td>${new Date(x.t).toLocaleString([],{dateStyle:'medium',timeStyle:'short'})}</td><td>${esc(x.k)}</td><td>${x.d}s</td><td>${x.w}</td><td>${x.a}%</td></tr>`).join('')||'<tr><td colspan="5">No tests yet. Finish a test and it will show up here.</td></tr>');
+}
+$('hbtn').addEventListener('click',()=>{done=true;clearInterval(tick);stage.classList.remove('run');$('game').classList.add('hide');$('result').classList.remove('show');$('hp').classList.remove('hide');renderH()});
+$('hback').addEventListener('click',()=>{$('hp').classList.add('hide');setup()});
+$('hclr').addEventListener('click',e=>{const b=e.target;if(b.dataset.s){saveH([]);renderH();delete b.dataset.s;b.textContent='Clear history'}else{b.dataset.s=1;b.textContent='Click again to confirm'}});
+$('vb').addEventListener('click',()=>{
+  const r=unpack($('vi').value.trim().split(/\s+/).pop()||'');
+  $('vr').innerHTML=r?`<span style="color:#1f9d55">Valid certificate</span><br>${esc(r.n)} · ${esc(r.w)} WPM · ${esc(r.a)}% accuracy · ${esc(r.d)}s ${esc(r.k)} · ${esc(r.t)}`:'<span style="color:var(--bad)">Not valid. The code is missing or has been changed.</span>';
+});
+function getName(){try{return localStorage.getItem('vf-name')||''}catch(e){return''}}
+function setName(v){try{localStorage.setItem('vf-name',v.trim())}catch(e){}$('nm').value=v;$('pn').value=v}
+setName(getName());
+$('pn').addEventListener('input',e=>{try{localStorage.setItem('vf-name',e.target.value.trim())}catch(_){}$('nm').value=e.target.value});
+$('nm').addEventListener('input',e=>{try{localStorage.setItem('vf-name',e.target.value.trim())}catch(_){}$('pn').value=e.target.value});
+function makeCert(){
+  const name=$('nm').value.trim()||'Typing Champion';
+  const rec={n:name.replace(/\|/g,' '),w:last.w,a:last.a,d:dur,k:kind,t:new Date().toISOString().slice(0,10)};
+  const code=pack(rec);
+  const c=document.createElement('canvas');c.width=1600;c.height=1130;
+  const g=c.getContext('2d'),F='Manrope,system-ui,sans-serif';
+  g.fillStyle='#fbfaff';g.fillRect(0,0,1600,1130);
+  g.strokeStyle='#7c4dff';g.lineWidth=14;g.strokeRect(40,40,1520,1050);
+  g.strokeStyle='#b794ff';g.lineWidth=3;g.strokeRect(70,70,1460,990);
+  g.save();g.translate(620,140);g.scale(3.4,3.4);g.fillStyle='#7c4dff';g.fill(new Path2D('M13.5 2 5 13.5h6L9.5 22 19 9.5h-6.2z'));g.restore();
+  g.textAlign='left';g.fillStyle='#7c4dff';g.font='800 64px '+F;g.fillText('Violet Fast',715,215);
+  g.textAlign='center';
+  g.fillStyle='#1b2333';g.font='800 80px '+F;g.fillText('Certificate of Achievement',800,380);
+  g.fillStyle='#6b7487';g.font='600 34px '+F;g.fillText('This certifies that',800,460);
+  g.fillStyle='#1b2333';g.font='800 96px '+F;g.fillText(name,800,580);
+  g.fillStyle='#7c4dff';g.fillRect(450,610,700,5);
+  g.fillStyle='#6b7487';g.font='600 34px '+F;g.fillText('completed a '+dur+'-second '+kind+' typing test with a speed of',800,690);
+  g.fillStyle='#7c4dff';g.font='800 150px '+F;g.fillText(last.w+' WPM',800,850);
+  g.fillStyle='#1b2333';g.font='700 40px '+F;g.fillText(last.a+'% accuracy',800,925);
+  g.fillStyle='#6b7487';g.font='600 28px '+F;g.fillText(new Date().toLocaleDateString(undefined,{year:'numeric',month:'long',day:'numeric'}),800,1010);
+  if(window.qrcode){
+    if(qrcode.stringToBytesFuncs)qrcode.stringToBytes=qrcode.stringToBytesFuncs['UTF-8'];
+    const q=qrcode(0,'M');q.addData('Violet Fast certificate\nVerify code:\n'+code);q.make();
+    const n=q.getModuleCount(),m=Math.floor(230/n),s=m*n,ox=1250,oy=775;
+    g.fillStyle='#fff';g.fillRect(ox-12,oy-12,s+24,s+24);
+    g.fillStyle='#1b2333';
+    for(let r=0;r<n;r++)for(let k=0;k<n;k++)if(q.isDark(r,k))g.fillRect(ox+k*m,oy+r*m,m,m);
+    g.fillStyle='#6b7487';g.font='600 22px '+F;g.fillText('Scan to verify',ox+s/2,oy+s+34);
+  }
+  return new Promise(r=>c.toBlob(r,'image/png'));
+}
+$('dl').addEventListener('click',async()=>{
+  const b=$('dl');
+  try{
+    const blob=await makeCert();
+    const d=window.claude&&await claude.use('downloads');
+    if(d){await d.save({filename:'violet-fast-certificate.png',data:blob})}
+    else{const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='violet-fast-certificate.png';a.click()}
+    b.textContent='Certificate saved';
+  }catch(e){if(!e||e.code!=='declined')b.textContent='Could not save, try again'}
+});
+$('theme').addEventListener('click',()=>{
+  const r=document.documentElement;
+  const dark=r.dataset.theme?r.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+  r.dataset.theme=dark?'light':'dark';
+});
+document.fonts&&document.fonts.ready.then(()=>{if(!started)setup()});
+setup();
+</script>
+<dialog id="authDlg">
+  <div class="ah"><h2 class="ph">Welcome to Violet Fast</h2><button class="theme" id="aclose" type="button">Close</button></div>
+  <div class="modes" style="width:fit-content"><button id="tin" type="button" aria-pressed="true">Sign in</button><button id="tup" type="button" aria-pressed="false">Sign up</button></div>
+  <button class="soc" id="agg" type="button"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span>Continue with Google</span></button>
+  <button class="soc" id="afb" type="button"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#1877F2"/><path fill="#fff" d="M16.67 15.47 17.2 12h-3.33V9.75c0-.95.47-1.88 1.96-1.88h1.51V4.92s-1.37-.23-2.68-.23c-2.74 0-4.53 1.66-4.53 4.67V12H7.1v3.47h3.03V24h3.74v-8.53z"/></svg><span>Continue with Facebook</span></button>
+  <form id="aform">
+    <input class="pin" id="anm" type="text" placeholder="Your name" style="display:none">
+    <input class="pin" id="aem" type="email" placeholder="Email" required>
+    <input class="pin" id="apw" type="password" placeholder="Password (6+ characters)" minlength="6" required>
+    <button class="again" id="asub">Sign in</button>
+  </form>
+  <div class="phone">
+    <input class="pin" id="aph" type="tel" placeholder="Phone with country code, e.g. +919876543210">
+    <button class="soc" id="asend" type="button">Send code by SMS</button>
+    <div id="acodebox" style="display:none;flex-direction:column;gap:10px"><input class="pin" id="acode" type="text" inputmode="numeric" placeholder="6-digit code"><button class="soc" id="averify" type="button">Verify code</button></div>
+  </div>
+  <p id="amsg" class="foot" role="status"></p>
+</dialog>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {getAuth,onAuthStateChanged,signOut,GoogleAuthProvider,FacebookAuthProvider,signInWithPopup,createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile,RecaptchaVerifier,signInWithPhoneNumber} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+// 1) Paste your own Firebase project settings here (Firebase console > Project settings > Your apps > Web app)
+const firebaseConfig={apiKey:"AIzaSyCRxd6n5UHnCLEP123OnPdvrlOOUCr4m-A",authDomain:"violet-fast.firebaseapp.com",projectId:"violet-fast",appId:"1:588734930789:web:022934fa0446e7617f8b8c"};
+
+const auth=getAuth(initializeApp(firebaseConfig));
+const dlg=$('authDlg'),msg=$('amsg');
+let mode='in',conf=null,rv=null;
+const say=(t,bad=true)=>{msg.textContent=t;msg.style.color=bad?'var(--bad)':'#1f9d55'};
+const fail=e=>say(((e&&e.code)||'').replace('auth/','').replace(/-/g,' ')||'Something went wrong. Try again.');
+
+function setMode(m){
+  mode=m;
+  $('tin').setAttribute('aria-pressed',m==='in');$('tup').setAttribute('aria-pressed',m==='up');
+  $('anm').style.display=m==='up'?'':'none';
+  $('asub').textContent=m==='up'?'Create account':'Sign in';
+  say('',false);
+}
+$('tin').onclick=()=>setMode('in');
+$('tup').onclick=()=>setMode('up');
+$('abtn').onclick=()=>{auth.currentUser?signOut(auth):dlg.showModal()};
+$('aclose').onclick=()=>dlg.close();
+
+$('aform').onsubmit=async e=>{
+  e.preventDefault();
+  try{
+    const em=$('aem').value.trim(),pw=$('apw').value;
+    if(mode==='up'){
+      const c=await createUserWithEmailAndPassword(auth,em,pw);
+      const n=$('anm').value.trim();
+      if(n){await updateProfile(c.user,{displayName:n});$('nm').value=n}
+    }else await signInWithEmailAndPassword(auth,em,pw);
+    dlg.close();
+  }catch(x){fail(x)}
+};
+
+async function popup(p){try{await signInWithPopup(auth,p);dlg.close()}catch(x){fail(x)}}
+$('agg').onclick=()=>popup(new GoogleAuthProvider());
+$('afb').onclick=()=>popup(new FacebookAuthProvider());
+
+$('asend').onclick=async()=>{
+  try{
+    rv=rv||new RecaptchaVerifier(auth,'asend',{size:'invisible'});
+    conf=await signInWithPhoneNumber(auth,$('aph').value.trim(),rv);
+    $('acodebox').style.display='flex';say('Code sent. Enter it below.',false);
+  }catch(x){fail(x);try{rv.clear()}catch(_){}rv=null}
+};
+$('averify').onclick=async()=>{try{await conf.confirm($('acode').value.trim());dlg.close()}catch(x){fail(x)}};
+
+onAuthStateChanged(auth,u=>{
+  HK='vf-hist'+(u?'-'+u.uid:'');
+  $('abtn').textContent=u?'Sign out':'Sign in';
+  const n=u?(u.displayName||u.phoneNumber||u.email||''):'';
+  $('who').textContent=n?'Hi, '+n.split(' ')[0]:'';
+  if(u&&u.displayName){$('nm').value=u.displayName;$('pn').value=u.displayName}
+});
+</script>
 </body>
 </html>
