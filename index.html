@@ -1024,23 +1024,21 @@
       saveH(loadH().concat(record));
       renderH();
 
-      if (auth.currentUser) {
-        addDoc(
-          collection(db, 'users', auth.currentUser.uid, 'history'),
-          record
-        ).catch(error => {
+
+      if (typeof window.vfSaveCloudHistory === 'function') {
+        window.vfSaveCloudHistory(record).catch(error => {
           console.error('Firestore save failed:', error);
         });
       }
 
-      $('rWpm').textContent = last.w;
-      $('rAcc').textContent = (keys ? Math.round(hits / keys * 100) : 0) + '%';
-      $('rChars').textContent = hits;
-      $('rErr').textContent = errs;
-      $('rTime').textContent = Math.min(dur, Math.round((Date.now() - startT) / 1000)) + 's';
-      $('game').classList.add('hide');
-      $('result').classList.add('show');
-      cap.blur();
+    $('rWpm').textContent = last.w;
+    $('rAcc').textContent = (keys ? Math.round(hits / keys * 100) : 0) + '%';
+    $('rChars').textContent = hits;
+    $('rErr').textContent = errs;
+    $('rTime').textContent = Math.min(dur, Math.round((Date.now() - startT) / 1000)) + 's';
+    $('game').classList.add('hide');
+    $('result').classList.add('show');
+    cap.blur();
     }
 
     function type(ch) {
@@ -1117,7 +1115,34 @@
     }
     $('hbtn').addEventListener('click', () => { done = true; clearInterval(tick); stage.classList.remove('run'); $('game').classList.add('hide'); $('result').classList.remove('show'); $('hp').classList.remove('hide'); renderH() });
     $('hback').addEventListener('click', () => { $('hp').classList.add('hide'); setup() });
-    $('hclr').addEventListener('click', e => { const b = e.target; if (b.dataset.s) { saveH([]); renderH(); delete b.dataset.s; b.textContent = 'Clear history' } else { b.dataset.s = 1; b.textContent = 'Click again to confirm' } });
+    $('hclr').addEventListener('click', async e => {
+      const b = e.currentTarget;
+
+      if (!b.dataset.s) {
+        b.dataset.s = '1';
+        b.textContent = 'Click again to confirm';
+        return;
+      }
+
+      b.disabled = true;
+
+      try {
+        if (typeof window.vfClearCloudHistory === 'function') {
+          await window.vfClearCloudHistory();
+        }
+
+        saveH([]);
+        renderH();
+        delete b.dataset.s;
+        b.textContent = 'Clear history';
+      } catch (error) {
+        console.error('Clear history failed:', error);
+        b.textContent = 'Failed — try again';
+        delete b.dataset.s;
+      } finally {
+        b.disabled = false;
+      }
+    });
     $('vb').addEventListener('click', () => {
       const r = unpack($('vi').value.trim().split(/\s+/).pop() || '');
       $('vr').innerHTML = r ? `<span style="color:#1f9d55">Valid certificate</span><br>${esc(r.n)} · ${esc(r.w)} WPM · ${esc(r.a)}% accuracy · ${esc(r.d)}s ${esc(r.k)}${r.l ? ' (' + esc(r.l) + ', ' + esc(r.g) + ')' : ''} · ${esc(r.t)}` : '<span style="color:var(--bad)">Not valid. The code is missing or has been changed.</span>';
@@ -1245,7 +1270,8 @@
       addDoc,
       getDocs,
       query,
-      orderBy
+      orderBy,
+      deleteDoc
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     // 1) Paste your own Firebase project settings here (Firebase console > Project settings > Your apps > Web app)
@@ -1253,6 +1279,32 @@
 
     const auth = getAuth(initializeApp(firebaseConfig));
     const db = getFirestore(auth.app);
+
+    window.vfSaveCloudHistory = async (record) => {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      await addDoc(
+        collection(db, 'users', user.uid, 'history'),
+        record
+      );
+    };
+
+    window.vfClearCloudHistory = async () => {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      const historyRef = collection(
+        db, 'users', user.uid, 'history'
+      );
+
+      const snapshot = await getDocs(historyRef);
+
+      await Promise.all(
+        snapshot.docs.map(item => deleteDoc(item.ref))
+      );
+    };
+
     const dlg = $('authDlg'), msg = $('amsg');
     let mode = 'in', conf = null, rv = null;
     const say = (t, bad = true) => { msg.textContent = t; msg.style.color = bad ? 'var(--bad)' : '#1f9d55' };
@@ -1325,12 +1377,26 @@
           const snapshot = await getDocs(historyQuery);
           const cloudHistory = snapshot.docs.map(doc => doc.data());
 
-          saveH(
-            [...loadH(), ...cloudHistory].filter(
-              (record, index, arr) =>
-                arr.findIndex(item => item.t === record.t) === index
-            )
-          );
+          const combined = [...loadH(), ...cloudHistory];
+          const uniqueHistory = new Map();
+
+          for (const record of combined) {
+            const key = [
+              record.t,
+              record.w,
+              record.a,
+              record.d,
+              record.k,
+              record.l
+            ].join('|');
+
+            uniqueHistory.set(key, record);
+          }
+
+          const mergedHistory = [...uniqueHistory.values()]
+            .sort((a, b) => Number(a.t) - Number(b.t));
+
+          saveH(mergedHistory);
           renderH();
         } catch (error) {
           console.error('Cloud history load failed:', error);
