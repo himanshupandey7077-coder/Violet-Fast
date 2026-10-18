@@ -1031,14 +1031,14 @@
         });
       }
 
-    $('rWpm').textContent = last.w;
-    $('rAcc').textContent = (keys ? Math.round(hits / keys * 100) : 0) + '%';
-    $('rChars').textContent = hits;
-    $('rErr').textContent = errs;
-    $('rTime').textContent = Math.min(dur, Math.round((Date.now() - startT) / 1000)) + 's';
-    $('game').classList.add('hide');
-    $('result').classList.add('show');
-    cap.blur();
+      $('rWpm').textContent = last.w;
+      $('rAcc').textContent = (keys ? Math.round(hits / keys * 100) : 0) + '%';
+      $('rChars').textContent = hits;
+      $('rErr').textContent = errs;
+      $('rTime').textContent = Math.min(dur, Math.round((Date.now() - startT) / 1000)) + 's';
+      $('game').classList.add('hide');
+      $('result').classList.add('show');
+      cap.blur();
     }
 
     function type(ch) {
@@ -1113,8 +1113,49 @@
       $('hs').innerHTML = `<div>Tests<strong>${a.length}</strong></div><div>Best WPM<strong>${best}</strong></div><div>Average WPM<strong>${avg}</strong></div>`;
       $('ht').innerHTML = '<tr><th>Date</th><th>Mode</th><th>Level</th><th>Time</th><th>WPM</th><th>Accuracy</th></tr>' + (a.map(x => `<tr><td>${new Date(x.t).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}</td><td>${esc(x.k)}</td><td>${esc(LB[x.l] || 'normal')}</td><td>${x.d}s</td><td>${x.w}</td><td>${x.a}%</td></tr>`).join('') || '<tr><td colspan="6">No tests yet. Finish a test and it will show up here.</td></tr>');
     }
-    $('hbtn').addEventListener('click', () => { done = true; clearInterval(tick); stage.classList.remove('run'); $('game').classList.add('hide'); $('result').classList.remove('show'); $('hp').classList.remove('hide'); renderH() });
-    $('hback').addEventListener('click', () => { $('hp').classList.add('hide'); setup() });
+
+    function showHistory() {
+      done = true;
+      clearInterval(tick);
+      stage.classList.remove('run');
+      $('game').classList.add('hide');
+      $('result').classList.remove('show');
+      $('hp').classList.remove('hide');
+      renderH();
+    }
+
+    function showTyping() {
+      $('hp').classList.add('hide');
+      setup();
+    }
+
+    $('hbtn').addEventListener('click', () => {
+      if (history.state?.vfPage !== 'history') {
+        history.pushState(
+          { ...(history.state || {}), vfPage: 'history' },
+          '',
+          '#history'
+        );
+      }
+      showHistory();
+    });
+
+    $('hback').addEventListener('click', () => {
+      if (history.state?.vfPage === 'history') {
+        history.back();
+      } else {
+        showTyping();
+      }
+    });
+
+    window.addEventListener('popstate', (event) => {
+      if (event.state?.vfPage === 'history') {
+        showHistory();
+      } else if (!$('hp').classList.contains('hide')) {
+        showTyping();
+      }
+    });
+
     $('hclr').addEventListener('click', async e => {
       const b = e.currentTarget;
 
