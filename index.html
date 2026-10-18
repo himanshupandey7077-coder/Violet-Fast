@@ -1403,7 +1403,25 @@
     const dlg = $('authDlg'), msg = $('amsg');
     let mode = 'in', conf = null, rv = null;
     const say = (t, bad = true) => { msg.textContent = t; msg.style.color = bad ? 'var(--bad)' : '#1f9d55' };
-    const fail = e => say(((e && e.code) || '').replace('auth/', '').replace(/-/g, ' ') || 'Something went wrong. Try again.');
+    const AUTH_MSG = {
+      'unauthorized-domain': 'This website address is not allowed yet. In Firebase open Authentication > Settings > Authorized domains and add it.',
+      'operation-not-allowed': 'This sign-in method is turned off. Turn it on in Firebase > Authentication > Sign-in method.',
+      'configuration-not-found': 'Sign-in is not set up in Firebase yet. Open Authentication and press Get started.',
+      'invalid-credential': 'Wrong email or password.',
+      'invalid-email': 'That email address is not valid.',
+      'email-already-in-use': 'This email already has an account. Use Sign in instead.',
+      'weak-password': 'The password must be at least 6 characters.',
+      'popup-blocked': 'Your browser blocked the sign-in window. Allow popups for this site and try again.',
+      'popup-closed-by-user': 'The sign-in window was closed before it finished.',
+      'operation-not-supported-in-this-environment': 'Sign-in does not work when the page is opened as a file. Open it from your website address (https).',
+      'invalid-phone-number': 'Enter the phone number with country code, like +919876543210.',
+      'billing-not-enabled': 'Phone sign-in needs billing turned on in Firebase, or use a test phone number.',
+      'too-many-requests': 'Too many tries. Wait a little and try again.',
+      'network-request-failed': 'No internet connection, or the request was blocked.',
+      'account-exists-with-different-credential': 'This email is already used with another sign-in method.',
+      'invalid-api-key': 'The Firebase API key in the code is wrong.'
+    };
+    const fail = e => { console.error('Auth error:', e); const c = ((e && e.code) || '').replace('auth/', ''); say(AUTH_MSG[c] || (c ? c.replace(/-/g, ' ') : 'Something went wrong. Try again.')) };
 
     function setMode(m) {
       mode = m;
@@ -1452,6 +1470,7 @@
       await setDoc(doc(db, 'publicProfiles', p.userId), { owner: u.uid, avatar: p.avatar || 'p9', best, avg, tests: a.length, updated: Date.now() });
     }
     window.vfSyncPublic = () => syncPublic().catch(e => console.error('Public profile sync failed:', e));
+    const cloudMsg = e => (e && e.code === 'permission-denied') ? 'Firestore blocked this. In Firebase open Firestore Database > Rules, paste the new rules, press Publish, then reload this page.' : (e && (e.code === 'unavailable' || e.code === 'failed-precondition' || e.code === 'not-found')) ? 'Firestore is not ready. In Firebase open Firestore Database and create the database first, then reload this page.' : 'Could not reach your profile in the cloud. Check your internet and Firestore rules, then try again.';
     async function loadProfile(u) {
       const ref = doc(db, 'users', u.uid), snap = await getDoc(ref);
       let p = snap.exists() ? snap.data() : {};
@@ -1471,12 +1490,17 @@
     const markSel = () => grid.querySelectorAll('.avopt').forEach(b => b.classList.toggle('sel', b.dataset.a === PROF.avatar));
     function renderProfile() {
       paintAv($('pav'), PROF.avatar); markSel();
-      $('puid').textContent = PROF.userId;
+      $('puid').textContent = PROF.userId || 'Not created yet';
       $('pn').value = PROF.name || ''; $('pb').value = PROF.bio || ''; $('pc').value = PROF.city || '';
       $('pmsg').textContent = ''; $('pcopy').textContent = 'Copy profile link';
     }
     async function saveProfile(quiet) {
       const u = auth.currentUser; if (!u || !PROF) return;
+      if (!PROF.userId) {
+        const keep = { name: $('pn').value.trim(), bio: $('pb').value.trim(), city: $('pc').value.trim(), avatar: PROF.avatar };
+        try { await loadProfile(u); Object.assign(PROF, keep); $('puid').textContent = PROF.userId }
+        catch (e) { console.error(e); $('pmsg').style.color = 'var(--bad)'; $('pmsg').textContent = cloudMsg(e); return }
+      }
       PROF.name = $('pn').value.trim(); PROF.bio = $('pb').value.trim(); PROF.city = $('pc').value.trim();
       const m = $('pmsg');
       try {
@@ -1484,7 +1508,7 @@
         await syncPublic();
         $('nm').value = PROF.name; try { localStorage.setItem('vf-name', PROF.name) } catch (_) { }
         m.style.color = '#1f9d55'; m.textContent = quiet ? 'Picture saved.' : 'Profile saved.';
-      } catch (e) { console.error(e); m.style.color = 'var(--bad)'; m.textContent = 'Could not save. Check your Firestore rules and try again.' }
+      } catch (e) { console.error(e); m.style.color = 'var(--bad)'; m.textContent = cloudMsg(e) }
     }
     function setAvatar(a) { if (!PROF) return; PROF.avatar = a; paintAv($('pav'), a); paintAv($('avbtn'), a); markSel(); saveProfile(true) }
     $('avfile').onchange = e => {
@@ -1501,10 +1525,20 @@
     };
     $('psave').onclick = () => saveProfile();
     $('pcopy').onclick = async () => {
+      if (!PROF || !PROF.userId) return;
       const l = location.origin + location.pathname + '?u=' + PROF.userId;
       try { await navigator.clipboard.writeText(l); $('pcopy').textContent = 'Link copied' } catch (_) { $('pcopy').textContent = l }
     };
-    $('avbtn').onclick = () => { if (PROF) { renderProfile(); showPanel('pp') } };
+    $('avbtn').onclick = async () => {
+      const u = auth.currentUser; if (!u) return;
+      let err = null;
+      if (!PROF) {
+        try { await loadProfile(u); paintAv($('avbtn'), PROF.avatar) }
+        catch (e) { console.error('Profile load failed:', e); err = e; PROF = { userId: '', avatar: 'p9', name: u.displayName || '', bio: '', city: '' } }
+      }
+      renderProfile(); showPanel('pp');
+      if (err) { $('pmsg').style.color = 'var(--bad)'; $('pmsg').textContent = cloudMsg(err) }
+    };
     $('logout').onclick = async () => { try { await signOut(auth) } catch (e) { console.error(e) } setup() };
 
     const visit = new URLSearchParams(location.search).get('u');
