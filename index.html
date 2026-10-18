@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/svg+xml"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13.5 2 5 13.5h6L9.5 22 19 9.5h-6.2z' fill='%237c4dff'/%3E%3C/svg%3E">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Violet Fast — Typing Practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+Devanagari:wght@400&family=Noto+Sans+Gurmukhi:wght@400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f3f1ff;
+      --card: rgba(255, 255, 255, .72);
+      --surface: var(--card);
+      --ink: #1a1635;
+      --mute: #8581a6;
+      --line: rgba(110, 90, 255, .16);
+      --accent: #7c4dff;
+      --grad: linear-gradient(135deg, #7c4dff, #4f7cff);
+      --good: #1a1635;
+      --done: #a6a4bc;
+      --bad: #f0436b;
+      --badbg: rgba(240, 67, 107, .14);
+      --shadow: 0 10px 40px rgba(90, 60, 200, .12);
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px)
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #09071a;
+        --card: rgba(26, 21, 52, .62);
+        --ink: #eeebff;
+        --mute: #6f6a96;
+        --line: rgba(150, 130, 255, .17);
+        --accent: #8b6bff;
+        --grad: linear-gradient(135deg, #8b6bff, #5b8bff);
+        --good: #eeebff;
+        --done: #6a6690;
+        --bad: #ff5c85;
+        --badbg: rgba(255, 92, 133, .16);
+        --shadow: 0 10px 40px rgba(0, 0, 0, .45)
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #09071a;
+      --card: rgba(26, 21, 52, .62);
+      --ink: #eeebff;
+      --mute: #6f6a96;
+      --line: rgba(150, 130, 255, .17);
+      --accent: #8b6bff;
+      --grad: linear-gradient(135deg, #8b6bff, #5b8bff);
+      --good: #eeebff;
+      --done: #6a6690;
+      --bad: #ff5c85;
+      --badbg: rgba(255, 92, 133, .16);
+      --shadow: 0 10px 40px rgba(0, 0, 0, .45)
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html {
+      scroll-padding-top: env(safe-area-inset-top, 0px)
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100dvh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Manrope, system-ui, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(520px 420px at 12% 8%, rgba(124, 77, 255, .32), transparent 65%), radial-gradient(480px 420px at 88% 18%, rgba(59, 130, 246, .26), transparent 65%), radial-gradient(600px 460px at 50% 105%, rgba(236, 72, 153, .2), transparent 65%);
+      background-size: 140% 140%;
+      animation: drift 20s ease-in-out infinite alternate
+    }
+
+    @keyframes drift {
+      to {
+        background-position: 100% 100%
+      }
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: 0
+      }
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(14px)
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    header {
+      width: 100%;
+      max-width: 980px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 26px 24px 0
+    }
+
+    header>div:last-child {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 1.6rem;
+      letter-spacing: -.03em
+    }
+
+    .logo svg {
+      filter: drop-shadow(0 0 10px rgba(124, 77, 255, .7))
+    }
+
+    .logo span {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent
+    }
+
+    .tag {
+      margin: 4px 0 0 36px;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--mute)
+    }
+
+    .theme {
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--line);
+      color: var(--mute);
+      border-radius: 12px;
+      padding: 9px 14px;
+      font: 600 .85rem Manrope, sans-serif;
+      cursor: pointer;
+      transition: .2s
+    }
+
+    .theme:hover {
+      color: var(--ink);
+      border-color: var(--accent);
+      transform: translateY(-1px)
+    }
+
+    main {
+      width: 100%;
+      max-width: 980px;
+      padding: 24px 24px 48px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 22px
+    }
+
+    #game {
+      display: flex;
+      flex-direction: column;
+      gap: 18px
+    }
+
+    .ctrl,
+    .stat,
+    .stage,
+    .tw,
+    .result {
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow)
+    }
+
+    .ctrl {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+      padding: 10px 14px;
+      border-radius: 16px
+    }
+
+    .grp {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      flex: 1 1 130px;
+      min-width: 0
+    }
+
+    .lab {
+      font-size: .62rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--mute)
+    }
+
+    .modes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      background: rgba(127, 127, 170, .12);
+      padding: 4px;
+      border-radius: 14px;
+      width: fit-content;
+      max-width: 100%
+    }
+
+    .modes button {
+      border: 0;
+      background: none;
+      color: var(--mute);
+      font: 700 .88rem Manrope, sans-serif;
+      padding: 8px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: .2s
+    }
+
+    .modes button:hover {
+      color: var(--ink)
+    }
+
+    .modes button[aria-pressed="true"] {
+      background: var(--grad);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(124, 77, 255, .4)
+    }
+
+    .live {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px
+    }
+
+    .stat {
+      border-radius: 14px;
+      padding: 8px 18px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px
+    }
+
+    .stat small {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--mute)
+    }
+
+    .stat b {
+      font-size: 1.6rem;
+      font-weight: 800;
+      font-variant-numeric: tabular-nums
+    }
+
+    .stage {
+      position: relative;
+      border-radius: 28px;
+      padding: clamp(26px, 5vw, 60px);
+      cursor: text;
+      overflow: hidden;
+      min-height: clamp(280px, 42vh, 440px);
+      display: flex;
+      align-items: center
+    }
+
+    .prog {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 4px;
+      background: var(--line)
+    }
+
+    .prog i {
+      display: block;
+      height: 100%;
+      width: 100%;
+      background: var(--grad);
+      box-shadow: 0 0 12px var(--accent);
+      transition: width .3s linear
+    }
+
+    .view {
+      width: 100%;
+      height: calc(2em * 3);
+      overflow: hidden;
+      font: 400 clamp(1.3rem, 3.2vw + .4rem, 2.1rem)/2 "JetBrains Mono", "Noto Sans Devanagari", "Noto Sans Gurmukhi", ui-monospace, monospace;
+      position: relative
+    }
+
+    .words {
+      transition: transform .15s ease;
+      position: relative
+    }
+
+    .words span {
+      color: var(--ink);
+      position: relative
+    }
+
+    .words span.ok {
+      color: var(--done)
+    }
+
+    .words span.no {
+      color: var(--bad);
+      background: var(--badbg);
+      border-radius: 3px
+    }
+
+    .words span.cur {
+      background: rgba(124, 77, 255, .16);
+      border-radius: 3px
+    }
+
+    .words span.cur::before {
+      content: "";
+      position: absolute;
+      left: -1px;
+      top: .18em;
+      bottom: .18em;
+      width: 2px;
+      background: var(--accent);
+      box-shadow: 0 0 10px var(--accent);
+      border-radius: 2px;
+      animation: blink 1s steps(1) infinite
+    }
+
+    .stage.run .words span.cur::before {
+      animation: none
+    }
+
+    .hint {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: color-mix(in srgb, var(--bg) 55%, transparent);
+      backdrop-filter: blur(6px);
+      color: var(--ink);
+      font-weight: 700;
+      transition: opacity .2s;
+      text-align: center;
+      padding: 16px
+    }
+
+    .stage.focus .hint,
+    .stage.run .hint {
+      opacity: 0;
+      pointer-events: none
+    }
+
+    .foot {
+      color: var(--mute);
+      font-size: .9rem;
+      text-align: center
+    }
+
+    kbd {
+      font: 500 .8rem "JetBrains Mono", monospace;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 2px 7px;
+      background: var(--card)
+    }
+
+    .result {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      text-align: center;
+      padding: clamp(24px, 5vw, 44px);
+      border-radius: 28px
+    }
+
+    .result.show {
+      display: flex;
+      animation: rise .5s ease
+    }
+
+    .big {
+      font-size: clamp(4rem, 16vw, 7.5rem);
+      font-weight: 800;
+      letter-spacing: -.05em;
+      line-height: 1;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent
+    }
+
+    .big small {
+      font-size: 1.1rem;
+      color: var(--mute);
+      -webkit-text-fill-color: var(--mute);
+      font-weight: 600;
+      letter-spacing: 0;
+      margin-left: 8px
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+      gap: 14px;
+      width: 100%
+    }
+
+    .stats div {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      color: var(--mute);
+      font-weight: 700;
+      font-size: .72rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px
+    }
+
+    .stats strong {
+      color: var(--ink);
+      font-size: 1.6rem;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: none
+    }
+
+    .again {
+      background: var(--grad);
+      color: #fff;
+      border: 0;
+      border-radius: 14px;
+      padding: 13px 30px;
+      font: 700 1rem Manrope, sans-serif;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(124, 77, 255, .4);
+      transition: .2s
+    }
+
+    .again:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08)
+    }
+
+    .cert {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%
+    }
+
+    .cert input,
+    .pin,
+    textarea {
+      font: 600 .95rem Manrope, sans-serif;
+      padding: 12px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--ink);
+      width: 260px;
+      max-width: 100%
+    }
+
+    textarea {
+      width: 100%;
+      font: 500 .9rem "JetBrains Mono", monospace
+    }
+
+    .cert input:focus-visible,
+    .pin:focus-visible,
+    textarea:focus-visible {
+      outline: 2px solid var(--accent)
+    }
+
+    .dl {
+      background: var(--card);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 12px 20px;
+      font: 700 .95rem Manrope, sans-serif;
+      cursor: pointer;
+      transition: .2s
+    }
+
+    .dl:hover {
+      background: var(--accent);
+      color: #fff
+    }
+
+    .panel {
+      display: flex;
+      flex-direction: column;
+      gap: 18px
+    }
+
+    .bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+
+    .ph {
+      margin: 0;
+      font-size: 1.3rem;
+      font-weight: 800
+    }
+
+    .tw {
+      max-height: 320px;
+      overflow: auto;
+      border-radius: 16px
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .9rem
+    }
+
+    th,
+    td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap
+    }
+
+    th {
+      color: var(--mute);
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      background: var(--card);
+      backdrop-filter: blur(10px)
+    }
+
+    .vf {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start
+    }
+
+    #vr {
+      font-weight: 600
+    }
+
+    dialog {
+      background: var(--bg);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 24px;
+      width: min(420px, 92vw);
+      box-shadow: var(--shadow)
+    }
+
+    dialog::backdrop {
+      background: #0009;
+      backdrop-filter: blur(4px)
+    }
+
+    dialog[open] {
+      display: flex;
+      flex-direction: column;
+      gap: 12px
+    }
+
+    dialog .pin {
+      width: 100%
+    }
+
+    #aform,
+    .phone {
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .ah {
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .soc {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--card);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      font: 700 .95rem Manrope, sans-serif;
+      cursor: pointer;
+      transition: .2s
+    }
+
+    .soc:hover {
+      border-color: var(--accent)
+    }
+
+    button:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px
+    }
+
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      font: 600 .85rem Manrope, sans-serif;
+      color: var(--ink);
+      background: var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238581a6' stroke-width='3'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 7px 30px 7px 11px;
+      cursor: pointer;
+      width: 100%
+    }
+
+    select:focus-visible {
+      outline: 2px solid var(--accent)
+    }
+
+    option {
+      background: var(--bg);
+      color: var(--ink)
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%
+    }
+
+    button,
+    select {
+      touch-action: manipulation
+    }
+
+    button {
+      -webkit-tap-highlight-color: transparent
+    }
+
+    .ht {
+      display: none
+    }
+
+    @media (hover:none) {
+      .hd {
+        display: none
+      }
+
+      .ht {
+        display: inline
+      }
+
+      .kb {
+        display: none
+      }
+    }
+
+    @media (pointer:coarse) {
+
+      select,
+      .theme,
+      .again,
+      .dl,
+      .soc {
+        min-height: 44px
+      }
+    }
+
+    @media (min-width:1200px) {
+
+      header,
+      main {
+        max-width: 1120px
+      }
+    }
+
+    @media (max-width:640px) {
+      .stage {
+        min-height: 220px;
+        padding: 20px;
+        border-radius: 22px
+      }
+
+      .live {
+        gap: 8px
+      }
+
+      .stat {
+        padding: 8px 14px
+      }
+
+      .result {
+        padding: 22px 16px
+      }
+
+      .cert input {
+        width: 100%
+      }
+
+      .cert .dl {
+        width: 100%
+      }
+    }
+
+    @media (max-height:480px) and (orientation:landscape) {
+      .stage {
+        min-height: 0
+      }
+
+      header {
+        padding-top: 12px
+      }
+    }
+
+    .custom {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start
+    }
+
+    .hr{display:flex;align-items:center;gap:8px}
+    .menu{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--card);backdrop-filter:blur(12px);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer;padding:0;transition:.2s}
+    .menu:hover{border-color:var(--accent)}
+    .menu span{display:block;width:20px;height:2px;border-radius:2px;background:var(--ink)}
+    .av,.avbig,.avopt{display:grid;place-items:center;background-size:cover;background-position:center;overflow:hidden;color:#fff}
+    .av{width:44px;height:44px;border-radius:50%;border:2px solid var(--accent);font-size:22px;cursor:pointer;padding:0;box-shadow:0 0 0 3px var(--line)}
+    .avbig{width:96px;height:96px;border-radius:50%;border:3px solid var(--accent);font-size:48px;flex:none}
+    .avopt{aspect-ratio:1;border-radius:50%;border:3px solid transparent;font-size:1.5rem;cursor:pointer;padding:0}
+    .avopt.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--line)}
+    .avgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;max-width:420px;width:100%}
+    .scrim{position:fixed;inset:0;background:#0007;backdrop-filter:blur(3px);z-index:40}
+    .drawer{position:fixed;top:0;right:0;bottom:0;width:min(380px,92vw);background:var(--bg);border-left:1px solid var(--line);box-shadow:var(--shadow);z-index:50;padding:calc(18px + env(safe-area-inset-top,0px)) 18px 24px;display:flex;flex-direction:column;gap:20px;overflow-y:auto;transform:translateX(105%);transition:transform .25s ease,visibility .25s;visibility:hidden}
+    .drawer.open{transform:none;visibility:visible}
+    .dh{display:flex;justify-content:space-between;align-items:center}
+    .dsec{display:flex;flex-direction:column;gap:10px}
+    .drawer .ctrl{box-shadow:none;background:none;border:0;padding:0;backdrop-filter:none}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);border:1px solid var(--line);color:var(--ink);border-radius:12px;padding:12px 14px;font:700 .95rem Manrope,sans-serif;cursor:pointer;text-align:left;transition:.2s}
+    .nav:hover{border-color:var(--accent)}
+    .pcard{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:20px;border-radius:22px;background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow)}
+    .idrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:6px 0}
+    code{font:700 1.1rem "JetBrains Mono",monospace;background:var(--card);border:1px solid var(--line);padding:6px 12px;border-radius:10px;letter-spacing:.06em}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .pf{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;width:100%}
+    .pf label{display:flex;flex-direction:column;gap:4px}
+    .pf .pin{width:100%}
+    label.dl{display:inline-block}
+    .hide{display:none !important}
+
+    #cap {
+      font-size: 16px;
+      position: fixed;
+      opacity: 0;
+      pointer-events: none;
+      left: 0;
+      top: 0;
+      width: 1px;
+      height: 1px
+    }
+
+    @media (max-width:640px) {
+      header {
+        padding: 18px 16px 0
+      }
+
+      main {
+        padding: 16px 16px 36px;
+        gap: 16px
+      }
+
+      .live {
+        gap: 10px
+      }
+
+      .stat {
+        padding: 12px
+      }
+
+      .modes button {
+        padding: 8px 11px;
+        font-size: .82rem
+      }
+
+      .ctrl {
+        grid-template-columns: 1fr
+      }
+
+      .tag {
+        margin-left: 0
+      }
+
+      .logo {
+        font-size: 1.4rem
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      * {
+        animation: none !important;
+        transition: none !important
+      }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
+</head>
+
+<body>
+  <header>
+    <div>
+      <div class="logo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+          <path d="M13.5 2 5 13.5h6L9.5 22 19 9.5h-6.2z" fill="#7c4dff" />
+        </svg><span>Violet Fast</span></div>
+      <p class="tag">A little practice. A lot more speed.</p>
+    </div>
+    <div class="hr"><button class="theme" id="abtn" type="button">Sign in</button><button class="av hide" id="avbtn" type="button" aria-label="Open profile"></button><button class="menu" id="mbtn" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
+  </header>
+
+  <div class="scrim hide" id="scrim"></div>
+  <aside class="drawer" id="drawer" aria-label="Menu">
+    <div class="dh"><h2 class="ph">Menu</h2><button class="theme" id="mclose" type="button">Close</button></div>
+    <div class="dsec"><span class="lab">Test settings</span><div class="ctrl">
+        <label class="grp"><span class="lab">Language</span><select id="selLang">
+            <option value="en">English</option>
+            <option value="hi">हिन्दी (Hindi)</option>
+            <option value="pa">ਪੰਜਾਬੀ (Punjabi)</option>
+            <option value="es">Español (Spanish)</option>
+            <option value="fr">Français (French)</option>
+            <option value="de">Deutsch (German)</option>
+          </select></label>
+        <label class="grp"><span class="lab">Mode</span><select id="selKind">
+            <option value="words">Words</option>
+            <option value="sentences">Sentences</option>
+            <option value="punctuation">Punctuation</option>
+            <option value="numbers">Numbers</option>
+            <option value="custom">Custom text</option>
+          </select></label>
+        <label class="grp"><span class="lab">Level</span><select id="selLevel">
+            <option value="normal">Normal</option>
+            <option value="adv">Advanced</option>
+          </select></label>
+        <label class="grp"><span class="lab">Time</span><select id="selTime">
+            <option value="15">15 seconds</option>
+            <option value="30">30 seconds</option>
+            <option value="60" selected>60 seconds</option>
+            <option value="120">120 seconds</option>
+          </select></label>
+      </div><div class="custom hide" id="cbox"><textarea id="ct" rows="3" maxlength="3000"
+          placeholder="Paste or type the text you want to practice..." aria-label="Custom text"></textarea><button
+          class="dl" id="cuse" type="button">Use this text</button></div></div>
+    <div class="dsec"><span class="lab">More</span>
+      <button class="nav" id="hbtn" type="button">History <span>&rsaquo;</span></button>
+      <button class="nav" id="nVerify" type="button">Verify a certificate <span>&rsaquo;</span></button>
+      <button class="nav" id="theme" type="button" aria-label="Toggle light or dark theme">Light / dark theme <span>&#9680;</span></button>
+    </div>
+  </aside>
+
+  <main>
+    <section id="game">
+      
+      <div class="live">
+        <div class="stat"><small>Time</small><b id="time">60</b></div><button class="theme" id="rst"
+          type="button">Restart</button>
+      </div>
+      <div class="stage" id="stage">
+        <div class="prog"><i id="pb"></i></div>
+        <div class="view" id="view">
+          <div class="words" id="words"></div>
+        </div>
+        <div class="hint"><span class="hd">Click here or just start typing</span><span class="ht">Tap here to start
+            typing</span></div>
+      </div>
+      <p class="foot" style="margin-top:24px"><span class="kb"><kbd>Tab</kbd> restart anytime</span><span
+          id="lnote"></span></p>
+    </section>
+
+    <section class="panel hide" id="hp">
+      <div class="bar">
+        <h2 class="ph">Your results</h2><button class="theme" id="hback">Back to typing</button>
+      </div>
+      <div class="stats" id="hs"></div>
+      <div class="tw">
+        <table id="ht"></table>
+      </div>
+      <button class="theme" id="hclr" style="align-self:flex-start">Clear history</button>
+      </section>
+
+    <section class="panel hide" id="vp">
+      <div class="bar"><h2 class="ph">Verify a certificate</h2><button class="theme" id="vback" type="button">Back to typing</button></div>
+      <p class="foot" style="margin:0;text-align:left">Scan the QR code on a certificate, then paste the text you see here.</p>
+      <textarea id="vi" rows="3" aria-label="Certificate code"></textarea>
+      <button class="dl" id="vb" type="button" style="align-self:flex-start">Verify</button>
+      <div id="vr"></div>
+    </section>
+
+    <section class="panel hide" id="pp">
+      <div class="bar"><h2 class="ph">Your profile</h2><button class="theme" id="pback" type="button">Back to typing</button></div>
+      <div class="pcard">
+        <div class="avbig" id="pav"></div>
+        <div>
+          <span class="lab">Your public user ID</span>
+          <div class="idrow"><code id="puid">-</code><button class="theme" id="pcopy" type="button">Copy profile link</button></div>
+          <p class="foot" style="margin:0;text-align:left">People who open your link see only this ID, your picture and your typing stats. They never see your name.</p>
+        </div>
+      </div>
+      <div class="vf"><span class="lab">Choose a picture</span>
+        <div class="avgrid" id="avgrid"></div>
+        <div class="row"><label class="dl">Upload your own<input type="file" id="avfile" accept="image/*" hidden></label></div>
+        <p class="foot" style="margin:0;text-align:left">An uploaded picture is public on your profile link.</p>
+      </div>
+      <div class="vf" style="width:100%"><span class="lab">About you (private, only you can see this)</span>
+        <div class="pf">
+          <label><span class="lab">Full name</span><input class="pin" id="pn" type="text" maxlength="30" placeholder="Your name" aria-label="Full name"></label>
+          <label><span class="lab">City</span><input class="pin" id="pc" type="text" maxlength="40" placeholder="Your city" aria-label="City"></label>
+          <label style="grid-column:1/-1"><span class="lab">Bio</span><input class="pin" id="pb" type="text" maxlength="120" placeholder="A line about you" aria-label="Bio"></label>
+        </div>
+        <div class="row"><button class="again" id="psave" type="button">Save profile</button><span id="pmsg" class="foot"></span></div>
+      </div>
+      <div class="row"><button class="theme" id="logout" type="button">Log out</button></div>
+    </section>
+
+    <section class="panel hide" id="up">
+      <div class="bar"><h2 class="ph">Profile</h2><button class="theme" id="uback" type="button">Back to typing</button></div>
+      <div class="pcard"><div class="avbig" id="uav"></div><div><span class="lab">User ID</span><div class="idrow"><code id="uid">-</code></div></div></div>
+      <div class="stats" id="ust"></div>
+      <p class="foot" id="umsg"></p>
+    </section>
+
+    <section class="result" id="result" aria-live="polite">
+      <div class="big"><span id="rWpm">0</span><small>words per minute</small></div>
+      <div class="stats">
+        <div>Time<strong id="rTime">0s</strong></div>
+        <div>Accuracy<strong id="rAcc">0%</strong></div>
+        <div>Characters<strong id="rChars">0</strong></div>
+        <div>Mistakes<strong id="rErr">0</strong></div>
+      </div>
+      <div class="cert"><input id="nm" type="text" maxlength="30" placeholder="Your name for the certificate"
+          aria-label="Your name"><button class="dl" id="dl">Download certificate</button></div>
+      <button class="again" id="again">Try again</button>
+    </section>
+  </main>
+
+  <input id="cap" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false"
+    aria-label="Typing input">
+
+  <script>
+    const WORDS = "the of and to in is you that it he was for on are as with his they at be this from have or by one had not but what all were when we there can an your which their said if do will each about how up out them then she many some so these would other into has more her two like him see time could no make than first been its who now people my made over did down only way find use may water long little very after words called just where most know get through back much before go good new write our used me man too any day same right look think also around another came come work three word must because does part even place well such here take why things help put years different away again off went old number great tell men say small every found still between name should home big give air line set own under read last never us left end along while might next sound below saw something thought both few those always looked show large often together asked house don't world going want school important until form food keep children feet land side without boy once animals life enough took sometimes four head above kind began almost live page got earth need far hand high year mother light country father let night picture being study second soon story since white ever paper hard near sentence better best across during today however sure knew try told young sun thing whole hear example heard several change answer room sea against top turned learn point city play toward five using himself usually".split(" ");
+
+    const $ = id => document.getElementById(id);
+    const stage = $('stage'), wordsEl = $('words'), cap = $('cap');
+    let dur = 60, kind = "words", last = {}, text = "", spans = [], pos = 0, started = false, startT = 0, tick = null, done = false, keys = 0, hits = 0, errs = 0, line0 = 0;
+
+    function rnd(n, P = WORDS) { let o = [], last = ""; for (let i = 0; i < n; i++) { let w; do { w = P[Math.floor(Math.random() * P.length)] } while (w === last); o.push(w); last = w } return o.join(" ") }
+
+    const SENT = ["The quick brown fox jumps over the lazy dog.", "Practice every day and your speed will grow.", "A good habit is built one small step at a time.", "Typing without looking at the keys is a useful skill.", "Computers help us learn, work and share ideas.", "The best way to learn is to keep trying.", "Fast hands come from a calm and focused mind.", "Rain fell softly on the quiet town last night.", "Every expert was once a beginner.", "Read a little, write a little, and learn a lot.", "Accuracy first, then speed will follow naturally.", "Good things come to those who work hard."];
+    const HARD = "extraordinary necessary environment particularly opportunity responsibility development government technology communication knowledge achievement atmosphere temperature imagination architecture experience significant challenge community information laboratory mysterious adventure vocabulary beautiful unbelievable competition interesting difficult".split(" ");
+    const LANGW = { hi: "और का है में की से को यह पर एक हम वह नहीं कि भी तो था थी हैं ने लिए साथ लोग समय काम घर देश पानी दिन रात बात जीवन सब कुछ बहुत अच्छा नया पुराना छोटा स्कूल किताब दोस्त परिवार खाना प्यार सुबह शाम आज कल अब फिर जब तब कहाँ कैसे क्यों क्या कौन मैं तुम आप भारत शहर गाँव मौसम खुश सीखना लिखना चलना खेलना देखना सुनना बोलना समझना मेहनत सफलता विद्यार्थी शिक्षक कंप्यूटर इंटरनेट मित्र संसार सपना".split(" "), pa: "ਅਤੇ ਦਾ ਹੈ ਵਿੱਚ ਦੀ ਤੋਂ ਨੂੰ ਇਹ ਉਹ ਇੱਕ ਅਸੀਂ ਨਹੀਂ ਵੀ ਤਾਂ ਸੀ ਹਨ ਨੇ ਲਈ ਨਾਲ ਲੋਕ ਸਮਾਂ ਕੰਮ ਘਰ ਪਾਣੀ ਦਿਨ ਰਾਤ ਗੱਲ ਸਭ ਕੁਝ ਬਹੁਤ ਚੰਗਾ ਨਵਾਂ ਪੁਰਾਣਾ ਵੱਡਾ ਛੋਟਾ ਸਕੂਲ ਕਿਤਾਬ ਦੋਸਤ ਪਰਿਵਾਰ ਖਾਣਾ ਪਿਆਰ ਸਵੇਰ ਅੱਜ ਹੁਣ ਫਿਰ ਜਦੋਂ ਕਿੱਥੇ ਕਿਵੇਂ ਕਿਉਂ ਕੀ ਕੌਣ ਮੈਂ ਤੁਸੀਂ ਪੰਜਾਬ ਪਿੰਡ ਸੜਕ ਮੌਸਮ ਸਿੱਖਣਾ ਲਿਖਣਾ ਖੇਡਣਾ ਵੇਖਣਾ ਸੁਣਨਾ ਬੋਲਣਾ ਮਿਹਨਤ ਸਫਲਤਾ ਵਿਦਿਆਰਥੀ ਅਧਿਆਪਕ ਕੰਪਿਊਟਰ ਮਿੱਤਰ ਸੁਪਨਾ ਖੇਤ ਕਿਸਾਨ ਮਿੱਟੀ".split(" "), es: "de la que el en y a los se del las un por con no una su para es al lo como mas pero sus le ya este si porque esta entre cuando muy sin sobre tambien me hasta hay donde quien desde todo nos durante todos uno les ni contra otros ese eso ante ellos esto mi antes algunos unos yo otro otra tanto mucho nada poco ella estar algo casa tiempo vida mundo trabajo escuela amigo familia agua dia noche ciudad libro".split(" "), fr: "le de un etre et a il avoir ne je son que se qui ce dans en du elle au pour pas vous par sur faire plus dire me on mon lui nous comme mais pouvoir avec tout aller voir bien ou sans tu leur homme si deux moi vouloir femme venir quand grand notre devoir sous jour vie temps monde ecole livre ami maison eau nuit ville travail famille".split(" "), de: "der die und in den von zu das mit sich des auf ist im dem nicht ein eine als auch es an werden aus er hat dass sie nach wird bei einer um am sind noch wie einem einen so zum war haben nur oder aber vor zur bis mehr durch man sein wurde keine Zeit Haus Wasser Tag Nacht Stadt Buch Freund Schule Leben Welt Arbeit Familie".split(" ") };
+    const LN = { en: 'English', hi: 'Hindi', pa: 'Punjabi', es: 'Spanish', fr: 'French', de: 'German' };
+    const LB = { veasy: 'very easy', easy: 'easy', normal: 'normal', hard: 'hard', adv: 'advanced' };
+    let level = "normal", lang = "en";
+    const LV = { normal: { sp: 0, cap: 0, num: 0, dig: 4 }, adv: { sp: .22, cap: .25, num: .12, dig: 8 } };
+    function poolFor() {
+      if (lang === 'en') return level === 'adv' ? HARD.concat(WORDS.filter(w => w.length >= 7)) : WORDS;
+      const b = LANGW[lang];
+      return level === 'adv' ? b.slice().sort((x, y) => y.length - x.length).slice(0, Math.ceil(b.length / 2)) : b;
+    }
+    const rn = d => String(Math.floor(Math.random() * 10 ** (1 + Math.floor(Math.random() * d))));
+    function gen() {
+      const L = LV[level] || LV.normal, PL = poolFor();
+      if (kind === "custom") { const t = ($('ct').value || '').replace(/\s+/g, ' ').trim(); return t || 'Paste your own text in the box above, then press Use this text.' }
+      if (kind === "sentences") {
+        if (lang !== 'en') { let o = []; while (o.join(' ').length < 2600) { const s = rnd(6 + Math.floor(Math.random() * 5), PL); o.push(s[0].toUpperCase() + s.slice(1) + '.') } return o.join(' ') }
+        let o = [], l = -1, n = 0; while (n < 2600) { let i; do { i = Math.floor(Math.random() * SENT.length) } while (i === l); l = i; o.push(SENT[i]); n += SENT[i].length + 1 } return o.join(" ")
+      }
+      if (kind === "numbers") return Array.from({ length: 500 }, () => rn(L.dig)).join(" ");
+      const pk = kind === "punctuation", P = pk ? { sp: Math.max(L.sp, .2), cap: .15, num: 0 } : L;
+      let up = pk;
+      return rnd(400, PL).split(" ").map(x => {
+        if (Math.random() < P.num) return rn(L.dig);
+        if (up) { x = x[0].toUpperCase() + x.slice(1); up = false }
+        else if (Math.random() < P.cap) x = x[0].toUpperCase() + x.slice(1);
+        if (Math.random() < P.sp) { const e = Math.random(); if (e < .5) x += ","; else if (e < .8) { x += "."; if (pk) up = true } else if (e < .9) x += "?"; else x += "!" }
+        return x
+      }).join(" ");
+    }
+    function setup() {
+      clearInterval(tick);
+      started = false; done = false; pos = 0; keys = 0; hits = 0; errs = 0; line0 = 0;
+      text = gen();
+      wordsEl.innerHTML = ""; wordsEl.style.transform = "";
+      spans = [...text].map(c => { const s = document.createElement('span'); s.textContent = c; wordsEl.appendChild(s); return s });
+      spans[0].className = "cur";
+      $('time').textContent = dur; $('pb').style.width = '100%';
+      stage.classList.remove('run');
+      $('result').classList.remove('show'); $('game').classList.remove('hide'); ['hp','vp','pp','up'].forEach(i => $(i).classList.add('hide')); VIEW = false;
+      cap.value = "\u200b";
+      if (!$('drawer').classList.contains('open')) cap.focus({ preventScroll: true });
+    }
+
+    function liveWpm() {
+      const m = (Date.now() - startT) / 60000;
+      return m > 0 ? Math.round(hits / 5 / m) : 0;
+    }
+
+    function begin() {
+      started = true; startT = Date.now(); stage.classList.add('run');
+      tick = setInterval(() => {
+        const left = Math.max(0, dur - Math.round((Date.now() - startT) / 1000));
+        $('time').textContent = left; $('pb').style.width = (left / dur * 100) + '%';
+        if (left <= 0) finish();
+      }, 250);
+    }
+
+    function finish() {
+      if (done) return; done = true; clearInterval(tick);
+      const m = Math.max((Date.now() - startT) / 60000, 1 / 60);
+      last = { w: Math.round(hits / 5 / m), a: keys ? Math.round(hits / keys * 100) : 0 };
+      $('dl').textContent = 'Download certificate';
+
+      const record = {
+        t: Date.now(),
+        w: last.w,
+        a: last.a,
+        d: dur,
+        k: kind,
+        l: level
+      };
+
+      saveH(loadH().concat(record));
+      renderH();
+
+
+      if (typeof window.vfSaveCloudHistory === 'function') {
+        window.vfSaveCloudHistory(record).catch(error => {
+          console.error('Firestore save failed:', error);
+        });
+      }
+      if (typeof window.vfSyncPublic === 'function') window.vfSyncPublic();
+
+    $('rWpm').textContent = last.w;
+    $('rAcc').textContent = (keys ? Math.round(hits / keys * 100) : 0) + '%';
+    $('rChars').textContent = hits;
+    $('rErr').textContent = errs;
+    $('rTime').textContent = Math.min(dur, Math.round((Date.now() - startT) / 1000)) + 's';
+    $('game').classList.add('hide');
+    $('result').classList.add('show');
+    cap.blur();
+    }
+
+    function type(ch) {
+      if (done || pos >= spans.length) return;
+      if (!started) begin();
+      keys++;
+      const ok = ch === text[pos];
+      if (ok) hits++; else errs++;
+      spans[pos].className = ok ? "ok" : "no";
+      pos++;
+      spans[pos] && (spans[pos].className = "cur");
+      scroll();
+      if (pos >= spans.length) finish();
+    }
+
+    function back() {
+      if (done || pos === 0) return;
+      spans[pos].className = "";
+      pos--;
+      if (spans[pos].className === "ok") hits--;
+      spans[pos].className = "cur";
+      scroll();
+    }
+
+    function scroll() {
+      const lh = parseFloat(getComputedStyle($('view')).lineHeight);
+      const row = Math.round(spans[Math.min(pos, spans.length - 1)].offsetTop / lh);
+      if (row > 1) wordsEl.style.transform = `translateY(${-(row - 1) * lh}px)`;
+      else wordsEl.style.transform = "";
+    }
+
+    function backWord() {
+      while (pos > 0 && text[pos - 1] === ' ') back();
+      while (pos > 0 && text[pos - 1] !== ' ') back();
+    }
+    cap.addEventListener('input', e => {
+      if (e.inputType === 'deleteContentBackward') back();
+      else if (e.data) for (const c of e.data) type(c);
+      cap.value = "\u200b";
+    });
+    document.addEventListener('keydown', e => {
+      if ($('drawer').classList.contains('open')) { if (e.key === 'Escape') closeMenu(); return }
+      if (/^(TEXTAREA|INPUT)$/.test(e.target.tagName) && e.target !== cap) return;
+      if (done) return;
+      if (e.key === 'Tab') { e.preventDefault(); setup(); return }
+      if (e.key === 'Backspace' && !done) { e.preventDefault(); (e.ctrlKey || e.altKey) ? backWord() : back(); return }
+      if (e.target !== cap && !done && !e.ctrlKey && !e.metaKey) cap.focus({ preventScroll: true });
+    });
+    stage.addEventListener('click', () => cap.focus({ preventScroll: true }));
+    cap.addEventListener('focus', () => { stage.classList.add('focus'); if (matchMedia('(pointer:coarse)').matches) setTimeout(() => stage.scrollIntoView({ block: 'center', behavior: 'smooth' }), 300) });
+    cap.addEventListener('blur', () => stage.classList.remove('focus'));
+
+    $('again').addEventListener('click', setup);
+    $('rst').onclick = setup;
+    try { $('ct').value = localStorage.getItem('vf-custom') || '' } catch (_) { }
+    $('cuse').onclick = () => { try { localStorage.setItem('vf-custom', $('ct').value) } catch (_) { } setup(); closeMenu() };
+    const NOTE = { hi: ' \u00b7 Turn on a Hindi keyboard (Inscript) to type.', pa: ' \u00b7 Turn on a Punjabi (Gurmukhi) keyboard to type.' };
+    $('selKind').onchange = e => { kind = e.target.value; $('cbox').classList.toggle('hide', kind !== 'custom'); setup() };
+    $('selLevel').onchange = e => { level = e.target.value; setup() };
+    $('selTime').onchange = e => { dur = +e.target.value; setup() };
+    $('selLang').onchange = e => { lang = e.target.value; $('lnote').textContent = NOTE[lang] || ''; setup() };
+    const SALT = 'vf-violet-2026';
+    const esc = s => String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+    function h(s) { let x = 2166136261; for (const c of s + SALT) { x ^= c.charCodeAt(0); x = Math.imul(x, 16777619) } return (x >>> 0).toString(36).toUpperCase() }
+    function pack(r) { const p = [r.n, r.w, r.a, r.d, r.k, r.t, r.l, r.g].join('|'); return btoa(unescape(encodeURIComponent(p))) + '.' + h(p) }
+    function unpack(code) { try { const [b, c] = code.split('.'); const p = decodeURIComponent(escape(atob(b))); if (!c || h(p) !== c) return null; const [n, w, a, d, k, t, l, g] = p.split('|'); return { n, w, a, d, k, t, l, g } } catch (e) { return null } }
+    let HK = 'vf-hist';
+    function loadH() { try { return JSON.parse(localStorage.getItem(HK) || '[]') } catch (e) { return [] } }
+    function saveH(a) { try { localStorage.setItem(HK, JSON.stringify(a.slice(-200))) } catch (e) { } }
+    function renderH() {
+      const a = loadH().slice().reverse();
+      const best = a.reduce((m, x) => Math.max(m, x.w), 0), avg = a.length ? Math.round(a.reduce((s, x) => s + x.w, 0) / a.length) : 0;
+      $('hs').innerHTML = `<div>Tests<strong>${a.length}</strong></div><div>Best WPM<strong>${best}</strong></div><div>Average WPM<strong>${avg}</strong></div>`;
+      $('ht').innerHTML = '<tr><th>Date</th><th>Mode</th><th>Level</th><th>Time</th><th>WPM</th><th>Accuracy</th></tr>' + (a.map(x => `<tr><td>${new Date(x.t).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}</td><td>${esc(x.k)}</td><td>${esc(LB[x.l] || 'normal')}</td><td>${x.d}s</td><td>${x.w}</td><td>${x.a}%</td></tr>`).join('') || '<tr><td colspan="6">No tests yet. Finish a test and it will show up here.</td></tr>');
+    }
+    let VIEW = false;
+    function showPanel(n) {
+      done = true; clearInterval(tick); stage.classList.remove('run');
+      ['game', 'hp', 'vp', 'pp', 'up'].forEach(i => $(i).classList.toggle('hide', i !== n));
+      $('result').classList.remove('show');
+      VIEW = n !== 'game';
+      closeMenu();
+      if (n === 'hp') renderH();
+      window.scrollTo(0, 0);
+    }
+    function openMenu() { $('drawer').classList.add('open'); $('scrim').classList.remove('hide'); $('mbtn').setAttribute('aria-expanded', 'true') }
+    function closeMenu() {
+      const was = $('drawer').classList.contains('open');
+      $('drawer').classList.remove('open'); $('scrim').classList.add('hide'); $('mbtn').setAttribute('aria-expanded', 'false');
+      if (was && !VIEW && !done) cap.focus({ preventScroll: true });
+    }
+    $('mbtn').onclick = () => $('drawer').classList.contains('open') ? closeMenu() : openMenu();
+    $('mclose').onclick = closeMenu; $('scrim').onclick = closeMenu;
+    $('hbtn').addEventListener('click', () => showPanel('hp'));
+    $('nVerify').addEventListener('click', () => showPanel('vp'));
+    ['hback', 'vback', 'pback'].forEach(i => $(i).addEventListener('click', setup));
+    $('uback').addEventListener('click', () => { try { history.replaceState(null, '', location.pathname) } catch (_) { } setup() });
+    const AVS = [['\u{1F98A}', '#ff9a62', '#ff5f6d'], ['\u{1F43C}', '#6dd5ed', '#2193b0'], ['\u{1F981}', '#f9d423', '#ff4e50'], ['\u{1F419}', '#c471f5', '#fa71cd'], ['\u{1F438}', '#96e6a1', '#2dbf7a'], ['\u{1F989}', '#a18cd1', '#6a5ae0'], ['\u{1F42C}', '#4facfe', '#00c6ff'], ['\u{1F984}', '#f093fb', '#f5576c'], ['\u{1F680}', '#434343', '#7c4dff'], ['\u26A1', '#7c4dff', '#4f7cff']];
+    function paintAv(el, a) {
+      el.textContent = ''; el.style.backgroundImage = '';
+      if (a && String(a).startsWith('data:image/')) { el.style.backgroundImage = 'url("' + a + '")'; return }
+      const v = AVS[+String(a || '').slice(1)] || AVS[9];
+      el.style.backgroundImage = `linear-gradient(135deg,${v[1]},${v[2]})`; el.textContent = v[0];
+    }
+    $('hclr').addEventListener('click', async e => {
+      const b = e.currentTarget;
+
+      if (!b.dataset.s) {
+        b.dataset.s = '1';
+        b.textContent = 'Click again to confirm';
+        return;
+      }
+
+      b.disabled = true;
+
+      try {
+        if (typeof window.vfClearCloudHistory === 'function') {
+          await window.vfClearCloudHistory();
+        }
+
+        saveH([]);
+        renderH();
+        delete b.dataset.s;
+        b.textContent = 'Clear history';
+      } catch (error) {
+        console.error('Clear history failed:', error);
+        b.textContent = 'Failed — try again';
+        delete b.dataset.s;
+      } finally {
+        b.disabled = false;
+      }
+    });
+    $('vb').addEventListener('click', () => {
+      const r = unpack($('vi').value.trim().split(/\s+/).pop() || '');
+      $('vr').innerHTML = r ? `<span style="color:#1f9d55">Valid certificate</span><br>${esc(r.n)} · ${esc(r.w)} WPM · ${esc(r.a)}% accuracy · ${esc(r.d)}s ${esc(r.k)}${r.l ? ' (' + esc(r.l) + ', ' + esc(r.g) + ')' : ''} · ${esc(r.t)}` : '<span style="color:var(--bad)">Not valid. The code is missing or has been changed.</span>';
+    });
+    function getName() { try { return localStorage.getItem('vf-name') || '' } catch (e) { return '' } }
+    function setName(v) { try { localStorage.setItem('vf-name', v.trim()) } catch (e) { } $('nm').value = v; $('pn').value = v }
+    setName(getName());
+    $('pn').addEventListener('input', e => { try { localStorage.setItem('vf-name', e.target.value.trim()) } catch (_) { } $('nm').value = e.target.value });
+    $('nm').addEventListener('input', e => { try { localStorage.setItem('vf-name', e.target.value.trim()) } catch (_) { } $('pn').value = e.target.value });
+    function makeCert() {
+      const name = $('nm').value.trim() || 'Typing Champion';
+      const rec = { n: name.replace(/\|/g, ' '), w: last.w, a: last.a, d: dur, k: kind, t: new Date().toISOString().slice(0, 10), l: LB[level], g: LN[lang] };
+      const code = pack(rec), id = 'VF-' + h(code).slice(0, 8);
+      const W = 1600, H = 1130, c = document.createElement('canvas'); c.width = W; c.height = H;
+      const g = c.getContext('2d'), SER = 'Georgia,"Times New Roman",serif', SAN = 'Manrope,system-ui,sans-serif', NAVY = '#1d2b5a', GOLD = '#b8913a', INK = '#2a2f45', BOLT = new Path2D('M13.5 2 5 13.5h6L9.5 22 19 9.5h-6.2z');
+      const T = (s, x, y, f, col, ls) => { g.font = f; g.fillStyle = col; g.letterSpacing = ls || '0px'; g.fillText(s, x, y) };
+      g.textAlign = 'center';
+      g.fillStyle = NAVY; g.fillRect(24, 24, W - 48, H - 48);
+      g.fillStyle = '#fdfaf1'; g.fillRect(46, 46, W - 92, H - 92);
+      g.save(); g.beginPath(); g.rect(46, 46, W - 92, H - 92); g.clip();
+      g.strokeStyle = 'rgba(184,145,58,.13)'; g.lineWidth = 1.2;
+      for (let i = 0; i < 36; i++) { g.beginPath(); for (let x = 0; x <= W; x += 10) { const y = H / 2 + Math.sin(x / 95 + i * .35) * (40 + i * 9); x ? g.lineTo(x, y) : g.moveTo(x, y) } g.stroke() }
+      g.globalAlpha = .06; g.translate(800, 575); g.scale(30, 30); g.translate(-12, -12); g.fillStyle = NAVY; g.fill(BOLT);
+      g.restore();
+      g.strokeStyle = GOLD; g.lineWidth = 5; g.strokeRect(62, 62, W - 124, H - 124);
+      g.lineWidth = 1.5; g.strokeStyle = NAVY; g.strokeRect(74, 74, W - 148, H - 148);
+      g.fillStyle = GOLD;[[62, 62], [W - 62, 62], [62, H - 62], [W - 62, H - 62]].forEach(([x, y]) => { g.beginPath(); g.arc(x, y, 16, 0, 7); g.fill() });
+      g.save(); g.translate(776, 96); g.scale(2.1, 2.1); g.fillStyle = GOLD; g.fill(BOLT); g.restore();
+      T('VIOLET FAST', 800, 200, '700 30px ' + SAN, NAVY, '12px');
+      T('CERTIFICATE', 800, 300, '700 100px ' + SER, NAVY, '14px');
+      T('OF TYPING PROFICIENCY', 800, 350, '600 26px ' + SAN, GOLD, '10px');
+      g.strokeStyle = GOLD; g.lineWidth = 2; g.beginPath(); g.moveTo(560, 385); g.lineTo(760, 385); g.moveTo(840, 385); g.lineTo(1040, 385); g.stroke();
+      g.save(); g.translate(800, 385); g.rotate(Math.PI / 4); g.fillStyle = GOLD; g.fillRect(-8, -8, 16, 16); g.restore();
+      T('This is to certify that', 800, 445, 'italic 30px ' + SER, INK);
+      g.letterSpacing = '0px'; let fs = 104; g.font = 'italic 700 ' + fs + 'px ' + SER;
+      while (g.measureText(name).width > 1150 && fs > 44) { fs -= 4; g.font = 'italic 700 ' + fs + 'px ' + SER }
+      T(name, 800, 550, g.font, NAVY);
+      g.fillStyle = GOLD; g.fillRect(450, 575, 700, 3);
+      T('has successfully completed the Violet Fast typing assessment', 800, 630, '28px ' + SER, INK);
+      T('(' + LN[lang] + ' \u00b7 ' + kind + ' \u00b7 ' + LB[level] + ' level \u00b7 ' + dur + ' seconds) with a speed of', 800, 672, '28px ' + SER, INK);
+      g.letterSpacing = '0px'; g.font = '700 130px ' + SER; const a1 = g.measureText(String(last.w)).width;
+      g.font = '700 44px ' + SER; const a2 = g.measureText(' WPM').width, x0 = 800 - (a1 + a2) / 2;
+      g.textAlign = 'left'; T(String(last.w), x0, 780, '700 130px ' + SER, NAVY); T(' WPM', x0 + a1, 780, '700 44px ' + SER, GOLD); g.textAlign = 'center';
+      T('with ' + last.a + '% accuracy', 800, 830, '600 30px ' + SAN, INK);
+      T('Violet Fast', 300, 965, 'italic 64px "Brush Script MT","Segoe Script","Lucida Handwriting",cursive', NAVY);
+      g.fillStyle = INK; g.fillRect(150, 985, 300, 2);
+      T('Authorized Signatory', 300, 1018, '600 22px ' + SAN, INK, '1px');
+      g.save(); g.translate(800, 935); g.fillStyle = GOLD; g.beginPath();
+      for (let i = 0; i < 72; i++) { const r = i % 2 ? 74 : 86, a = i * Math.PI / 36; g.lineTo(Math.cos(a) * r, Math.sin(a) * r) }
+      g.closePath(); g.fill(); g.fillStyle = NAVY; g.beginPath(); g.arc(0, 0, 66, 0, 7); g.fill();
+      g.strokeStyle = '#fdfaf1'; g.lineWidth = 3; g.beginPath(); g.arc(0, 0, 57, 0, 7); g.stroke();
+      g.scale(2.4, 2.4); g.translate(-12, -12); g.fillStyle = '#fdfaf1'; g.fill(BOLT); g.restore();
+      T('Certificate ID: ' + id + '   \u00b7   Issued: ' + rec.t, 800, 1044, '600 20px ' + SAN, INK, '1px');
+      if (window.qrcode) {
+        if (qrcode.stringToBytesFuncs) qrcode.stringToBytes = qrcode.stringToBytesFuncs['UTF-8'];
+        const q = qrcode(0, 'L'); q.addData(code); q.make();
+        const n = q.getModuleCount(), m = Math.floor(170 / n), s = m * n, ox = 1450 - s, oy = 835;
+        g.fillStyle = '#fff'; g.fillRect(ox - 10, oy - 10, s + 20, s + 20); g.strokeStyle = GOLD; g.lineWidth = 2; g.strokeRect(ox - 10, oy - 10, s + 20, s + 20);
+        g.fillStyle = NAVY;
+        for (let r = 0; r < n; r++)for (let k = 0; k < n; k++)if (q.isDark(r, k)) g.fillRect(ox + k * m, oy + r * m, m, m);
+        T('Scan to verify', ox + s / 2, oy + s + 34, '600 20px ' + SAN, INK);
+      }
+      return new Promise(r => c.toBlob(r, 'image/png'));
+    }
+    $('dl').addEventListener('click', async () => {
+      const b = $('dl');
+      try {
+        const blob = await makeCert();
+        const d = window.claude && await claude.use('downloads');
+        if (d) { await d.save({ filename: 'violet-fast-certificate.png', data: blob }) }
+        else { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'violet-fast-certificate.png'; a.click() }
+        b.textContent = 'Certificate saved';
+      } catch (e) { if (!e || e.code !== 'declined') b.textContent = 'Could not save, try again' }
+    });
+    $('theme').addEventListener('click', () => {
+      const r = document.documentElement;
+      const dark = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme:dark)').matches;
+      r.dataset.theme = dark ? 'light' : 'dark';
+    });
+    document.fonts && document.fonts.ready.then(() => { if (!started && !VIEW) setup() });
+    setup();
+  </script>
+  <dialog id="authDlg">
+    <div class="ah">
+      <h2 class="ph">Welcome to Violet Fast</h2><button class="theme" id="aclose" type="button">Close</button>
+    </div>
+    <div class="modes" style="width:fit-content"><button id="tin" type="button" aria-pressed="true">Sign
+        in</button><button id="tup" type="button" aria-pressed="false">Sign up</button></div>
+    <button class="soc" id="agg" type="button"><svg width="20" height="20" viewBox="0 0 48 48" aria-hidden="true">
+        <path fill="#EA4335"
+          d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+        <path fill="#4285F4"
+          d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+        <path fill="#FBBC05"
+          d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+        <path fill="#34A853"
+          d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+      </svg><span>Continue with Google</span></button>
+    <button class="soc" id="afb" type="button"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="12" fill="#1877F2" />
+        <path fill="#fff"
+          d="M16.67 15.47 17.2 12h-3.33V9.75c0-.95.47-1.88 1.96-1.88h1.51V4.92s-1.37-.23-2.68-.23c-2.74 0-4.53 1.66-4.53 4.67V12H7.1v3.47h3.03V24h3.74v-8.53z" />
+      </svg><span>Continue with Facebook</span></button>
+    <form id="aform">
+      <input class="pin" id="anm" type="text" placeholder="Your name" style="display:none">
+      <input class="pin" id="aem" type="email" placeholder="Email" required>
+      <input class="pin" id="apw" type="password" placeholder="Password (6+ characters)" minlength="6" required>
+      <button class="again" id="asub">Sign in</button>
+    </form>
+    <div class="phone">
+      <input class="pin" id="aph" type="tel" placeholder="Phone with country code, e.g. +919876543210">
+      <button class="soc" id="asend" type="button">Send code by SMS</button>
+      <div id="acodebox" style="display:none;flex-direction:column;gap:10px"><input class="pin" id="acode" type="text"
+          inputmode="numeric" placeholder="6-digit code"><button class="soc" id="averify" type="button">Verify
+          code</button></div>
+    </div>
+    <p id="amsg" class="foot" role="status"></p>
+  </dialog>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      getDocs,
+      query,
+      orderBy,
+      deleteDoc,
+      doc,
+      getDoc,
+      setDoc
+    } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    // 1) Paste your own Firebase project settings here (Firebase console > Project settings > Your apps > Web app)
+    const firebaseConfig = { apiKey: "AIzaSyCRxd6n5UHnCLEP123OnPdvrlOOUCr4m-A", authDomain: "violet-fast.firebaseapp.com", projectId: "violet-fast", appId: "1:588734930789:web:022934fa0446e7617f8b8c" };
+
+    const auth = getAuth(initializeApp(firebaseConfig));
+    const db = getFirestore(auth.app);
+
+    window.vfSaveCloudHistory = async (record) => {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      await addDoc(
+        collection(db, 'users', user.uid, 'history'),
+        record
+      );
+    };
+
+    window.vfClearCloudHistory = async () => {
+      const user = auth.currentUser;
+      if (!user) return;
+
+      const historyRef = collection(
+        db, 'users', user.uid, 'history'
+      );
+
+      const snapshot = await getDocs(historyRef);
+
+      await Promise.all(
+        snapshot.docs.map(item => deleteDoc(item.ref))
+      );
+    };
+
+    const dlg = $('authDlg'), msg = $('amsg');
+    let mode = 'in', conf = null, rv = null;
+    const say = (t, bad = true) => { msg.textContent = t; msg.style.color = bad ? 'var(--bad)' : '#1f9d55' };
+    const fail = e => say(((e && e.code) || '').replace('auth/', '').replace(/-/g, ' ') || 'Something went wrong. Try again.');
+
+    function setMode(m) {
+      mode = m;
+      $('tin').setAttribute('aria-pressed', m === 'in'); $('tup').setAttribute('aria-pressed', m === 'up');
+      $('anm').style.display = m === 'up' ? '' : 'none';
+      $('asub').textContent = m === 'up' ? 'Create account' : 'Sign in';
+      say('', false);
+    }
+    $('tin').onclick = () => setMode('in');
+    $('tup').onclick = () => setMode('up');
+    $('abtn').onclick = () => { auth.currentUser ? signOut(auth) : dlg.showModal() };
+    $('aclose').onclick = () => dlg.close();
+
+    $('aform').onsubmit = async e => {
+      e.preventDefault();
+      try {
+        const em = $('aem').value.trim(), pw = $('apw').value;
+        if (mode === 'up') {
+          const c = await createUserWithEmailAndPassword(auth, em, pw);
+          const n = $('anm').value.trim();
+          if (n) { await updateProfile(c.user, { displayName: n }); $('nm').value = n }
+        } else await signInWithEmailAndPassword(auth, em, pw);
+        dlg.close();
+      } catch (x) { fail(x) }
+    };
+
+    async function popup(p) { try { await signInWithPopup(auth, p); dlg.close() } catch (x) { fail(x) } }
+    $('agg').onclick = () => popup(new GoogleAuthProvider());
+    $('afb').onclick = () => popup(new FacebookAuthProvider());
+
+    $('asend').onclick = async () => {
+      try {
+        rv = rv || new RecaptchaVerifier(auth, 'asend', { size: 'invisible' });
+        conf = await signInWithPhoneNumber(auth, $('aph').value.trim(), rv);
+        $('acodebox').style.display = 'flex'; say('Code sent. Enter it below.', false);
+      } catch (x) { fail(x); try { rv.clear() } catch (_) { } rv = null }
+    };
+    $('averify').onclick = async () => { try { await conf.confirm($('acode').value.trim()); dlg.close() } catch (x) { fail(x) } };
+
+
+    let PROF = null;
+    const genId = () => 'VF-' + Array.from({ length: 8 }, () => 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'[Math.floor(Math.random() * 32)]).join('');
+    async function syncPublic(p = PROF, u = auth.currentUser) {
+      if (!p || !u) return;
+      const a = loadH(), best = a.reduce((m, x) => Math.max(m, x.w), 0), avg = a.length ? Math.round(a.reduce((t, x) => t + x.w, 0) / a.length) : 0;
+      await setDoc(doc(db, 'publicProfiles', p.userId), { owner: u.uid, avatar: p.avatar || 'p9', best, avg, tests: a.length, updated: Date.now() });
+    }
+    window.vfSyncPublic = () => syncPublic().catch(e => console.error('Public profile sync failed:', e));
+    async function loadProfile(u) {
+      const ref = doc(db, 'users', u.uid), snap = await getDoc(ref);
+      let p = snap.exists() ? snap.data() : {};
+      if (!p.userId) {
+        for (let i = 0; i < 6; i++) {
+          const id = genId();
+          if (!(await getDoc(doc(db, 'publicProfiles', id))).exists()) { p.userId = id; break }
+        }
+        p.avatar = p.avatar || 'p9'; p.name = p.name || u.displayName || '';
+        await setDoc(ref, p, { merge: true });
+        await syncPublic(p, u);
+      }
+      PROF = p; return p;
+    }
+    const grid = $('avgrid');
+    AVS.forEach((_, i) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'avopt'; b.dataset.a = 'p' + i; paintAv(b, 'p' + i); b.setAttribute('aria-label', 'Picture ' + (i + 1)); b.onclick = () => setAvatar('p' + i); grid.appendChild(b) });
+    const markSel = () => grid.querySelectorAll('.avopt').forEach(b => b.classList.toggle('sel', b.dataset.a === PROF.avatar));
+    function renderProfile() {
+      paintAv($('pav'), PROF.avatar); markSel();
+      $('puid').textContent = PROF.userId;
+      $('pn').value = PROF.name || ''; $('pb').value = PROF.bio || ''; $('pc').value = PROF.city || '';
+      $('pmsg').textContent = ''; $('pcopy').textContent = 'Copy profile link';
+    }
+    async function saveProfile(quiet) {
+      const u = auth.currentUser; if (!u || !PROF) return;
+      PROF.name = $('pn').value.trim(); PROF.bio = $('pb').value.trim(); PROF.city = $('pc').value.trim();
+      const m = $('pmsg');
+      try {
+        await setDoc(doc(db, 'users', u.uid), { name: PROF.name, bio: PROF.bio, city: PROF.city, avatar: PROF.avatar, userId: PROF.userId }, { merge: true });
+        await syncPublic();
+        $('nm').value = PROF.name; try { localStorage.setItem('vf-name', PROF.name) } catch (_) { }
+        m.style.color = '#1f9d55'; m.textContent = quiet ? 'Picture saved.' : 'Profile saved.';
+      } catch (e) { console.error(e); m.style.color = 'var(--bad)'; m.textContent = 'Could not save. Check your Firestore rules and try again.' }
+    }
+    function setAvatar(a) { if (!PROF) return; PROF.avatar = a; paintAv($('pav'), a); paintAv($('avbtn'), a); markSel(); saveProfile(true) }
+    $('avfile').onchange = e => {
+      const f = e.target.files[0]; if (!f) return;
+      const img = new Image(), url = URL.createObjectURL(f);
+      img.onload = () => {
+        const c = document.createElement('canvas'); c.width = c.height = 160;
+        const g = c.getContext('2d'), s = Math.min(img.width, img.height);
+        g.drawImage(img, (img.width - s) / 2, (img.height - s) / 2, s, s, 0, 0, 160, 160);
+        URL.revokeObjectURL(url); setAvatar(c.toDataURL('image/jpeg', .82));
+      };
+      img.onerror = () => { $('pmsg').style.color = 'var(--bad)'; $('pmsg').textContent = 'Could not read that image.' };
+      img.src = url; e.target.value = '';
+    };
+    $('psave').onclick = () => saveProfile();
+    $('pcopy').onclick = async () => {
+      const l = location.origin + location.pathname + '?u=' + PROF.userId;
+      try { await navigator.clipboard.writeText(l); $('pcopy').textContent = 'Link copied' } catch (_) { $('pcopy').textContent = l }
+    };
+    $('avbtn').onclick = () => { if (PROF) { renderProfile(); showPanel('pp') } };
+    $('logout').onclick = async () => { try { await signOut(auth) } catch (e) { console.error(e) } setup() };
+
+    const visit = new URLSearchParams(location.search).get('u');
+    if (visit) {
+      const vid = visit.trim().toUpperCase();
+      showPanel('up'); $('uid').textContent = vid; paintAv($('uav'), 'p9');
+      getDoc(doc(db, 'publicProfiles', vid)).then(sn => {
+        if (!sn.exists()) { $('umsg').textContent = 'No profile found for this ID.'; return }
+        const d = sn.data(); paintAv($('uav'), d.avatar);
+        $('ust').innerHTML = `<div>Best WPM<strong>${Number(d.best) || 0}</strong></div><div>Average WPM<strong>${Number(d.avg) || 0}</strong></div><div>Tests<strong>${Number(d.tests) || 0}</strong></div>`;
+      }).catch(e => { console.error(e); $('umsg').textContent = 'Could not load this profile.' });
+    }
+
+    onAuthStateChanged(auth, async (u) => {
+      HK = 'vf-hist' + (u ? '-' + u.uid : '');
+
+      $('abtn').classList.toggle('hide', !!u);
+      $('avbtn').classList.toggle('hide', !u);
+      if (u) {
+        paintAv($('avbtn'), 'p9');
+        try {
+          await loadProfile(u);
+          paintAv($('avbtn'), PROF.avatar);
+          const nm = PROF.name || u.displayName || '';
+          if (nm) { $('nm').value = nm; $('pn').value = nm }
+        } catch (e) { console.error('Profile load failed:', e) }
+      } else { PROF = null }
+
+      if (u) {
+        try {
+          const historyQuery = query(
+            collection(db, 'users', u.uid, 'history'),
+            orderBy('t', 'desc')
+          );
+
+          const snapshot = await getDocs(historyQuery);
+          const cloudHistory = snapshot.docs.map(doc => doc.data());
+
+          const combined = [...loadH(), ...cloudHistory];
+          const uniqueHistory = new Map();
+
+          for (const record of combined) {
+            const key = [
+              record.t,
+              record.w,
+              record.a,
+              record.d,
+              record.k,
+              record.l
+            ].join('|');
+
+            uniqueHistory.set(key, record);
+          }
+
+          const mergedHistory = [...uniqueHistory.values()]
+            .sort((a, b) => Number(a.t) - Number(b.t));
+
+          saveH(mergedHistory);
+          renderH();
+          window.vfSyncPublic();
+        } catch (error) {
+          console.error('Cloud history load failed:', error);
+        }
+      } else {
+        renderH();
+      }
+    });
+
+  </script>
+</body>
+
+</html>
