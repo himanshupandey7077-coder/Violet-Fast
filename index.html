@@ -6,6 +6,9 @@
   <link rel="icon" type="image/svg+xml"
     href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M13.5 2 5 13.5h6L9.5 22 19 9.5h-6.2z' fill='%237c4dff'/%3E%3C/svg%3E">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#7c4dff">
+  <meta name="description" content="Violet Fast: a modern typing platform with tests, lessons, daily goals, leaderboards and certificates in six languages.">
+  <link rel="manifest" href="manifest.webmanifest">
   <title>Violet Fast — Typing Practice</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -866,51 +869,61 @@
         transition: none !important
       }
     }
+  
+.skip{position:absolute;left:-999px;top:0;background:var(--accent);color:#fff;padding:8px 14px;border-radius:0 0 10px 0;z-index:100;font-weight:700}.skip:focus{left:0}
+.vfnav{width:100%;max-width:980px;padding:14px 24px 0;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.vfnav::-webkit-scrollbar{display:none}
+.vfnav button{flex:none;border:1px solid transparent;background:none;color:var(--mute);font:700 .88rem Manrope,sans-serif;padding:9px 14px;border-radius:12px;cursor:pointer;transition:.2s}
+.vfnav button:hover{color:var(--ink)}
+.vfnav button[aria-current="page"]{background:var(--grad);color:#fff;box-shadow:0 4px 14px rgba(124,77,255,.35)}
+@media (min-width:1200px){.vfnav{max-width:1120px}}
+@media (max-width:640px){.vfnav{padding:12px 16px 0}}
+main>section{display:none!important}
+body[data-r="test"] #game:not(.hide){display:flex!important}
+body[data-r="test"] #result.show{display:flex!important}
+body[data-r="home"] #vf-home,body[data-r="learn"] #vf-learn,body[data-r="dashboard"] #vf-dash,body[data-r="history"] #hp,body[data-r="leaderboard"] #vf-lb,body[data-r="profile"] #pp,body[data-r="settings"] #vf-set,body[data-r="verify"] #vp,body[data-r="user"] #up{display:flex!important}
+.card{background:var(--card);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.hero{padding:clamp(22px,5vw,44px);border-radius:28px}
+.hero h1{margin:0 0 8px;font-size:clamp(1.8rem,5vw,3rem);letter-spacing:-.03em;line-height:1.1}
+.hero h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{margin:0 0 18px;color:var(--mute);font-weight:600;max-width:56ch}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap}
+.kpi{display:flex;flex-direction:column;gap:4px}.kpi b{font-size:1.7rem;font-weight:800;letter-spacing:-.02em}
+.lf{text-align:left}
+.ring{width:120px;height:120px}.ring .rg{stroke:var(--line);stroke-width:10}.ring .rf{stroke:var(--accent);stroke-width:10;stroke-linecap:round;transition:stroke-dashoffset .6s}.rt{font:800 20px Manrope,sans-serif;fill:var(--ink)}.rs{font:600 9px Manrope,sans-serif;fill:var(--mute)}
+.bar{display:flex}.chart svg .bar{fill:var(--accent);opacity:.85}
+.les{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}.les:last-child{border:0}
+.tag{font:700 .72rem Manrope,sans-serif;padding:4px 10px;border-radius:99px;background:var(--line);color:var(--mute)}.tag.ok{background:rgba(31,157,85,.18);color:#1f9d55}
+.kb{width:100%;max-width:640px;height:auto;display:block;margin:10px auto 0}.kb text{font:700 14px "JetBrains Mono",monospace;fill:var(--ink);pointer-events:none}.kb g.on text{fill:#fff}.kb g.nx rect{stroke-width:3;animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.5}}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;margin-top:8px;font:600 .75rem Manrope,sans-serif;color:var(--mute)}.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+.ban{display:none;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between;padding:12px 16px}.ban.show{display:flex}.ban span{color:var(--mute);font-weight:600;font-size:.85rem;flex:1 1 200px}
+#vf-guide{display:none}#vf-guide.show{display:block}
+.livebar{display:flex;gap:16px;font-weight:600;color:var(--mute);font-size:.85rem}.livebar b{color:var(--ink);font-size:1.1rem;margin-left:4px}
+.rx{display:flex;flex-direction:column;gap:14px;width:100%}.rx .chart{text-align:left}
+.pass{border-color:#1f9d55}
+.chip{display:inline-block;padding:4px 10px;border-radius:99px;background:var(--badbg);color:var(--bad);font:700 .85rem "JetBrains Mono",monospace;margin:2px}.chip.ok{background:rgba(31,157,85,.18);color:#1f9d55}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-top:10px}
+.bd{display:flex;gap:10px;align-items:center;padding:10px;border-radius:14px;border:1px solid var(--line);background:var(--card)}.bd i{font-style:normal;font-size:1.6rem}.bd.off{opacity:.45;filter:grayscale(1)}
+.sk{margin:8px 0 0;padding-left:20px;line-height:1.9;font-weight:600}.sk li{color:var(--ink)}
+.srow{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);flex-wrap:wrap;font-weight:600}.srow:last-child{border:0}.srow select{width:200px;max-width:100%}.srow input[type=range]{width:200px;max-width:100%}.srow input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent)}
+.hf{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.hf .pin{width:200px}.hf select{width:auto;min-width:120px}
+.theme[aria-pressed="true"]{background:var(--grad);color:#fff;border-color:transparent}
+.av.sm{width:26px;height:26px;border-width:1px;font-size:13px;box-shadow:none;vertical-align:middle;display:inline-grid}
+.toast{position:fixed;left:50%;bottom:20px;transform:translate(-50%,20px);opacity:0;pointer-events:none;z-index:90;background:var(--ink);color:var(--bg);padding:12px 18px;border-radius:14px;font:700 .9rem Manrope,sans-serif;max-width:90vw;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}.toast.bad{background:var(--bad);color:#fff}
+.view{font-family:var(--tf,"JetBrains Mono",monospace)!important;font-size:calc(var(--ts,1) * clamp(1.3rem,3.2vw + .4rem,2.1rem))!important}
+.stage.cb .words span.cur{background:var(--accent);color:#fff;opacity:.9}.stage.cb .words span.cur::before,.stage.cu .words span.cur::before{display:none}
+.stage.cu .words span.cur{background:none;border-bottom:3px solid var(--accent);border-radius:0}
+.rm *{animation:none!important;transition:none!important}
+html.hc{--ink:#000;--mute:#3a3a3a;--done:#666;--line:rgba(0,0,0,.5)}html.hc[data-theme="dark"]{--ink:#fff;--mute:#d4d4d4;--done:#999;--line:rgba(255,255,255,.6)}
+@media (max-width:640px){.hf .pin{width:100%}.ring{width:100px;height:100px}}
 
-    .tabs{width:100%;max-width:980px;display:flex;gap:6px;overflow-x:auto;padding:14px 24px 0;scrollbar-width:none}
-    .tabs button{flex:0 0 auto;background:var(--card);border:1px solid var(--line);color:var(--mute);border-radius:10px;padding:8px 13px;font:700 .8rem Manrope,sans-serif;cursor:pointer}
-    .tabs button[aria-current=page]{background:var(--grad);color:#fff;border-color:transparent}
-    .card2{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px}
-    .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-    .meter{height:10px;border-radius:9px;background:var(--line);overflow:hidden}.meter i{display:block;height:100%;background:var(--grad);width:0}
-    .badge{display:inline-block;padding:6px 10px;border-radius:99px;border:1px solid var(--line);font:700 .78rem Manrope;margin:3px}.badge.on{background:var(--grad);color:#fff;border-color:transparent}
-    .kbd{display:flex;flex-direction:column;gap:4px;align-items:center}.kbd div{display:flex;gap:4px}.kbd b{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;font:700 .8rem 'JetBrains Mono',monospace;color:#111}
-    .lrow{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-    .stage .words{font-family:var(--tf,'JetBrains Mono',monospace)}.words{font-size:var(--fs,inherit)}
-    [data-cursor=block] .words span.cur{background:var(--accent);color:#fff}[data-cursor=block] .words span.cur::before,[data-cursor=underline] .words span.cur::before{display:none}
-    [data-cursor=underline] .words span.cur{border-bottom:3px solid var(--accent)}
-    [data-motion=off] *,[data-motion=off] body::before{animation:none!important;transition:none!important}
-    @media (prefers-reduced-motion:reduce){*,body::before{animation:none!important;transition:none!important}}
-    :focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-    .skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;z-index:99;background:var(--card);padding:8px}
-    .live{gap:10px;flex-wrap:wrap}
-
-    header{max-width:1100px;flex-wrap:nowrap;gap:18px}
-    header .tag{display:none}
-    .tabs{width:auto;max-width:none;padding:0;margin-left:auto;overflow:visible}
-    .hr{display:flex;align-items:center;gap:10px}
-    .avw{display:flex!important;flex-direction:row!important;align-items:center;gap:8px}
-    .avw.hide{display:none!important}
-    .avl{font:700 .9rem Manrope,sans-serif!important;color:var(--ink);max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer}
-    .av{width:40px;height:40px}
-    main{max-width:1100px}
-    .hero{text-align:center;display:flex;flex-direction:column;align-items:center;gap:16px;padding:44px 8px 18px}
-    .hero h1{margin:0;font-size:clamp(2.1rem,6.5vw,3.8rem);line-height:1.08;font-weight:800;letter-spacing:-.035em}
-    .hero h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .hero p{margin:0;max-width:560px;color:var(--mute);font-weight:600;line-height:1.6}
-    .pill{padding:6px 14px;border-radius:99px;background:var(--card);border:1px solid var(--line);font:700 .75rem Manrope,sans-serif;color:var(--accent)}
-    .feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:14px}
-    .fc{display:flex;gap:14px;align-items:center;text-align:left;background:var(--card);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:22px;padding:18px;color:var(--ink);cursor:pointer;box-shadow:var(--shadow);font-family:Manrope,sans-serif;transition:.2s}
-    .fc:hover{transform:translateY(-3px);border-color:var(--accent)}
-    .fc b{display:block;font-size:1.02rem;margin-bottom:3px}.fc small{color:var(--mute);font-weight:600;line-height:1.45;font-size:.82rem}
-    .ic{flex:0 0 52px;height:52px;border-radius:16px;display:grid;place-items:center;font-style:normal;font-size:1.5rem;color:#fff;background:linear-gradient(135deg,var(--c1),var(--c2));transform:rotate(-6deg)}
-    @media(max-width:700px){header{flex-wrap:wrap}.tabs{order:3;width:100%;margin:0}.avl{max-width:80px}}
   </style>
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js"></script>
 </head>
 
 <body>
-  <a class="skip" href="#main">Skip to content</a>
   <header>
     <div>
       <div class="logo"><svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
@@ -918,14 +931,12 @@
         </svg><span>Violet Fast</span></div>
       <p class="tag">A little practice. A lot more speed.</p>
     </div>
-    <nav class="tabs" id="tabs" aria-label="Sections"></nav>
     <div class="hr"><button class="theme" id="abtn" type="button">Sign in</button><div class="avw hide" id="avw"><button class="av" id="avbtn" type="button" aria-label="Open profile"></button><span class="avl" id="avl">My profile</span></div><button class="menu" id="mbtn" type="button" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button></div>
   </header>
 
   <div class="scrim hide" id="scrim"></div>
   <aside class="drawer" id="drawer" aria-label="Menu">
     <div class="dh"><h2 class="ph">Menu</h2><button class="theme" id="mclose" type="button">Close</button></div>
-    <div class="dsec" id="dnav"><span class="lab">Navigate</span></div>
     <div class="dsec"><span class="lab">Test settings</span><div class="ctrl">
         <label class="grp"><span class="lab">Language</span><select id="selLang">
             <option value="en">English</option>
@@ -940,31 +951,33 @@
             <option value="sentences">Sentences</option>
             <option value="punctuation">Punctuation</option>
             <option value="numbers">Numbers</option>
-            <option value="symbols">Symbols</option><option value="daily">Daily challenge</option><option value="custom">Custom text</option>
+            <option value="custom">Custom text</option>
           </select></label>
         <label class="grp"><span class="lab">Level</span><select id="selLevel">
-            <option value="veasy">Very easy</option><option value="easy">Easy</option><option value="normal" selected>Normal</option><option value="hard">Hard</option><option value="adv">Advanced</option>
+            <option value="normal">Normal</option>
+            <option value="adv">Advanced</option>
           </select></label>
         <label class="grp"><span class="lab">Time</span><select id="selTime">
             <option value="15">15 seconds</option>
             <option value="30">30 seconds</option>
             <option value="60" selected>60 seconds</option>
-            <option value="120">2 minutes</option><option value="180">3 minutes</option><option value="300">5 minutes</option>
+            <option value="120">120 seconds</option>
           </select></label>
       </div><div class="custom hide" id="cbox"><textarea id="ct" rows="3" maxlength="3000"
           placeholder="Paste or type the text you want to practice..." aria-label="Custom text"></textarea><button
           class="dl" id="cuse" type="button">Use this text</button></div></div>
     <div class="dsec"><span class="lab">More</span>
-            <button class="nav" id="nVerify" type="button">Verify a certificate <span>&rsaquo;</span></button>
+      <button class="nav" id="hbtn" type="button">History <span>&rsaquo;</span></button>
+      <button class="nav" id="nVerify" type="button">Verify a certificate <span>&rsaquo;</span></button>
       <button class="nav" id="theme" type="button" aria-label="Toggle light or dark theme">Light / dark theme <span>&#9680;</span></button>
     </div>
   </aside>
 
-  <main id="main" tabindex="-1">
+  <main>
     <section id="game">
       
       <div class="live">
-        <div class="stat"><small>Time</small><b id="time">60</b></div><div class="stat"><small>WPM</small><b id="lw">0</b></div><div class="stat"><small>Accuracy</small><b id="la">100%</b></div><div class="stat"><small>Errors</small><b id="le">0</b></div><button class="theme" id="rst"
+        <div class="stat"><small>Time</small><b id="time">60</b></div><button class="theme" id="rst"
           type="button">Restart</button>
       </div>
       <div class="stage" id="stage">
@@ -979,57 +992,10 @@
           id="lnote"></span></p>
     </section>
 
-
-    <section class="panel hide" id="hm">
-      <div class="hero">
-        <span class="pill">Free &middot; 6 languages &middot; works offline</span>
-        <h1>Type with <em>flow</em>,<br>not friction.</h1>
-        <p>Short, focused sessions that build real speed. Test yourself, follow guided lessons and watch your numbers climb.</p>
-        <div class="row" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center"><button class="again" data-go="test" type="button">Start typing</button><button class="dl" data-go="lp" type="button">Take a lesson</button></div>
-      </div>
-      <div class="grid2"><div class="card2"><span class="lab">Daily goal</span><b id="hgoal">0 / 10 min</b><div class="meter"><i id="hgm"></i></div></div><div class="card2"><span class="lab">Practice streak</span><b id="hstreak">0 days</b></div><div class="card2"><span class="lab">Personal best</span><b id="hbest">0 WPM</b></div></div>
-      <div class="feat">
-        <button class="fc" data-go="test" type="button"><i class="ic" style="--c1:#7c4dff;--c2:#4f7cff">&#9000;</i><span><b>Speed test</b><small>15 seconds to 5 minutes, five difficulty levels.</small></span></button>
-        <button class="fc" id="hdaily" type="button"><i class="ic" style="--c1:#ff7a59;--c2:#f0436b">&#9889;</i><span><b>Daily challenge</b><small>One shared text per day. Beat your own score.</small></span></button>
-        <button class="fc" data-go="lp" type="button"><i class="ic" style="--c1:#2dbf7a;--c2:#4facfe">&#9783;</i><span><b>Guided lessons</b><small>Finger placement and step-by-step drills.</small></span></button>
-        <button class="fc" id="hcust" type="button"><i class="ic" style="--c1:#c471f5;--c2:#fa71cd">&#9998;</i><span><b>Your own text</b><small>Paste anything and practise on it.</small></span></button>
-        <button class="fc" data-go="dp" type="button"><i class="ic" style="--c1:#f9d423;--c2:#ff9a62">&#9650;</i><span><b>Progress</b><small>Charts, streaks and achievements.</small></span></button>
-        <button class="fc" data-go="lbp" type="button"><i class="ic" style="--c1:#4facfe;--c2:#7c4dff">&#9733;</i><span><b>Leaderboard</b><small>See the fastest public profiles.</small></span></button>
-      </div>
-    </section>
-    <section class="panel hide" id="lp">
-      <div class="bar"><h2 class="ph">Learn</h2></div>
-      <div class="card2"><span class="lab">Finger placement — rest fingers on the home row (F and J have bumps)</span><div class="kbd" id="kbd" role="img" aria-label="Keyboard with each key coloured by the finger that presses it"></div><p class="foot" id="fleg" style="text-align:left"></p></div>
-      <div class="card2"><span class="lab">Lessons — reach 90% accuracy and 15 WPM to unlock the next</span><div id="lessons"></div></div>
-    </section>
-    <section class="panel hide" id="dp">
-      <div class="bar"><h2 class="ph">Dashboard</h2></div>
-      <div class="grid2"><div class="card2"><span class="lab">Today's goal</span><b id="dgoal"></b><div class="meter"><i id="dgm"></i></div></div><div class="card2"><span class="lab">Streak</span><b id="dstreak"></b></div><div class="card2"><span class="lab">Training for you</span><b id="dtrain"></b><button class="dl" id="dtbtn" type="button">Start training</button></div></div>
-      <div class="charts" id="dc"></div>
-      <div class="card2"><span class="lab">Achievements</span><div id="dach"></div></div>
-    </section>
-    <section class="panel hide" id="lbp">
-      <div class="bar"><h2 class="ph">Leaderboard</h2><button class="theme" id="lbr" type="button">Refresh</button></div>
-      <p class="foot" style="text-align:left;margin:0">Top public profiles by best WPM. Hide your stats in Profile to opt out.</p>
-      <div class="tw"><table id="lbt"></table></div>
-    </section>
-    <section class="panel hide" id="sp">
-      <div class="bar"><h2 class="ph">Settings</h2></div>
-      <div class="card2">
-        <label class="grp"><span class="lab">Theme</span><select id="sTheme"><option value="">System</option><option value="light">Light</option><option value="dark">Dark</option></select></label>
-        <label class="grp"><span class="lab">Typing font</span><select id="sFont"><option value="">JetBrains Mono</option><option value="Manrope,sans-serif">Manrope</option><option value="Georgia,serif">Serif</option><option value="'Noto Sans Devanagari','Noto Sans Gurmukhi',sans-serif">Indic-friendly</option></select></label>
-        <label class="grp"><span class="lab">Font size</span><select id="sSize"><option value="">Default</option><option value="1.1em">Large</option><option value="1.3em">Extra large</option></select></label>
-        <label class="grp"><span class="lab">Cursor</span><select id="sCur"><option value="line">Line</option><option value="block">Block</option><option value="underline">Underline</option></select></label>
-        <label class="grp"><span class="lab">Daily goal (minutes)</span><input class="pin" id="sGoal" type="number" min="1" max="600" value="10"></label>
-        <label class="chk"><input type="checkbox" id="sMotion"> Reduce motion</label>
-        <p class="foot" style="text-align:left"><b>Shortcuts:</b> Tab restart · Backspace / Ctrl+Backspace delete char / word · Alt+1…8 switch sections · Esc close menu</p>
-      </div>
-    </section>
     <section class="panel hide" id="hp">
       <div class="bar">
         <h2 class="ph">Your results</h2><button class="theme" id="hback">Back to typing</button>
       </div>
-      <div class="row" style="display:flex;gap:8px;flex-wrap:wrap"><input class="pin" id="hq" placeholder="Search history" aria-label="Search history" style="flex:1 1 160px"><select id="hfl" aria-label="Filter language"><option value="">All languages</option><option value="en">English</option><option value="hi">Hindi</option><option value="pa">Punjabi</option><option value="es">Spanish</option><option value="fr">French</option><option value="de">German</option></select><select id="hfk" aria-label="Filter mode"><option value="">All modes</option><option>words</option><option>sentences</option><option>punctuation</option><option>numbers</option><option>symbols</option><option>daily</option><option>custom</option></select><button class="theme" id="hcsv" type="button">Download CSV</button><button class="theme" id="hjson" type="button">Download JSON</button></div>
       <div class="stats" id="hs"></div>
       <div class="charts" id="hc"></div>
       <div class="tw">
@@ -1080,7 +1046,7 @@
           <label><span class="lab">Your typing level</span><select id="ps"><option value="">Select</option><option>Beginner</option><option>Intermediate</option><option>Advanced</option><option>Professional</option></select></label>
           <label><span class="lab">Target speed (WPM)</span><input class="pin" id="pt" type="number" min="5" max="300" placeholder="e.g. 60" aria-label="Target WPM"></label>
           <label><span class="lab">Daily practice (minutes)</span><input class="pin" id="pd" type="number" min="0" max="600" placeholder="e.g. 20" aria-label="Daily practice minutes"></label>
-          <label style="grid-column:1/-1"><span class="lab">Bio</span><input class="pin" id="pb" type="text" maxlength="120" placeholder="A line about you" aria-label="Bio"></label>
+          <label style="grid-column:1/-1"><span class="lab">Bio</span><input class="pin" id="pbio" type="text" maxlength="120" placeholder="A line about you" aria-label="Bio"></label>
         </div>
         <label class="chk"><input type="checkbox" id="pshow" checked> Show my typing stats on my public profile</label>
         <div class="row"><button class="again" id="psave" type="button">Save profile</button><span id="pmsg" class="foot"></span></div>
@@ -1101,9 +1067,8 @@
         <div>Time<strong id="rTime">0s</strong></div>
         <div>Accuracy<strong id="rAcc">0%</strong></div>
         <div>Characters<strong id="rChars">0</strong></div>
-        <div>Mistakes<strong id="rErr">0</strong></div><div>Raw WPM<strong id="rRaw">0</strong></div><div>Net WPM<strong id="rNet">0</strong></div><div>CPM<strong id="rCpm">0</strong></div>
+        <div>Mistakes<strong id="rErr">0</strong></div>
       </div>
-      <div class="charts" id="rGraph"></div><p class="foot" id="rMiss"></p>
       <div class="cert"><input id="nm" type="text" maxlength="30" placeholder="Your name for the certificate"
           aria-label="Your name"><button class="dl" id="dl">Download certificate</button></div>
       <button class="again" id="again">Try again</button>
@@ -1118,7 +1083,7 @@
 
     const $ = id => document.getElementById(id);
     const stage = $('stage'), wordsEl = $('words'), cap = $('cap');
-    let samples = [], missed = {}, rawKeys = 0, dur = 60, kind = "words", last = {}, text = "", spans = [], pos = 0, started = false, startT = 0, tick = null, done = false, keys = 0, hits = 0, errs = 0, line0 = 0;
+    let dur = 60, kind = "words", last = {}, text = "", spans = [], pos = 0, started = false, startT = 0, tick = null, done = false, keys = 0, hits = 0, errs = 0, line0 = 0;
 
     function rnd(n, P = WORDS) { let o = [], last = ""; for (let i = 0; i < n; i++) { let w; do { w = P[Math.floor(Math.random() * P.length)] } while (w === last); o.push(w); last = w } return o.join(" ") }
 
@@ -1128,28 +1093,14 @@
     const LN = { en: 'English', hi: 'Hindi', pa: 'Punjabi', es: 'Spanish', fr: 'French', de: 'German' };
     const LB = { veasy: 'very easy', easy: 'easy', normal: 'normal', hard: 'hard', adv: 'advanced' };
     let level = "normal", lang = "en";
-    const LV = { veasy: { sp: 0, cap: 0, num: 0, dig: 2 }, easy: { sp: 0, cap: 0, num: 0, dig: 3 }, normal: { sp: 0, cap: 0, num: 0, dig: 4 }, hard: { sp: .1, cap: .1, num: .05, dig: 6 }, adv: { sp: .22, cap: .25, num: .12, dig: 8 } };
+    const LV = { normal: { sp: 0, cap: 0, num: 0, dig: 4 }, adv: { sp: .22, cap: .25, num: .12, dig: 8 } };
     function poolFor() {
-      const lenF = (b, f) => { const r = b.filter(f); return r.length > 15 ? r : b };
-      const bb = lang === 'en' ? WORDS : LANGW[lang];
-      if (level === 'veasy') return lenF(bb, w => [...w].length <= 3);
-      if (level === 'easy') return lenF(bb, w => [...w].length <= 5);
-      if (level === 'hard') return lenF(bb, w => [...w].length >= 6);
       if (lang === 'en') return level === 'adv' ? HARD.concat(WORDS.filter(w => w.length >= 7)) : WORDS;
       const b = LANGW[lang];
       return level === 'adv' ? b.slice().sort((x, y) => y.length - x.length).slice(0, Math.ceil(b.length / 2)) : b;
     }
     const rn = d => String(Math.floor(Math.random() * 10 ** (1 + Math.floor(Math.random() * d))));
-    function mul(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296 } }
-    let drill = null;
-    const SYM = '@#$%&*()-+=/<>[]{}_~^|;:"\''.split('');
     function gen() {
-      if (drill) { const k = drill; let o = []; for (let i = 0; i < 90; i++) { let w = ''; const n = 2 + Math.floor(Math.random() * 4); for (let j = 0; j < n; j++) w += k[Math.floor(Math.random() * k.length)]; o.push(w) } return o.join(' ') }
-      if (kind === 'daily') { const d = new Date(), seed = d.getFullYear() * 400 + d.getMonth() * 32 + d.getDate(), o = Math.random; Math.random = mul(seed); const sk = [kind, level, lang]; try { kind = 'words'; level = 'normal'; lang = 'en'; return gen0() } finally { Math.random = o; [kind, level, lang] = sk } }
-      if (kind === 'symbols') return rnd(300).split(' ').map(w => Math.random() < .5 ? w + SYM[Math.floor(Math.random() * SYM.length)] : SYM[Math.floor(Math.random() * SYM.length)] + w).join(' ');
-      return gen0().normalize('NFC');
-    }
-    function gen0() {
       const L = LV[level] || LV.normal, PL = poolFor();
       if (kind === "custom") { const t = ($('ct').value || '').replace(/\s+/g, ' ').trim(); return t || 'Paste your own text in the box above, then press Use this text.' }
       if (kind === "sentences") {
@@ -1169,14 +1120,14 @@
     }
     function setup() {
       clearInterval(tick);
-      started = false; done = false; pos = 0; keys = 0; hits = 0; errs = 0; line0 = 0; samples = []; missed = {}; rawKeys = 0; $('lw').textContent = 0; $('la').textContent = '100%'; $('le').textContent = 0;
+      started = false; done = false; pos = 0; keys = 0; hits = 0; errs = 0; line0 = 0;
       text = gen();
       wordsEl.innerHTML = ""; wordsEl.style.transform = "";
       spans = [...text].map(c => { const s = document.createElement('span'); s.textContent = c; wordsEl.appendChild(s); return s });
       spans[0].className = "cur";
       $('time').textContent = dur; $('pb').style.width = '100%';
       stage.classList.remove('run');
-      $('result').classList.remove('show'); $('game').classList.remove('hide'); PANELS.slice(1).forEach(i => $(i).classList.add('hide')); VIEW = false; if (location.hash !== '#test') try { history.replaceState(null, '', '#test') } catch (_) { } markTab('test');
+      $('result').classList.remove('show'); $('game').classList.remove('hide'); ['hp','vp','pp','up'].forEach(i => $(i).classList.add('hide')); VIEW = false;
       cap.value = "\u200b";
       if (!$('drawer').classList.contains('open')) cap.focus({ preventScroll: true });
     }
@@ -1189,11 +1140,9 @@
     function begin() {
       started = true; startT = Date.now(); stage.classList.add('run');
       tick = setInterval(() => {
-        const el = (Date.now() - startT) / 1000, left = Math.max(0, Math.ceil(dur - el));
-        const m = Math.max(el, 1) / 60; $('lw').textContent = Math.round(hits / 5 / m); $('la').textContent = (keys ? Math.round(hits / keys * 100) : 100) + '%'; $('le').textContent = errs;
-        if (samples.length < Math.floor(el)) samples.push(Math.round(hits / 5 / m));
+        const left = Math.max(0, dur - Math.round((Date.now() - startT) / 1000));
         $('time').textContent = left; $('pb').style.width = (left / dur * 100) + '%';
-        if (el >= dur) finish();
+        if (left <= 0) finish();
       }, 250);
     }
 
@@ -1203,21 +1152,24 @@
       last = { w: Math.round(hits / 5 / m), a: keys ? Math.round(hits / keys * 100) : 0 };
       $('dl').textContent = 'Download certificate';
 
-      const raw = Math.round(keys / 5 / m), cpm = Math.round(hits / m), net = Math.max(0, Math.round((hits - errsLeft()) / 5 / m));
-      const record = { t: Date.now(), w: last.w, a: last.a, d: dur, k: kind, l: level, g: lang, r: raw, c: cpm, e: errs };
-      const el = (Date.now() - startT) / 1000;
-      if (keys >= 10 && el >= 5 && last.w <= 300 && !drill) {
-        saveH(loadH().concat(record));
-        renderH();
-        if (typeof window.vfSaveCloudHistory === 'function') window.vfSaveCloudHistory(record).catch(error => console.error('Firestore save failed:', error));
-        if (typeof window.vfSyncPublic === 'function') window.vfSyncPublic();
+      const record = {
+        t: Date.now(),
+        w: last.w,
+        a: last.a,
+        d: dur,
+        k: kind,
+        l: level, g: lang };
+
+      saveH(loadH().concat(record));
+      renderH();
+
+
+      if (typeof window.vfSaveCloudHistory === 'function') {
+        window.vfSaveCloudHistory(record).catch(error => {
+          console.error('Firestore save failed:', error);
+        });
       }
-      if (drill) lessonDone(last);
-      $('rRaw').textContent = raw; $('rNet').textContent = net; $('rCpm').textContent = cpm;
-      const mk = Object.entries(missed).sort((x, y) => y[1] - x[1]).slice(0, 5).map(([c, n]) => (c === ' ' ? 'space' : c) + '×' + n);
-      $('rMiss').textContent = mk.length ? 'Most missed keys: ' + mk.join(', ') : 'No missed keys. Great control!';
-      try { localStorage.setItem('vf-missed', JSON.stringify(Object.entries(JSON.parse(localStorage.getItem('vf-missed') || '{}')).concat(Object.entries(missed)).reduce((o, [c, n]) => (o[c] = (o[c] || 0) + n, o), {}))) } catch (_) { }
-      $('rGraph').innerHTML = samples.length > 1 ? chartSVG(samples, 'Speed over time (WPM)', last.w, 0, 'seconds') : '';
+      if (typeof window.vfSyncPublic === 'function') window.vfSyncPublic();
 
     $('rWpm').textContent = last.w;
     $('rAcc').textContent = (keys ? Math.round(hits / keys * 100) : 0) + '%';
@@ -1229,13 +1181,12 @@
     cap.blur();
     }
 
-    function errsLeft() { let n = 0; for (let i = 0; i < pos; i++) if (spans[i].className === 'no') n++; return n }
     function type(ch) {
       if (done || pos >= spans.length) return;
       if (!started) begin();
       keys++;
       const ok = ch === text[pos];
-      if (ok) hits++; else { errs++; missed[text[pos]] = (missed[text[pos]] || 0) + 1 }
+      if (ok) hits++; else errs++;
       spans[pos].className = ok ? "ok" : "no";
       pos++;
       spans[pos] && (spans[pos].className = "cur");
@@ -1245,7 +1196,7 @@
 
     function back() {
       if (done || pos === 0) return;
-      if (spans[pos]) spans[pos].className = "";
+      spans[pos].className = "";
       pos--;
       if (spans[pos].className === "ok") hits--;
       spans[pos].className = "cur";
@@ -1263,20 +1214,14 @@
       while (pos > 0 && text[pos - 1] === ' ') back();
       while (pos > 0 && text[pos - 1] !== ' ') back();
     }
-    let comp = false;
-    cap.addEventListener('compositionstart', () => comp = true);
-    cap.addEventListener('compositionend', e => { comp = false; for (const c of (e.data || '').normalize('NFC')) type(c); cap.value = "\u200b" });
     cap.addEventListener('input', e => {
-      if (comp || e.isComposing) return;
       if (e.inputType === 'deleteContentBackward') back();
-      else if (e.data) for (const c of e.data.normalize('NFC')) type(c);
+      else if (e.data) for (const c of e.data) type(c);
       cap.value = "\u200b";
     });
     document.addEventListener('keydown', e => {
       if ($('drawer').classList.contains('open')) { if (e.key === 'Escape') closeMenu(); return }
       if (/^(TEXTAREA|INPUT)$/.test(e.target.tagName) && e.target !== cap) return;
-      if (e.altKey && /^[1-8]$/.test(e.key)) { e.preventDefault(); go(['hm', 'test', 'lp', 'dp', 'hp', 'lbp', 'pp', 'sp'][+e.key - 1]); return }
-      if (done && !VIEW && e.key === 'Tab') { e.preventDefault(); setup(); return }
       if (done) return;
       if (e.key === 'Tab') { e.preventDefault(); setup(); return }
       if (e.key === 'Backspace' && !done) { e.preventDefault(); (e.ctrlKey || e.altKey) ? backWord() : back(); return }
@@ -1296,15 +1241,14 @@
     $('selTime').onchange = e => { dur = +e.target.value; setup() };
     $('selLang').onchange = e => { lang = e.target.value; $('lnote').textContent = NOTE[lang] || ''; setup() };
     const SALT = 'vf-violet-2026';
-    const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    const esc = s => String(s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
     function h(s) { let x = 2166136261; for (const c of s + SALT) { x ^= c.charCodeAt(0); x = Math.imul(x, 16777619) } return (x >>> 0).toString(36).toUpperCase() }
     function pack(r) { const p = [r.n, r.w, r.a, r.d, r.k, r.t, r.l, r.g].join('|'); return btoa(unescape(encodeURIComponent(p))) + '.' + h(p) }
     function unpack(code) { try { const [b, c] = code.split('.'); const p = decodeURIComponent(escape(atob(b))); if (!c || h(p) !== c) return null; const [n, w, a, d, k, t, l, g] = p.split('|'); return { n, w, a, d, k, t, l, g } } catch (e) { return null } }
-    const PANELS = ['game','hm','lp','dp','hp','lbp','pp','sp','vp','up'];
     let HK = 'vf-hist';
     function loadH() { try { return JSON.parse(localStorage.getItem(HK) || '[]') } catch (e) { return [] } }
     function saveH(a) { try { localStorage.setItem(HK, JSON.stringify(a.slice(-200))) } catch (e) { } }
-    function chartSVG(v, title, avg, fixed, unit) {
+    function chartSVG(v, title, avg, fixed) {
       const W = 640, H = 210, L = 38, R = 14, T = 14, B = 26, n = v.length;
       const top = fixed || Math.max(10, Math.ceil(Math.max(...v) / 10) * 10);
       const X = i => L + (n > 1 ? i * (W - L - R) / (n - 1) : (W - L - R) / 2), Y = val => T + (H - T - B) * (1 - val / top);
@@ -1315,10 +1259,10 @@
       const line = n > 1 ? `<polyline points="${pts.join(' ')}" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linejoin="round"/>` : '';
       const dots = v.map((val, i) => `<circle cx="${X(i).toFixed(1)}" cy="${Y(val).toFixed(1)}" r="3.5" fill="var(--accent)"><title>${val}</title></circle>`).join('');
       const ay = Y(avg).toFixed(1);
-      return `<div class="chart"><div class="lab">${title}${unit ? '' : ' \u00b7 last ' + n + ' tests'}</div><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}">${g}${area}<line x1="${L}" x2="${W - R}" y1="${ay}" y2="${ay}" stroke="var(--bad)" stroke-dasharray="5 4"/>${line}${dots}<text x="${W - R}" y="${+ay - 5}" text-anchor="end" font-size="11" fill="var(--bad)">avg ${avg}</text></svg></div>`;
+      return `<div class="chart"><div class="lab">${title} \u00b7 last ${n} tests</div><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${title}">${g}${area}<line x1="${L}" x2="${W - R}" y1="${ay}" y2="${ay}" stroke="var(--bad)" stroke-dasharray="5 4"/>${line}${dots}<text x="${W - R}" y="${+ay - 5}" text-anchor="end" font-size="11" fill="var(--bad)">avg ${avg}</text></svg></div>`;
     }
     function renderH() {
-      const all = loadH(), q = ($('hq').value || '').toLowerCase(), fl = $('hfl').value, fk = $('hfk').value, a = all.map((x, i) => ({ ...x, i })).reverse().filter(x => (!fl || x.g === fl) && (!fk || x.k === fk) && (!q || [x.k, x.l, x.g, x.w, x.a, new Date(x.t).toLocaleString()].join(' ').toLowerCase().includes(q))), n = all.length;
+      const all = loadH(), a = all.map((x, i) => ({ ...x, i })).reverse(), n = all.length;
       const w = all.map(x => x.w);
       const best = n ? Math.max(...w) : 0, low = n ? Math.min(...w) : 0, avg = n ? Math.round(w.reduce((t, x) => t + x, 0) / n) : 0;
       const acc = n ? Math.round(all.reduce((t, x) => t + x.a, 0) / n) : 0;
@@ -1341,15 +1285,11 @@
     let VIEW = false;
     function showPanel(n) {
       done = true; clearInterval(tick); stage.classList.remove('run');
-      PANELS.forEach(i => $(i).classList.toggle('hide', i !== n));
+      ['game', 'hp', 'vp', 'pp', 'up'].forEach(i => $(i).classList.toggle('hide', i !== n));
       $('result').classList.remove('show');
       VIEW = n !== 'game';
       closeMenu();
       if (n === 'hp') renderH();
-      if (n === 'hm' || n === 'dp') renderDash();
-      if (n === 'lbp' && window.vfLoadBoard) window.vfLoadBoard();
-      if (n === 'lp') renderLearn();
-      if (n !== 'up') { try { history.replaceState(null, '', '#' + n) } catch (_) { } markTab(n) }
       window.scrollTo(0, 0);
     }
     function openMenu() { $('drawer').classList.add('open'); $('scrim').classList.remove('hide'); $('mbtn').setAttribute('aria-expanded', 'true') }
@@ -1360,7 +1300,8 @@
     }
     $('mbtn').onclick = () => $('drawer').classList.contains('open') ? closeMenu() : openMenu();
     $('mclose').onclick = closeMenu; $('scrim').onclick = closeMenu;
-        $('nVerify').addEventListener('click', () => showPanel('vp'));
+    $('hbtn').addEventListener('click', () => showPanel('hp'));
+    $('nVerify').addEventListener('click', () => showPanel('vp'));
     ['hback', 'vback', 'pback'].forEach(i => $(i).addEventListener('click', setup));
     $('uback').addEventListener('click', () => { try { history.replaceState(null, '', location.pathname) } catch (_) { } setup() });
     const AVS = [['\u{1F98A}', '#ff9a62', '#ff5f6d'], ['\u{1F43C}', '#6dd5ed', '#2193b0'], ['\u{1F981}', '#f9d423', '#ff4e50'], ['\u{1F419}', '#c471f5', '#fa71cd'], ['\u{1F438}', '#96e6a1', '#2dbf7a'], ['\u{1F989}', '#a18cd1', '#6a5ae0'], ['\u{1F42C}', '#4facfe', '#00c6ff'], ['\u{1F984}', '#f093fb', '#f5576c'], ['\u{1F680}', '#434343', '#7c4dff'], ['\u26A1', '#7c4dff', '#4f7cff']];
@@ -1478,80 +1419,509 @@
       const dark = r.dataset.theme ? r.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme:dark)').matches;
       r.dataset.theme = dark ? 'light' : 'dark';
     });
-    
-    // ---- navigation ----
-    const TABS = [['hm', 'Home'], ['pp', 'Profile']];
-    [['test', 'Typing Test'], ['lp', 'Learn'], ['dp', 'Dashboard'], ['hp', 'History'], ['lbp', 'Leaderboard'], ['sp', 'Settings']].forEach(([id, t]) => { const b = document.createElement('button'); b.type = 'button'; b.className = 'nav'; b.innerHTML = t + ' <span>&rsaquo;</span>'; b.onclick = () => { closeMenu(); go(id) }; $('dnav').appendChild(b) });
-    TABS.forEach(([id, t]) => { const b = document.createElement('button'); b.type = 'button'; b.textContent = t; b.dataset.t = id; b.onclick = () => go(id); $('tabs').appendChild(b) });
-    function markTab(n) { const c = n === 'game' ? 'test' : n; $('tabs').querySelectorAll('button').forEach(b => b.dataset.t === c ? b.setAttribute('aria-current', 'page') : b.removeAttribute('aria-current')) }
-    function go(n) {
-      const AL = { learn: 'lp', dashboard: 'dp', history: 'hp', leaderboard: 'lbp', settings: 'sp', home: 'hm', profile: 'pp' }; n = AL[n] || n;
-      if (n === 'test') return setup();
-      if (n !== 'pp' && !PANELS.includes(n)) return;
-      if (n === 'pp') { if (!$('abtn').classList.contains('hide')) return $('abtn').click(); return $('avbtn').click() }
-      showPanel(n);
-    }
-    window.go = go;
-    document.querySelectorAll('[data-go]').forEach(b => b.onclick = () => go(b.dataset.go));
-    window.addEventListener('hashchange', () => { const n = location.hash.slice(1); if (n && n !== 'test' && PANELS.includes(n) && n !== 'up' && n !== 'pp') showPanel(n); else if (n === 'test' && VIEW) setup() });
-    // ---- settings ----
-    const ST = (() => { try { return JSON.parse(localStorage.getItem('vf-set') || '{}') } catch (_) { return {} } })();
-    function applySet() {
-      const r = document.documentElement; if (ST.theme) r.dataset.theme = ST.theme; else delete r.dataset.theme;
-      r.style.setProperty('--tf', ST.font || ''); r.style.setProperty('--fs', ST.size || ''); r.dataset.cursor = ST.cur || 'line'; r.dataset.motion = ST.motion ? 'off' : 'on';
-    }
-    [['sTheme', 'theme'], ['sFont', 'font'], ['sSize', 'size'], ['sCur', 'cur']].forEach(([id, k]) => { $(id).value = ST[k] || (k === 'cur' ? 'line' : ''); $(id).onchange = e => { ST[k] = e.target.value; saveSet() } });
-    $('sGoal').value = ST.goal || 10; $('sGoal').onchange = e => { ST.goal = Math.min(600, Math.max(1, +e.target.value || 10)); saveSet() };
-    $('sMotion').checked = !!ST.motion; $('sMotion').onchange = e => { ST.motion = e.target.checked; saveSet() };
-    function saveSet() { try { localStorage.setItem('vf-set', JSON.stringify(ST)) } catch (_) { } applySet() }
-    applySet();
-    // ---- stats: goal, streak, achievements ----
-    const dayKey = t => { const d = new Date(t); return d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate() };
-    function dstats() {
-      const a = loadH(), today = dayKey(Date.now()), mins = a.filter(x => dayKey(x.t) === today).reduce((t, x) => t + x.d, 0) / 60;
-      const days = new Set(a.map(x => dayKey(x.t))); let st = 0, d = new Date(); if (!days.has(dayKey(d))) d.setDate(d.getDate() - 1);
-      while (days.has(dayKey(d))) { st++; d.setDate(d.getDate() - 1) }
-      return { a, mins, st, best: a.reduce((m, x) => Math.max(m, x.w), 0), goal: ST.goal || 10 };
-    }
-    const ACH = [['First test', s => s.a.length >= 1], ['10 tests', s => s.a.length >= 10], ['50 tests', s => s.a.length >= 50], ['30 WPM', s => s.best >= 30], ['60 WPM', s => s.best >= 60], ['100 WPM', s => s.best >= 100], ['95% accuracy', s => s.a.some(x => x.a >= 95 && x.w >= 20)], ['3-day streak', s => s.st >= 3], ['7-day streak', s => s.st >= 7], ['Polyglot', s => new Set(s.a.map(x => x.g)).size >= 3]];
-    function renderDash() {
-      const s = dstats(), g = `${Math.min(s.goal, Math.round(s.mins * 10) / 10)} / ${s.goal} min`, p = Math.min(100, s.mins / s.goal * 100) + '%';
-      $('hgoal').textContent = $('dgoal').textContent = g; $('hgm').style.width = $('dgm').style.width = p;
-      $('hstreak').textContent = $('dstreak').textContent = s.st + (s.st === 1 ? ' day' : ' days'); $('hbest').textContent = s.best + ' WPM';
-      const rc = s.a.slice(-30), avg = rc.length ? Math.round(rc.reduce((t, x) => t + x.w, 0) / rc.length) : 0;
-      $('dc').innerHTML = rc.length ? chartSVG(rc.map(x => x.w), 'Speed (WPM)', avg) + chartSVG(rc.map(x => x.a), 'Accuracy (%)', Math.round(rc.reduce((t, x) => t + x.a, 0) / rc.length), 100) : '<p class="foot">Take a test to see your progress.</p>';
-      $('dach').innerHTML = ACH.map(([n, f]) => `<span class="badge ${f(s) ? 'on' : ''}">${f(s) ? '\u2605 ' : ''}${esc(n)}</span>`).join('');
-      let miss = {}; try { miss = JSON.parse(localStorage.getItem('vf-missed') || '{}') } catch (_) { }
-      const top = Object.entries(miss).filter(([c]) => c.trim()).sort((x, y) => y[1] - x[1]).slice(0, 5).map(x => x[0]);
-      $('dtrain').textContent = top.length ? 'Weak keys: ' + top.join(' ') : 'Take a few tests first'; $('dtbtn').disabled = !top.length; $('dtbtn').onclick = () => startDrill(top.join(''));
-    }
-    $('hcust').onclick = () => { kind = 'custom'; $('selKind').value = 'custom'; $('cbox').classList.remove('hide'); setup(); openMenu() };
-    $('hdaily').onclick = () => { $('selKind').value = 'daily'; kind = 'daily'; dur = 60; $('selTime').value = '60'; setup() };
-    // ---- learn ----
-    const ROWS = ['qwertyuiop', 'asdfghjkl;', 'zxcvbnm,./'], FING = { q: 0, a: 0, z: 0, w: 1, s: 1, x: 1, e: 2, d: 2, c: 2, r: 3, f: 3, v: 3, t: 3, g: 3, b: 3, y: 4, h: 4, n: 4, u: 4, j: 4, m: 4, i: 5, k: 5, ',': 5, o: 6, l: 6, '.': 6, p: 7, ';': 7, '/': 7 };
-    const FC = ['#ff8a8a', '#ffc174', '#ffe27a', '#9be29b', '#7fd6e8', '#9db4ff', '#c9a2ff', '#ff9fd6'], FN = ['Left pinky', 'Left ring', 'Left middle', 'Left index', 'Right index', 'Right middle', 'Right ring', 'Right pinky'];
-    $('kbd').innerHTML = ROWS.map(r => '<div>' + [...r].map(c => `<b style="background:${FC[FING[c]]}">${c}</b>`).join('') + '</div>').join('') + '<div><b style="background:#ddd;width:240px">space = thumbs</b></div>';
-    $('fleg').innerHTML = FN.map((n, i) => `<span class="badge" style="background:${FC[i]};color:#111">${n}</span>`).join('');
-    const LES = [['Home row: left', 'asdf'], ['Home row: right', 'jkl;'], ['Home row: all', 'asdfjkl;'], ['Index reach', 'asdfjkl;gh'], ['Top row', 'qwertyuiop'], ['Top + home', 'asdfjkl;qweruiop'], ['Bottom row', 'zxcvbnm,./'], ['All letters', 'abcdefghijklmnopqrstuvwxyz'], ['Numbers', '1234567890'], ['Symbols', '!@#$%^&*()']];
-    let LP = (() => { try { return JSON.parse(localStorage.getItem('vf-les') || '{}') } catch (_) { return {} } })(), curLes = -1;
-    function renderLearn() {
-      $('lessons').innerHTML = LES.map(([n, k], i) => { const open = i === 0 || LP[i - 1], b = LP[i]; return `<div class="lrow"><span>${i + 1}. ${esc(n)} <code>${esc(k)}</code>${b ? ' \u2713 best ' + b + ' WPM' : ''}</span><button class="dl" data-l="${i}" ${open ? '' : 'disabled'}>${open ? 'Start' : 'Locked'}</button></div>` }).join('');
-      $('lessons').querySelectorAll('[data-l]').forEach(b => b.onclick = () => { curLes = +b.dataset.l; startDrill(LES[curLes][1]) });
-    }
-    function startDrill(k) { drill = [...new Set(k)].join(''); const d = dur; dur = 60; $('selTime').value = '60'; setup(); dur = d }
-    function lessonDone(r) {
-      if (curLes >= 0 && r.a >= 90 && r.w >= 15) { LP[curLes] = Math.max(LP[curLes] || 0, r.w); try { localStorage.setItem('vf-les', JSON.stringify(LP)) } catch (_) { } }
-      drill = null; curLes = -1;
-    }
-    // ---- history export ----
-    ['hq', 'hfl', 'hfk'].forEach(i => $(i).addEventListener('input', renderH));
-    function dl(name, mime, data) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([data], { type: mime })); a.download = name; a.click() }
-    $('hcsv').onclick = () => dl('violet-fast-history.csv', 'text/csv', 'date,language,mode,level,seconds,wpm,raw,cpm,accuracy,errors\n' + loadH().map(x => [new Date(x.t).toISOString(), x.g, x.k, x.l, x.d, x.w, x.r ?? '', x.c ?? '', x.a, x.e ?? ''].join(',')).join('\n'));
-    $('hjson').onclick = () => dl('violet-fast-history.json', 'application/json', JSON.stringify(loadH(), null, 2));
-    if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(() => { });
     document.fonts && document.fonts.ready.then(() => { if (!started && !VIEW) setup() });
-    (() => { const n = location.hash.slice(1); if (new URLSearchParams(location.search).get('u')) return; if (n && n !== 'test' && PANELS.includes(n) && n !== 'up' && n !== 'pp') showPanel(n); else if (n === 'test') setup(); else showPanel('hm') })();
+    setup();
   </script>
+  <script id="vf-platform">
+(() => {
+/*LOGIC-START*/
+const pad = n => String(n).padStart(2, '0');
+const dayStr = ts => { const d = new Date(ts); return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()) };
+const dnum = s => Math.round(new Date(s + 'T00:00:00').getTime() / 86400000);
+function calcStreaks(all, today) {
+  const days = [...new Set(all.map(x => dayStr(x.t)))].sort();
+  let best = 0, run = 0, prev = null;
+  for (const d of days) { run = (prev !== null && dnum(d) - dnum(prev) === 1) ? run + 1 : 1; best = Math.max(best, run); prev = d }
+  const set = new Set(days); let cur = 0; const t = new Date(today + 'T00:00:00');
+  if (!set.has(today)) t.setDate(t.getDate() - 1);
+  for (; ;) { const s = t.getFullYear() + '-' + pad(t.getMonth() + 1) + '-' + pad(t.getDate()); if (set.has(s)) { cur++; t.setDate(t.getDate() - 1) } else break }
+  return { cur, best };
+}
+const mins = all => all.reduce((s, x) => s + (+x.d || 0), 0) / 60;
+function consistency(v) {
+  if (v.length < 3) return 100;
+  const m = v.reduce((a, b) => a + b, 0) / v.length; if (!m) return 0;
+  const sd = Math.sqrt(v.reduce((a, b) => a + (b - m) * (b - m), 0) / v.length);
+  return Math.max(0, Math.round(100 - sd / m * 100));
+}
+function calcStats(keys, errs, hits, seconds) {
+  const mn = Math.max(1, seconds) / 60;
+  return { net: Math.round(hits / 5 / mn), raw: Math.round(keys / 5 / mn), cpm: Math.round(hits / mn), acc: keys ? Math.round((keys - errs) / keys * 100) : 0 };
+}
+const MODES5 = ['words', 'sentences', 'punctuation', 'numbers', 'symbols', 'custom'];
+const ACH = [
+  ['first', '\u{1F331}', 'First steps', 'Finish your first test', c => c.n >= 1],
+  ['t10', '\u{1F525}', 'Getting warm', 'Finish 10 tests', c => c.n >= 10],
+  ['t50', '\u{1F3AF}', 'Regular', 'Finish 50 tests', c => c.n >= 50],
+  ['t100', '\u{1F451}', 'Centurion', 'Finish 100 tests', c => c.n >= 100],
+  ['w30', '\u{1F695}', '30 WPM', 'Reach 30 WPM', c => c.best >= 30],
+  ['w50', '\u{1F697}', '50 WPM', 'Reach 50 WPM', c => c.best >= 50],
+  ['w70', '\u{1F680}', '70 WPM', 'Reach 70 WPM', c => c.best >= 70],
+  ['w100', '\u26A1', '100 WPM', 'Reach 100 WPM', c => c.best >= 100],
+  ['a95', '\u{1F3AF}', 'Sharp', '95% accuracy at 25+ WPM', c => c.sharp],
+  ['a100', '\u{1F48E}', 'Flawless', '100% accuracy at 20+ WPM', c => c.flawless],
+  ['s3', '\u{1F4C5}', 'On a roll', '3-day streak', c => c.sb >= 3],
+  ['s7', '\u{1F5D3}', 'Week warrior', '7-day streak', c => c.sb >= 7],
+  ['s30', '\u{1F3C6}', 'Unstoppable', '30-day streak', c => c.sb >= 30],
+  ['poly', '\u{1F30D}', 'Polyglot', 'Test in 3 languages', c => c.langs >= 3],
+  ['modes', '\u{1F9E9}', 'All-rounder', 'Try 5 test modes', c => c.modes >= 5],
+  ['long', '\u23F1', 'Marathon', 'Finish a 5-minute test', c => c.long],
+  ['l5', '\u{1F393}', 'Student', 'Complete 5 lessons', c => c.les >= 5],
+  ['lall', '\u{1F3EB}', 'Graduate', 'Complete every lesson', c => c.les >= LESSONS.length],
+  ['daily', '\u{1F4A5}', 'Challenger', 'Finish a daily challenge', c => c.daily]
+];
+function achCtx(all, learn, today) {
+  const st = calcStreaks(all, today);
+  return {
+    n: all.length, best: all.reduce((m, x) => Math.max(m, x.w), 0),
+    sharp: all.some(x => x.a >= 95 && x.w >= 25), flawless: all.some(x => x.a === 100 && x.w >= 20),
+    sb: st.best, langs: new Set(all.map(x => x.g || 'en')).size,
+    modes: new Set(all.map(x => x.k).filter(k => MODES5.includes(k))).size,
+    long: all.some(x => x.d >= 300), les: Object.values(learn).filter(v => v && v.done).length, daily: all.some(x => x.k === 'daily')
+  };
+}
+const achDone = (all, learn, today) => { const c = achCtx(all, learn, today); return ACH.filter(a => a[4](c)).map(a => a[0]) };
+const L = (id, t, keys, type, wpm, desc) => ({ id, t, keys, type, wpm, desc });
+const LESSONS = [
+  L('h1', 'Home row: left hand', 'asdf', 'set', 8, 'Rest your left fingers on A S D F. Feel the bump on F.'),
+  L('h2', 'Home row: right hand', 'jkl;', 'set', 8, 'Rest your right fingers on J K L ;. Feel the bump on J.'),
+  L('h3', 'Full home row', 'asdfghjkl;', 'set', 12, 'Add G and H with your index fingers.'),
+  L('t1', 'Top row: left hand', 'qwert', 'set', 12, 'Reach up with the same finger, then return home.'),
+  L('t2', 'Top row: right hand', 'yuiop', 'set', 12, 'Keep your wrists steady and reach with your fingers.'),
+  L('b1', 'Bottom row: left hand', 'zxcvb', 'set', 12, 'Curl your fingers down and back to the home row.'),
+  L('b2', 'Bottom row: right hand', 'nm,.', 'set', 12, 'N and M are typed with your right index finger.'),
+  L('az', 'All letters', 'abcdefghijklmnopqrstuvwxyz', 'set', 15, 'Every letter of the alphabet.'),
+  L('nu', 'Number row', '1234567890', 'num', 10, 'Reach to the number row without looking.'),
+  L('cp', 'Capital letters', '', 'caps', 15, 'Hold Shift with the opposite hand.'),
+  L('pu', 'Punctuation', ',.?!;:', 'punct', 12, 'Commas, full stops and question marks.'),
+  L('sy', 'Symbols', '@#$%&*()-+=/', 'sym', 10, 'Symbols for emails, code and data entry.'),
+  L('sp', 'Speed builder', '', 'words', 25, 'Common words at speed with high accuracy.')
+];
+const pick = a => a[Math.floor(Math.random() * a.length)];
+function pseudo(set, n) { const a = [...set]; let o = ''; while (o.length < n) { const c = pick(a); if (o.length >= 2 && o[o.length - 1] === c && o[o.length - 2] === c) continue; o += c } return o }
+const SYM = ['@', '#', '$', '%', '&', '*', '+', '=', '/', '-', '_', '!', '?', ';', ':'];
+const WRP = [['(', ')'], ['[', ']'], ['{', '}'], ['<', '>'], ['"', '"'], ["'", "'"]];
+function symText(PL, n = 360) {
+  const o = [];
+  for (let i = 0; i < n; i++) {
+    let w = pick(PL); const r = Math.random();
+    if (r < .22) { const p = pick(WRP); w = p[0] + w + p[1] } else if (r < .42) w = pick(SYM) + w;
+    else if (r < .58) w = w + pick(SYM); else if (r < .7) w = rn(3); else if (r < .76) w = w + '_' + pick(PL);
+    o.push(w);
+  }
+  return o.join(' ');
+}
+function lessonText(l) {
+  const ws = [];
+  if (l.type === 'set') {
+    const real = WORDS.filter(w => w.length >= 2 && [...w].every(c => l.keys.includes(c)));
+    for (let i = 0; i < 26; i++) ws.push(real.length >= 8 && Math.random() < .6 ? pick(real) : pseudo(l.keys, 3 + Math.floor(Math.random() * 3)));
+  } else if (l.type === 'num') { for (let i = 0; i < 24; i++) ws.push(pseudo('0123456789', 2 + Math.floor(Math.random() * 4))) }
+  else if (l.type === 'caps') { for (let i = 0; i < 24; i++) { const w = pick(WORDS); ws.push(Math.random() < .5 ? w[0].toUpperCase() + w.slice(1) : w) } }
+  else if (l.type === 'punct') { const P = [',', '.', '?', '!', ';', ':']; for (let i = 0; i < 24; i++) { const w = pick(WORDS); ws.push(Math.random() < .6 ? w + pick(P) : w) } }
+  else if (l.type === 'sym') return symText(WORDS, 26);
+  else { for (let i = 0; i < 30; i++) ws.push(pick(WORDS)) }
+  return ws.join(' ');
+}
+function weakKeys(stats, min = 10, top = 5) {
+  return Object.entries(stats).filter(([c, v]) => v[0] >= min && /[a-z0-9]/i.test(c)).map(([c, v]) => [c, v[1] / v[0], v[0]]).filter(x => x[1] >= .08).sort((a, b) => b[1] - a[1]).slice(0, top);
+}
+function weakText(chars) {
+  const set = chars.map(x => x.toLowerCase()), real = WORDS.filter(w => set.some(c => w.includes(c))), ws = [];
+  for (let i = 0; i < 30; i++) ws.push(real.length >= 10 ? pick(real) : pseudo(set.join('') + 'aeiou', 4));
+  return ws.join(' ');
+}
+const csvCell = v => { v = String(v == null ? '' : v); if (/^[=+\-@\t\r]/.test(v)) v = "'" + v; return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v };
+function toCSV(rows) {
+  const H = ['Date', 'Mode', 'Level', 'Language', 'Seconds', 'Net WPM', 'Raw WPM', 'Accuracy %', 'Errors'];
+  return [H, ...rows.map(x => [new Date(x.t).toISOString(), x.k, LB[x.l] || x.l, LN[x.g || 'en'] || x.g, x.d, x.w, x.r == null ? '' : x.r, x.a, x.e == null ? '' : x.e])].map(r => r.map(csvCell).join(',')).join('\n');
+}
+function filterH(all, f) {
+  const now = Date.now(), q = (f.q || '').trim().toLowerCase();
+  return all.filter(x => {
+    if (f.mode && x.k !== f.mode) return false;
+    if (f.level && x.l !== f.level) return false;
+    if (f.lang && (x.g || 'en') !== f.lang) return false;
+    if (f.range && now - x.t > f.range * 86400000) return false;
+    if (q) { const hay = [x.k, LB[x.l] || x.l, LN[x.g || 'en'], x.w, x.a, new Date(x.t).toLocaleDateString()].join(' ').toLowerCase(); if (!hay.includes(q)) return false }
+    return true;
+  });
+}
+function hashStr(s) { let h = 1779033703 ^ s.length; for (let i = 0; i < s.length; i++) { h = Math.imul(h ^ s.charCodeAt(i), 3432918353); h = h << 13 | h >>> 19 } return (h >>> 0) }
+function mulberry(a) { return () => { a |= 0; a = a + 0x6D2B79F5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296 } }
+const utcDay = () => new Date().toISOString().slice(0, 10);
+function dailyText(day) { const r = mulberry(hashStr('violet-fast|' + day)), o = []; for (let i = 0; i < 160; i++)o.push(WORDS[Math.floor(r() * WORDS.length)]); return o.join(' ') }
+/*LOGIC-END*/
+
+/* ===== UI layer ===== */
+const KEY = { set: 'vf-settings', learn: 'vf-learn', keys: 'vf-keys', badges: 'vf-badges' };
+const jget = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v } catch (e) { return d } };
+const jset = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)) } catch (e) { } };
+const S = Object.assign({ theme: 'system', font: 'mono', size: 1, cursor: 'line', live: false, rm: false, hc: false, goal: 5 }, jget(KEY.set, {}));
+let curLesson = null, curDaily = null, samples = [], missed = {}, tot = {}, composing = false, afterIME = false, prevKeys = 0, route = '';
+const origSetup = window.setup, main = document.querySelector('main');
+const lim = () => curLesson ? 600 : dur;
+const fmt = s => s >= 120 ? Math.floor(s / 60) + ':' + pad(s % 60) : String(s);
+const FONTS = {
+  mono: '"JetBrains Mono","Noto Sans Devanagari","Noto Sans Gurmukhi",ui-monospace,monospace',
+  sans: 'Manrope,"Noto Sans Devanagari","Noto Sans Gurmukhi",system-ui,sans-serif',
+  serif: 'Georgia,"Noto Sans Devanagari","Noto Sans Gurmukhi",serif',
+  system: 'system-ui,"Noto Sans Devanagari","Noto Sans Gurmukhi",sans-serif'
+};
+const TIPS = ['Keep your eyes on the text, not on the keyboard.', 'Accuracy first. Speed follows on its own.', 'Rest your fingers on the home row between words.', 'Short daily practice beats one long weekly session.', 'Relax your shoulders and keep your wrists level.', 'Type rhythmically. A steady pace beats bursts and pauses.', 'Do not look back at mistakes. Press backspace and carry on.'];
+
+/* ---- toast + global error handling ---- */
+let tt, errN = 0;
+function toast(m, t) { let e = $('vf-toast'); if (!e) { e = document.createElement('div'); e.id = 'vf-toast'; e.setAttribute('role', 'status'); document.body.appendChild(e) } e.textContent = m; e.className = 'toast show ' + (t || ''); clearTimeout(tt); tt = setTimeout(() => e.classList.remove('show'), 4500) }
+window.vfToast = toast;
+window.addEventListener('error', e => { console.error(e.error || e.message); if (errN++ < 3) toast('Something went wrong. Your saved results are safe.', 'bad') });
+window.addEventListener('unhandledrejection', e => { console.error(e.reason); if (errN++ < 3) toast('A background task failed. Your saved results are safe.', 'bad') });
+window.addEventListener('offline', () => toast('You are offline. Practice still works and results sync later.'));
+window.addEventListener('online', () => toast('Back online.'));
+function dlText(name, text, mime) { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([text], { type: mime })); a.download = name; document.body.appendChild(a); a.click(); a.remove() }
+
+/* ---- charts ---- */
+function ring(p, txt, sub) { const r = 44, c = 2 * Math.PI * r; return `<svg class="ring" viewBox="0 0 120 120" role="img" aria-label="${txt} ${sub}"><circle cx="60" cy="60" r="${r}" fill="none" class="rg"/><circle cx="60" cy="60" r="${r}" fill="none" class="rf" stroke-dasharray="${c}" stroke-dashoffset="${c * (1 - Math.min(1, p))}" transform="rotate(-90 60 60)"/><text x="60" y="58" text-anchor="middle" class="rt">${txt}</text><text x="60" y="76" text-anchor="middle" class="rs">${sub}</text></svg>` }
+function bars(vals, labels, unit) {
+  const W = 420, H = 130, m = Math.max(...vals, 1), bw = W / vals.length;
+  return `<svg viewBox="0 0 ${W} ${H + 22}" role="img" aria-label="Minutes practised per day">${vals.map((v, i) => { const h = Math.max(2, Math.round(v / m * H)); return `<rect class="bar" x="${i * bw + 8}" y="${H - h}" width="${bw - 16}" height="${h}" rx="6"><title>${labels[i]}: ${Math.round(v * 10) / 10} ${unit}</title></rect><text class="ax" x="${i * bw + bw / 2}" y="${H + 16}" text-anchor="middle">${labels[i]}</text>` }).join('')}</svg>`;
+}
+function lines(series, W = 560, H = 200) {
+  const Lm = 38, R = 14, T = 12, B = 26, n = Math.max(...series.map(s => s.v.length));
+  const hi = Math.max(10, Math.ceil(Math.max(...series.flatMap(s => s.v), 1) / 10) * 10);
+  const X = i => Lm + (W - Lm - R) * (n < 2 ? 0 : i / (n - 1)), Y = v => T + (H - T - B) * (1 - v / hi);
+  let g = ''; for (let k = 0; k <= 4; k++) { const v = hi * k / 4, y = Y(v); g += `<line class="gl" x1="${Lm}" x2="${W - R}" y1="${y}" y2="${y}"/><text class="ax" x="${Lm - 6}" y="${y + 4}" text-anchor="end">${Math.round(v)}</text>` }
+  const ls = series.map(s => `<polyline fill="none" stroke="${s.c}" stroke-width="2.4" stroke-linejoin="round" points="${s.v.map((v, i) => X(i).toFixed(1) + ',' + Y(v).toFixed(1)).join(' ')}"/>`).join('');
+  return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${series.map(s => s.l).join(' and ')} over time">${g}${ls}<text class="ax" x="${Lm}" y="${H - 6}">0s</text><text class="ax" x="${W - R}" y="${H - 6}" text-anchor="end">${n}s</text></svg><div class="legend">${series.map(s => `<span><i style="background:${s.c}"></i>${s.l}</span>`).join('')}</div>`;
+}
+
+/* ---- finger guide ---- */
+const FING = [['Left pinky', '1qaz`', '#f97316'], ['Left ring', '2wsx', '#eab308'], ['Left middle', '3edc', '#22c55e'], ['Left index', '4rfv5tgb', '#06b6d4'], ['Right index', '6yhn7ujm', '#3b82f6'], ['Right middle', '8ik,', '#8b5cf6'], ['Right ring', '9ol.', '#d946ef'], ['Right pinky', "0p;/-=[]'", '#f43f5e']];
+const KROWS = ['1234567890-=', 'qwertyuiop[]', "asdfghjkl;'", 'zxcvbnm,./'], KOFF = [0, .5, .75, 1.25];
+const fOf = c => FING.find(f => f[1].includes(c)) || FING[0];
+function kbSVG(on) {
+  let o = '<svg class="kb" viewBox="0 0 640 250" role="img" aria-label="Keyboard with a colour for each finger">';
+  KROWS.forEach((r, i) => [...r].forEach((c, j) => {
+    const f = fOf(c), x = 6 + (KOFF[i] + j) * 48, y = 6 + i * 48, act = on && on.has(c);
+    o += `<g class="${act ? 'on' : ''}" data-k="${esc(c)}"><rect x="${x}" y="${y}" width="44" height="44" rx="9" fill="${f[2]}" fill-opacity="${act ? 1 : .22}" stroke="${f[2]}"/><text x="${x + 22}" y="${y + 28}" text-anchor="middle">${esc(c.toUpperCase())}</text>${'fj'.includes(c) ? `<rect x="${x + 15}" y="${y + 35}" width="14" height="3" rx="1.5" fill="${f[2]}"/>` : ''}</g>`;
+  }));
+  o += `<g data-k=" "><rect x="126" y="198" width="300" height="40" rx="9" fill="#94a3b8" fill-opacity=".25" stroke="#94a3b8"/><text x="276" y="224" text-anchor="middle">SPACE (thumbs)</text></g></svg>`;
+  return o + '<div class="legend">' + FING.map(f => `<span><i style="background:${f[2]}"></i>${f[0]}</span>`).join('') + '</div>';
+}
+function hl() {
+  const g = $('vf-guide'); if (!curLesson || !g) return;
+  g.querySelectorAll('g.nx').forEach(e => e.classList.remove('nx'));
+  const c = (text[pos] || '').toLowerCase(); if (!c) return;
+  const el = [...g.querySelectorAll('g[data-k]')].find(e => e.dataset.k === c); if (el) el.classList.add('nx');
+}
+
+/* ---- text generation ---- */
+Object.assign(LV, { easy: { sp: 0, cap: 0, num: 0, dig: 3 }, hard: { sp: .12, cap: .1, num: .04, dig: 6 } });
+function pool() {
+  const base = lang === 'en' ? WORDS : (LANGW[lang] || WORDS), bl = base.slice().sort((a, b) => a.length - b.length);
+  if (level === 'easy') return lang === 'en' ? WORDS.filter(w => w.length <= 5) : bl.slice(0, Math.max(10, Math.ceil(base.length * .5)));
+  if (level === 'hard') return lang === 'en' ? WORDS.filter(w => w.length >= 6).concat(HARD) : bl.slice(Math.floor(base.length * .4));
+  if (level === 'adv') return lang === 'en' ? HARD.concat(WORDS.filter(w => w.length >= 7)) : bl.slice(Math.floor(base.length * .5));
+  return base;
+}
+window.gen = function () {
+  if (curLesson) return curLesson.text;
+  if (curDaily) return dailyText(curDaily);
+  const Lv = LV[level] || LV.normal, PL = pool();
+  if (kind === 'custom') { const t = ($('ct').value || '').replace(/\s+/g, ' ').trim().slice(0, 3000); return t || 'Paste your own text in the menu, then press Use this text.' }
+  if (kind === 'sentences') {
+    if (lang !== 'en') { const o = []; while (o.join(' ').length < 2600) { const s = rnd(6 + Math.floor(Math.random() * 5), PL); o.push(s[0].toUpperCase() + s.slice(1) + '.') } return o.join(' ') }
+    const o = []; let l = -1, n = 0; while (n < 2600) { let i; do { i = Math.floor(Math.random() * SENT.length) } while (i === l); l = i; o.push(SENT[i]); n += SENT[i].length + 1 } return o.join(' ');
+  }
+  if (kind === 'numbers') return Array.from({ length: 500 }, () => rn(Lv.dig)).join(' ');
+  if (kind === 'symbols') return symText(PL);
+  const pk = kind === 'punctuation', P = pk ? { sp: Math.max(Lv.sp, .2), cap: .15, num: 0 } : Lv; let up = pk;
+  return rnd(400, PL).split(' ').map(x => {
+    if (Math.random() < P.num) return rn(Lv.dig);
+    if (up) { x = x[0].toUpperCase() + x.slice(1); up = false } else if (Math.random() < P.cap) x = x[0].toUpperCase() + x.slice(1);
+    if (Math.random() < P.sp) { const e = Math.random(); if (e < .5) x += ','; else if (e < .8) { x += '.'; if (pk) up = true } else if (e < .9) x += '?'; else x += '!' }
+    return x;
+  }).join(' ');
+};
+
+/* ---- typing engine (fixed stats, backspace, IME) ---- */
+function updLive(el) { const e = $('vf-live'); if (!e || !S.live) return; const m = Math.max(el, 1) / 60; e.innerHTML = `<span>WPM <b>${started ? Math.round(hits / 5 / m) : 0}</b></span><span>Acc <b>${keys ? Math.round((keys - errs) / keys * 100) : 100}%</b></span><span>Errors <b>${errs}</b></span>` }
+function updBanner() {
+  const b = $('vf-ban'), g = $('vf-guide');
+  if (curLesson) { b.className = 'ban card show'; b.innerHTML = `<b>${esc(curLesson.t)}</b><span>${curLesson.id === 'weak' ? 'Practise the keys you miss most.' : 'Goal: ' + curLesson.wpm + ' WPM at 92% accuracy'}</span><button class="theme" data-go="learn" type="button">Exit lesson</button>`; g.className = 'card show'; g.innerHTML = kbSVG(new Set((curLesson.keys || '').toLowerCase())); hl() }
+  else if (curDaily) { b.className = 'ban card show'; b.innerHTML = `<b>Daily challenge \u00b7 ${esc(curDaily)}</b><span>Same text for everyone. Only your first attempt of the day counts on the leaderboard.</span>`; g.className = 'card'; g.innerHTML = '' }
+  else { b.className = 'ban card'; b.innerHTML = ''; g.className = 'card'; g.innerHTML = '' }
+}
+window.setup = function () {
+  clearInterval(tick);
+  started = false; done = false; pos = 0; keys = 0; hits = 0; errs = 0; line0 = 0; samples = []; missed = {}; tot = {}; prevKeys = 0; composing = false; afterIME = false;
+  text = window.gen();
+  wordsEl.lang = (curLesson || curDaily) ? 'en' : lang; wordsEl.innerHTML = ''; wordsEl.style.transform = '';
+  spans = [...text].map(c => { const s = document.createElement('span'); s.textContent = c; wordsEl.appendChild(s); return s });
+  spans[0].className = 'cur';
+  $('time').textContent = fmt(lim()); $('pb').style.width = '100%';
+  stage.classList.remove('run'); $('result').classList.remove('show'); $('game').classList.remove('hide');
+  updBanner(); updLive(0); cap.value = '\u200b';
+  if (route === 'test' && !$('drawer').classList.contains('open')) cap.focus({ preventScroll: true });
+};
+window.begin = function () {
+  started = true; startT = Date.now(); stage.classList.add('run');
+  tick = setInterval(() => {
+    const el = (Date.now() - startT) / 1000, Lm = lim(), left = Math.max(0, Math.ceil(Lm - el));
+    $('time').textContent = fmt(left); $('pb').style.width = (Math.max(0, Lm - el) / Lm * 100) + '%';
+    const sec = Math.floor(el);
+    while (samples.length < sec && samples.length < Lm) { const i = samples.length + 1; samples.push({ n: Math.round(hits / 5 / (i / 60)), r: Math.round(keys / 5 / (i / 60)), i: (keys - prevKeys) * 12 }); prevKeys = keys }
+    updLive(el);
+    if (el >= Lm) window.finish();
+  }, 200);
+};
+function typeChar(ch) {
+  if (done || pos >= spans.length) return;
+  if (!started) window.begin();
+  keys++;
+  const exp = text[pos], ok = ch === exp;
+  tot[exp] = (tot[exp] || 0) + 1;
+  if (ok) hits++; else { errs++; missed[exp] = (missed[exp] || 0) + 1 }
+  spans[pos].className = ok ? 'ok' : 'no';
+  pos++;
+  if (spans[pos]) spans[pos].className = 'cur';
+  scroll(); hl();
+  if (pos >= spans.length) window.finish();
+}
+window.type = ch => { if (composing || afterIME) return; typeChar(ch) };
+window.back = function () {
+  if (done || composing || pos === 0) return;
+  if (spans[pos]) spans[pos].className = '';
+  pos--;
+  if (spans[pos].className === 'ok') hits--;
+  spans[pos].className = 'cur';
+  scroll(); hl();
+};
+document.addEventListener('input', e => { if (e.target === cap && e.isComposing) e.stopImmediatePropagation() }, true);
+cap.addEventListener('compositionstart', () => { composing = true });
+cap.addEventListener('compositionend', e => { composing = false; afterIME = true; if (!done) for (const c of (e.data || '')) typeChar(c); cap.value = '\u200b'; setTimeout(() => { afterIME = false }, 40) });
+
+window.finish = function () {
+  if (done) return; done = true; clearInterval(tick);
+  const Lm = lim(), el = Math.max(1, Math.min((Date.now() - startT) / 1000, Lm));
+  const st = calcStats(keys, errs, hits, el), unc = spans.filter(s => s.className === 'no').length;
+  const cons = consistency(samples.map(s => s.i));
+  last = { w: st.net, a: st.acc };
+  const k = curLesson ? 'lesson' : curDaily ? 'daily' : kind;
+  const rec = { t: Date.now(), w: st.net, a: st.acc, d: Math.min(dur > 0 && !curLesson ? dur : 600, Math.max(1, Math.round(el))), k, l: level, g: lang, r: st.raw, e: errs };
+  const today = dayStr(Date.now()), before = jget(KEY.badges, []);
+  saveH(loadH().concat(rec));
+  const ks = jget(KEY.keys, {}); for (const c in tot) { const v = ks[c] || [0, 0]; ks[c] = [v[0] + tot[c], v[1] + (missed[c] || 0)] } jset(KEY.keys, ks);
+  let les = null;
+  if (curLesson && curLesson.id !== 'weak') {
+    const lp = jget(KEY.learn, {}), p = lp[curLesson.id] || { tries: 0, w: 0, a: 0 }, ok = st.acc >= 92 && st.net >= curLesson.wpm;
+    lp[curLesson.id] = { tries: p.tries + 1, w: Math.max(p.w, st.net), a: Math.max(p.a, st.acc), done: !!p.done || ok }; jset(KEY.learn, lp);
+    const idx = LESSONS.findIndex(l => l.id === curLesson.id); les = { ok, next: LESSONS[idx + 1] };
+  }
+  const after = achDone(loadH(), jget(KEY.learn, {}), today), nb = after.filter(x => !before.includes(x)); jset(KEY.badges, after);
+  $('dl').textContent = 'Download certificate';
+  $('rWpm').textContent = st.net; $('rAcc').textContent = st.acc + '%'; $('rChars').textContent = hits; $('rErr').textContent = errs; $('rTime').textContent = Math.round(el) + 's';
+  const miss = Object.entries(missed).sort((a, b) => b[1] - a[1]).slice(0, 6), tm = mins(loadH().filter(x => dayStr(x.t) === today)), goal = Math.max(1, S.goal || 5);
+  $('rx').innerHTML = `<div class="stats"><div>Raw WPM<strong>${st.raw}</strong></div><div>CPM<strong>${st.cpm}</strong></div><div>Errors<strong>${errs}<small> (${unc} left)</small></strong></div><div>Consistency<strong>${cons}%</strong></div></div>`
+    + (samples.length > 1 ? `<div class="chart"><h4 class="ct">Speed over time (WPM)</h4>${lines([{ v: samples.map(s => s.n), c: '#7c4dff', l: 'Net WPM' }, { v: samples.map(s => s.r), c: '#94a3b8', l: 'Raw WPM' }])}</div>` : '')
+    + (miss.length ? `<div class="chart"><h4 class="ct">Most missed characters</h4>${miss.map(([c, n]) => `<span class="chip">${esc(c === ' ' ? 'space' : c)} \u00d7${n}</span>`).join('')}</div>` : '')
+    + (les ? `<div class="card ${les.ok ? 'pass' : ''}"><b>${les.ok ? 'Lesson complete!' : 'Not quite yet'}</b><p class="foot" style="text-align:left;margin:4px 0 8px">${les.ok ? 'You reached the goal.' : 'Aim for ' + curLesson.wpm + ' WPM at 92% accuracy. Slow down and try again.'}</p>${les.ok && les.next ? `<button class="dl" data-act="lesson:${les.next.id}" type="button">Next: ${esc(les.next.t)}</button>` : ''}</div>` : '')
+    + (nb.length ? `<div class="card pass"><b>New badge${nb.length > 1 ? 's' : ''} unlocked</b><div class="bdgs">${nb.map(id => { const a = ACH.find(x => x[0] === id); return `<span class="chip ok">${a[1]} ${esc(a[2])}</span>` }).join('')}</div></div>` : '')
+    + `<p class="foot">Today: ${Math.round(tm * 10) / 10} of ${goal} minutes${tm >= goal ? ' \u2014 goal reached!' : ''}</p><p class="foot" id="rx-lb"></p>`;
+  $('game').classList.add('hide'); $('result').classList.add('show'); cap.blur();
+  if (window.vfSaveCloudHistory) window.vfSaveCloudHistory(rec).catch(e => { console.error(e); toast('Saved on this device. Cloud sync will retry when you are online and signed in.', 'warn') });
+  if (window.vfSyncPublic) window.vfSyncPublic();
+  if (window.vfSubmitScore) window.vfSubmitScore(rec, !!curDaily).then(r => { const e = $('rx-lb'); if (e && r === 'daily') e.textContent = 'Your daily challenge score was submitted.'; else if (e && r === 'best') e.textContent = 'New all-time best sent to the leaderboard.' }).catch(e => { console.error(e); const x = $('rx-lb'); if (x && curDaily) x.textContent = 'Daily score not submitted (only your first attempt counts, and you must be signed in).' });
+};
+
+/* ---- router ---- */
+const MAP = { game: 'test', hp: 'history', vp: 'verify', pp: 'profile', up: 'user' };
+const ROUTES = ['home', 'test', 'learn', 'dashboard', 'history', 'leaderboard', 'profile', 'settings', 'verify', 'user'];
+const NAV = [['home', 'Home'], ['test', 'Typing Test'], ['learn', 'Learn'], ['dashboard', 'Dashboard'], ['history', 'History'], ['leaderboard', 'Leaderboard'], ['profile', 'Profile'], ['settings', 'Settings']];
+function go(r, o) {
+  o = o || {}; if (!ROUTES.includes(r)) r = 'home';
+  const prev = route;
+  if (prev === 'test' && r !== 'test') { clearInterval(tick); done = true; cap.blur(); curLesson = null; curDaily = null; syncSel() }
+  route = r; document.body.dataset.r = r; VIEW = r !== 'test';
+  document.querySelectorAll('#vfnav button').forEach(b => b.setAttribute('aria-current', b.dataset.go === r ? 'page' : 'false'));
+  closeMenu();
+  if (r === 'test' && (prev !== 'test' || o.fresh)) window.setup();
+  const R = { home: renderHome, learn: renderLearn, dashboard: renderDash, history: window.renderH, leaderboard: renderLB, settings: renderSet }[r]; if (R) R();
+  if (o.push !== false) { try { history.pushState(null, '', location.pathname + (r === 'user' ? location.search : '') + '#/' + r) } catch (e) { } }
+  const nm = (NAV.find(n => n[0] === r) || [0, 'Profile'])[1]; document.title = nm + ' \u00b7 Violet Fast';
+  if (o.scroll !== false) window.scrollTo(0, 0);
+}
+window.showPanel = n => go(MAP[n] || n);
+const fromHash = () => { const r = location.hash.replace(/^#\/?/, ''); return (ROUTES.includes(r) && r !== 'profile' && r !== 'user') ? r : 'home' };
+window.addEventListener('popstate', () => go(fromHash(), { push: false }));
+const restart = () => route === 'test' ? window.setup() : go('test', { fresh: true });
+function syncSel() { $('selLang').value = lang; $('selKind').value = kind; $('selLevel').value = level; $('selTime').value = String(dur); $('cbox').classList.toggle('hide', kind !== 'custom'); $('lnote').textContent = NOTE[lang] || '' }
+function startLesson(id) {
+  const l = LESSONS.find(x => x.id === id); if (!l) return;
+  curDaily = null; curLesson = { ...l, text: lessonText(l) }; go('test', { fresh: true });
+}
+function startDaily() { curLesson = null; curDaily = utcDay(); kind = 'words'; level = 'normal'; lang = 'en'; dur = 60; syncSel(); go('test', { fresh: true }) }
+function startWeak() { const wk = weakKeys(jget(KEY.keys, {})); if (!wk.length) { toast('Take a few more tests first so we can find your weak keys.'); return } curDaily = null; curLesson = { id: 'weak', t: 'Weak-key practice', keys: wk.map(x => x[0]).join(''), wpm: 0, text: weakText(wk.map(x => x[0])) }; go('test', { fresh: true }) }
+document.addEventListener('click', e => {
+  const a = e.target.closest('[data-act]');
+  if (a) { const v = a.dataset.act; if (v === 'daily') startDaily(); else if (v === 'weak') startWeak(); else if (v.startsWith('lesson:')) startLesson(v.slice(7)); return }
+  const b = e.target.closest('[data-go]'); if (!b) return;
+  const r = b.dataset.go;
+  if (r === 'profile') { if ($('avw').classList.contains('hide')) $('abtn').click(); else $('avbtn').click(); return }
+  if (r === 'test' && route === 'test' && $('result').classList.contains('show')) { window.setup(); return }
+  go(r);
+});
+document.addEventListener('keydown', e => {
+  if (e.altKey && /^[1-8]$/.test(e.key)) { e.preventDefault(); const b = document.querySelector(`#vfnav button[data-go="${NAV[+e.key - 1][0]}"]`); if (b) b.click() }
+});
+window.addEventListener('keydown', e => { if (e.key === 'Escape' && $('drawer').classList.contains('open')) closeMenu() });
+
+/* ---- sections ---- */
+function mk(id, route, cls) { const s = document.createElement('section'); s.id = id; s.dataset.route = route; s.className = cls || 'panel'; main.appendChild(s); return s }
+const tip = () => TIPS[hashStr(dayStr(Date.now())) % TIPS.length];
+function renderHome() {
+  const all = loadH(), today = dayStr(Date.now()), st = calcStreaks(all, today), goal = Math.max(1, S.goal || 5), tm = mins(all.filter(x => dayStr(x.t) === today));
+  const best = all.reduce((m, x) => Math.max(m, x.w), 0), r10 = all.slice(-10), avg = r10.length ? Math.round(r10.reduce((a, x) => a + x.w, 0) / r10.length) : 0;
+  const lp = jget(KEY.learn, {}), next = LESSONS.find(l => !(lp[l.id] && lp[l.id].done));
+  $('vf-home').innerHTML = `<div class="card hero"><h1>Type faster. <span>Every day.</span></h1><p>Practice tests, structured lessons, daily goals and certificates in English, Hindi, Punjabi, Spanish, French and German.</p><div class="btnrow"><button class="again" data-go="test" type="button">Start a typing test</button><button class="dl" data-act="daily" type="button">Daily challenge</button>${next ? `<button class="theme" data-act="lesson:${next.id}" type="button">Continue: ${esc(next.t)}</button>` : ''}</div></div>
+  <div class="grid"><div class="card kpi"><span class="lab">Today's goal</span>${ring(tm / goal, Math.min(100, Math.round(tm / goal * 100)) + '%', (Math.round(tm * 10) / 10) + ' / ' + goal + ' min')}</div>
+  <div class="card kpi"><span class="lab">Practice streak</span><b>\u{1F525} ${st.cur} day${st.cur === 1 ? '' : 's'}</b><span class="foot lf">Best streak: ${st.best}</span></div>
+  <div class="card kpi"><span class="lab">Best speed</span><b>${best} WPM</b><span class="foot lf">Last 10 tests average: ${avg} WPM</span></div>
+  <div class="card kpi"><span class="lab">Tests taken</span><b>${all.length}</b><span class="foot lf">${Math.round(mins(all))} minutes practised</span></div></div>
+  <div class="card"><span class="lab">Tip of the day</span><p style="margin:6px 0 0;font-weight:600">${esc(tip())}</p></div>`;
+}
+function renderLearn() {
+  const lp = jget(KEY.learn, {}), n = LESSONS.filter(l => lp[l.id] && lp[l.id].done).length;
+  $('vf-learn').innerHTML = `<div class="bar"><h2 class="ph">Learn to type</h2><span class="tag">${n} / ${LESSONS.length} complete</span></div>
+  <div class="card"><span class="lab">Finger placement guide</span>${kbSVG(null)}<p class="foot lf">Rest your fingers on A S D F and J K L ;, thumbs on the space bar. Each colour shows which finger types that key. Keep your wrists relaxed and look at the screen, not the keys.</p></div>
+  <div class="card"><span class="lab">Lessons</span><div class="lessons">${LESSONS.map((l, i) => { const p = lp[l.id]; return `<div class="les"><div><b>${i + 1}. ${esc(l.t)}</b><div class="foot lf">${esc(l.desc)} Goal: ${l.wpm} WPM at 92% accuracy.</div>${p ? `<div class="foot lf">Best: ${p.w} WPM, ${p.a}% \u00b7 ${p.tries} ${p.tries === 1 ? 'try' : 'tries'}</div>` : ''}</div><div class="row">${p && p.done ? '<span class="tag ok">Done</span>' : ''}<button class="dl" data-act="lesson:${l.id}" type="button">${p ? 'Practise' : 'Start'}</button></div></div>` }).join('')}</div></div>`;
+}
+function advice(all, wk) {
+  if (!all.length) return ['Take your first test to unlock personalised tips.'];
+  const r = all.slice(-10), aw = r.reduce((a, x) => a + x.w, 0) / r.length, aa = r.reduce((a, x) => a + x.a, 0) / r.length, o = [];
+  if (aa < 92) o.push('Your recent accuracy is ' + Math.round(aa) + '%. Slow down a little: accuracy first, speed follows.');
+  else if (aw < 35) o.push('Your accuracy is solid. Build speed with a 60-second Normal test every day.');
+  else if (aw < 60) o.push('Good speed. Try the Hard level or Punctuation mode to build flexibility.');
+  else o.push('Excellent speed. Try the Advanced level, Symbols mode or the daily challenge.');
+  if (wk.length) o.push('Keys to practise: ' + wk.map(x => x[0].toUpperCase()).join(', ') + '.');
+  if (!Object.values(jget(KEY.learn, {})).some(v => v && v.done)) o.push('Start the structured lessons to build good habits.');
+  return o;
+}
+function renderDash() {
+  const all = loadH(), today = dayStr(Date.now()), st = calcStreaks(all, today), goal = Math.max(1, S.goal || 5), learn = jget(KEY.learn, {});
+  const tm = mins(all.filter(x => dayStr(x.t) === today)), days = [], vals = [];
+  for (let i = 6; i >= 0; i--) { const d = new Date(); d.setDate(d.getDate() - i); const s = dayStr(d.getTime()); days.push(['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'][d.getDay()]); vals.push(mins(all.filter(x => dayStr(x.t) === s))) }
+  const rc = all.slice(-30), done = new Set(achDone(all, learn, today)), wk = weakKeys(jget(KEY.keys, {}));
+  $('vf-dash').innerHTML = `<h2 class="ph">Dashboard</h2>
+  <div class="grid"><div class="card kpi"><span class="lab">Daily goal</span>${ring(tm / goal, Math.min(100, Math.round(tm / goal * 100)) + '%', (Math.round(tm * 10) / 10) + ' / ' + goal + ' min')}</div>
+  <div class="card kpi"><span class="lab">Streak</span><b>\u{1F525} ${st.cur}</b><span class="foot lf">Best: ${st.best} days</span></div>
+  <div class="card kpi"><span class="lab">Time practised</span><b>${Math.round(mins(all))} min</b><span class="foot lf">${all.length} tests</span></div>
+  <div class="card kpi"><span class="lab">Lessons</span><b>${LESSONS.filter(l => learn[l.id] && learn[l.id].done).length} / ${LESSONS.length}</b><span class="foot lf">completed</span></div></div>
+  <div class="charts"><div class="chart"><h4 class="ct">Minutes practised this week</h4>${bars(vals, days, 'min')}</div>${rc.length > 1 ? `<div class="chart"><h4 class="ct">Progress: speed and accuracy (last 30 tests)</h4>${lines([{ v: rc.map(x => x.w), c: '#7c4dff', l: 'WPM' }, { v: rc.map(x => x.a), c: '#1f9d55', l: 'Accuracy %' }])}</div>` : '<div class="chart"><h4 class="ct">Progress</h4><p class="foot">Finish at least 2 tests to see your progress.</p></div>'}</div>
+  <div class="card"><span class="lab">Personalised training</span><ul class="sk">${advice(all, wk).map(t => `<li>${esc(t)}</li>`).join('')}</ul>${wk.length ? `<div style="margin:8px 0">${wk.map(x => `<span class="chip">${esc(x[0].toUpperCase())} ${Math.round(x[1] * 100)}% errors</span>`).join('')}</div>` : ''}<div class="row"><button class="dl" data-act="weak" type="button">Practise my weak keys</button><button class="theme" data-go="learn" type="button">Open lessons</button></div></div>
+  <div class="card"><span class="lab">Achievements \u00b7 ${done.size} / ${ACH.length}</span><div class="bgrid">${ACH.map(a => `<div class="bd ${done.has(a[0]) ? '' : 'off'}" title="${esc(a[3])}"><i>${a[1]}</i><div><b>${esc(a[2])}</b><div class="foot lf">${esc(a[3])}</div></div></div>`).join('')}</div></div>`;
+}
+let lbTab = 'daily';
+async function renderLB() {
+  const el = $('vf-lb');
+  el.innerHTML = `<div class="bar"><h2 class="ph">Leaderboard</h2><div class="row"><button class="theme" data-lb="daily" aria-pressed="${lbTab === 'daily'}" type="button">Daily challenge</button><button class="theme" data-lb="best" aria-pressed="${lbTab === 'best'}" type="button">All-time best</button></div></div>
+  <div class="card"><p class="foot lf" style="margin:0 0 10px">${lbTab === 'daily' ? 'Today\u2019s challenge (' + utcDay() + ' UTC). Everyone types the same text. Only your first signed-in attempt counts.' : 'Best net speed from tests of 30 seconds or longer with at least 90% accuracy.'}</p>${lbTab === 'daily' ? '<button class="again" data-act="daily" type="button">Play today\u2019s challenge</button>' : ''}<div id="lbbody" style="margin-top:12px"><p class="foot">Loading\u2026</p></div></div>
+  <p class="foot lf">Only your username, picture and score are shown. Scores are checked for plausible values, but online rankings are for fun and are not a verified competition.</p>`;
+  const body = $('lbbody');
+  if (!window.vfLoadLB) { body.innerHTML = '<p class="foot">The leaderboard is not available right now.</p>'; return }
+  try {
+    const rows = await window.vfLoadLB(lbTab); if (lbTab !== (el.querySelector('[aria-pressed="true"]') || {}).dataset?.lb) return;
+    if (!rows.length) { body.innerHTML = '<p class="foot">No scores yet. Be the first!</p>'; return }
+    const t = document.createElement('table'); t.innerHTML = '<tr><th>#</th><th>Player</th><th>WPM</th><th>Accuracy</th></tr>';
+    rows.forEach((r, i) => { const tr = document.createElement('tr'), c = n => { const d = document.createElement('td'); tr.appendChild(d); return d }; c().textContent = i + 1; const p = c(); const av = document.createElement('span'); av.className = 'av sm'; paintAv(av, r.avatar); p.appendChild(av); p.appendChild(document.createTextNode(' @' + String(r.username || '').slice(0, 20))); c().textContent = Number(lbTab === 'daily' ? r.w : r.best) || 0; c().textContent = (Number(r.a) || 0) + '%'; t.appendChild(tr) });
+    const w = document.createElement('div'); w.className = 'tw'; w.appendChild(t); body.innerHTML = ''; body.appendChild(w);
+  } catch (e) { console.error(e); body.innerHTML = '<p class="foot" style="color:var(--bad)">Could not load the leaderboard (' + esc((e && e.code) || 'error') + '). Check your connection and Firestore rules.</p>' }
+}
+function applySettings() {
+  const r = document.documentElement;
+  if (S.theme === 'system') delete r.dataset.theme; else r.dataset.theme = S.theme;
+  r.style.setProperty('--tf', FONTS[S.font] || FONTS.mono); r.style.setProperty('--ts', S.size);
+  r.classList.toggle('rm', !!S.rm); r.classList.toggle('hc', !!S.hc);
+  stage.classList.remove('cb', 'cu'); if (S.cursor === 'block') stage.classList.add('cb'); if (S.cursor === 'under') stage.classList.add('cu');
+  const lv = $('vf-live'); if (lv) lv.classList.toggle('hide', !S.live);
+}
+function renderSet() {
+  const sel = (id, o, v) => `<select id="${id}">${o.map(([k, l]) => `<option value="${k}" ${String(k) === String(v) ? 'selected' : ''}>${l}</option>`).join('')}</select>`;
+  const chk = (id, v) => `<input type="checkbox" id="${id}" ${v ? 'checked' : ''}>`;
+  $('vf-set').innerHTML = `<h2 class="ph">Settings</h2><div class="card">
+  <div class="srow"><label for="s-theme">Theme</label>${sel('s-theme', [['system', 'System'], ['light', 'Light'], ['dark', 'Dark']], S.theme)}</div>
+  <div class="srow"><label for="s-font">Typing font</label>${sel('s-font', [['mono', 'Monospace'], ['sans', 'Sans serif'], ['serif', 'Serif'], ['system', 'System']], S.font)}</div>
+  <div class="srow"><label for="s-size">Text size</label><input type="range" id="s-size" min="0.8" max="1.6" step="0.1" value="${S.size}"></div>
+  <div class="srow"><label for="s-cur">Cursor style</label>${sel('s-cur', [['line', 'Line'], ['block', 'Block'], ['under', 'Underline']], S.cursor)}</div>
+  <div class="srow"><label for="s-live">Show live WPM, accuracy and errors while typing</label>${chk('s-live', S.live)}</div>
+  <div class="srow"><label for="s-goal">Daily goal (minutes)</label><input class="pin" type="number" id="s-goal" min="1" max="240" value="${S.goal}" style="width:100px"></div>
+  <div class="srow"><label for="s-rm">Reduce motion</label>${chk('s-rm', S.rm)}</div>
+  <div class="srow"><label for="s-hc">High contrast</label>${chk('s-hc', S.hc)}</div></div>
+  <div class="card"><span class="lab">Keyboard shortcuts</span><ul class="sk"><li><kbd>Tab</kbd> Restart the test</li><li><kbd>Esc</kbd> Close the menu</li><li><kbd>Ctrl</kbd> + <kbd>Backspace</kbd> Delete the last word</li><li><kbd>Alt</kbd> + <kbd>1</kbd> to <kbd>8</kbd> Go to a section</li></ul></div>
+  <div class="card"><span class="lab">Data and tools</span><p class="foot lf">${navigator.onLine ? 'You are online.' : 'You are offline. Practice still works and results sync later.'} Results are saved on this device and, when you are signed in, in your account.</p><div class="row"><button class="theme" id="s-exp" type="button">Download my data (JSON)</button><button class="theme" data-go="verify" type="button">Verify a certificate</button></div></div>`;
+}
+function onSet(e) {
+  const t = e.target; if (!t.id || !t.id.startsWith('s-')) return;
+  const m = { 's-theme': () => S.theme = t.value, 's-font': () => S.font = t.value, 's-size': () => S.size = +t.value, 's-cur': () => S.cursor = t.value, 's-live': () => S.live = t.checked, 's-goal': () => S.goal = Math.min(240, Math.max(1, +t.value || 5)), 's-rm': () => S.rm = t.checked, 's-hc': () => S.hc = t.checked };
+  if (m[t.id]) { m[t.id](); jset(KEY.set, S); applySettings() }
+}
+function mountHistory() {
+  const hp = $('hp'), tw = hp.querySelector('.tw'), d = document.createElement('div'); d.className = 'hf';
+  d.innerHTML = `<input id="hq" class="pin" type="search" placeholder="Search tests" aria-label="Search tests"><select id="hm" aria-label="Mode"><option value="">All modes</option>${['words', 'sentences', 'punctuation', 'numbers', 'symbols', 'custom', 'lesson', 'daily'].map(m => `<option value="${m}">${m}</option>`).join('')}</select><select id="hl" aria-label="Level"><option value="">All levels</option><option value="easy">Easy</option><option value="normal">Normal</option><option value="hard">Hard</option><option value="adv">Advanced</option></select><select id="hg" aria-label="Language"><option value="">All languages</option>${Object.entries(LN).map(([k, v]) => `<option value="${k}">${v}</option>`).join('')}</select><select id="hr" aria-label="Time range"><option value="">All time</option><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="90">Last 90 days</option></select><button class="theme" id="hcsv" type="button">Export CSV</button><button class="theme" id="hjson" type="button">Export JSON</button>`;
+  hp.insertBefore(d, tw);
+  d.addEventListener('input', () => window.renderH()); d.addEventListener('change', () => window.renderH());
+  const cur = () => filterH(loadH(), { q: $('hq').value, mode: $('hm').value, level: $('hl').value, lang: $('hg').value, range: +$('hr').value || 0 });
+  $('hcsv').onclick = () => dlText('violet-fast-history.csv', toCSV(cur()), 'text/csv');
+  $('hjson').onclick = () => dlText('violet-fast-history.json', JSON.stringify(cur(), null, 2), 'application/json');
+  window.renderH = function () {
+    const all = loadH().map((x, i) => ({ ...x, i })), rows = filterH(all, { q: $('hq').value, mode: $('hm').value, level: $('hl').value, lang: $('hg').value, range: +$('hr').value || 0 }), n = rows.length, a = rows.slice().reverse(), w = rows.map(x => x.w);
+    const best = n ? Math.max(...w) : 0, low = n ? Math.min(...w) : 0, avg = n ? Math.round(w.reduce((t, x) => t + x, 0) / n) : 0, acc = n ? Math.round(rows.reduce((t, x) => t + x.a, 0) / n) : 0;
+    $('hs').innerHTML = `<div>Tests<strong>${n}</strong></div><div>Peak speed<strong>${best}</strong></div><div>Average speed<strong>${avg}</strong></div><div>Lowest speed<strong>${low}</strong></div><div>Avg accuracy<strong>${acc}%</strong></div>`;
+    const rc = rows.slice(-40); $('hc').innerHTML = n ? chartSVG(rc.map(x => x.w), 'Speed (WPM)', avg) + chartSVG(rc.map(x => x.a), 'Accuracy (%)', acc, 100) : '';
+    $('ht').innerHTML = '<tr><th>Date</th><th>Mode</th><th>Level</th><th>Language</th><th>Time</th><th>WPM</th><th>Raw</th><th>Accuracy</th><th>Errors</th><th>Certificate</th></tr>' + (a.map(x => `<tr><td>${new Date(x.t).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}</td><td>${esc(x.k)}</td><td>${esc(LB[x.l] || 'normal')}</td><td>${esc(LN[x.g || 'en'] || '')}</td><td>${x.d}s</td><td>${x.w}</td><td>${x.r == null ? '-' : x.r}</td><td>${x.a}%</td><td>${x.e == null ? '-' : x.e}</td><td><button class="theme cdl" data-i="${x.i}" type="button">Download</button></td></tr>`).join('') || '<tr><td colspan="10">No tests match. Finish a test or clear the filters.</td></tr>');
+  };
+}
+
+/* ---- init ---- */
+function init() {
+  main.id = 'main';
+  const skip = document.createElement('a'); skip.className = 'skip'; skip.href = '#main'; skip.textContent = 'Skip to content'; document.body.prepend(skip);
+  const nav = document.createElement('nav'); nav.id = 'vfnav'; nav.className = 'vfnav'; nav.setAttribute('aria-label', 'Main');
+  nav.innerHTML = NAV.map(([r, l], i) => `<button type="button" data-go="${r}" title="Alt+${i + 1}">${l}</button>`).join('');
+  document.querySelector('header').after(nav);
+  [['game', 'test'], ['result', 'test'], ['hp', 'history'], ['vp', 'verify'], ['pp', 'profile'], ['up', 'user']].forEach(([i, r]) => { $(i).dataset.route = r });
+  mk('vf-home', 'home'); mk('vf-learn', 'learn'); mk('vf-dash', 'dashboard'); mk('vf-lb', 'leaderboard'); mk('vf-set', 'settings');
+  $('vf-set').addEventListener('change', onSet); $('vf-set').addEventListener('input', onSet);
+  $('vf-set').addEventListener('click', e => { if (e.target.id === 's-exp') dlText('violet-fast-data.json', JSON.stringify({ exported: new Date().toISOString(), history: loadH(), settings: S, lessons: jget(KEY.learn, {}), keyStats: jget(KEY.keys, {}) }, null, 2), 'application/json') });
+  $('vf-lb').addEventListener('click', e => { const b = e.target.closest('[data-lb]'); if (b) { lbTab = b.dataset.lb; renderLB() } });
+  const game = $('game'), ban = document.createElement('div'), gd = document.createElement('div'); ban.id = 'vf-ban'; ban.className = 'ban card'; gd.id = 'vf-guide'; gd.className = 'card';
+  game.insertBefore(gd, $('stage')); game.insertBefore(ban, gd);
+  const lv = document.createElement('div'); lv.id = 'vf-live'; lv.className = 'livebar hide'; $('rst').before(lv);
+  const rx = document.createElement('div'); rx.id = 'rx'; rx.className = 'rx'; $('result').insertBefore(rx, $('result').querySelector('.cert'));
+  mountHistory();
+  const st = $('selTime'); [[180, '3 minutes'], [300, '5 minutes']].forEach(([v, l]) => { const o = document.createElement('option'); o.value = v; o.textContent = l; st.appendChild(o) });
+  $('selLevel').innerHTML = '<option value="easy">Easy</option><option value="normal">Normal</option><option value="hard">Hard</option><option value="adv">Advanced</option>';
+  const sk = $('selKind'); if (![...sk.options].some(o => o.value === 'symbols')) { const o = document.createElement('option'); o.value = 'symbols'; o.textContent = 'Symbols'; sk.insertBefore(o, sk.querySelector('option[value="custom"]')) }
+  $('selLevel').value = level; syncSel();
+  $('selKind').onchange = e => { kind = e.target.value; curLesson = curDaily = null; syncSel(); restart() };
+  $('selLevel').onchange = e => { level = e.target.value; curLesson = curDaily = null; restart() };
+  $('selTime').onchange = e => { dur = +e.target.value; curLesson = curDaily = null; restart() };
+  $('selLang').onchange = e => { lang = e.target.value; curLesson = curDaily = null; syncSel(); restart() };
+  $('cuse').onclick = () => { try { localStorage.setItem('vf-custom', $('ct').value) } catch (_) { } kind = 'custom'; curLesson = curDaily = null; syncSel(); closeMenu(); restart() };
+  ['again', 'hback', 'vback', 'pback'].forEach(id => { $(id).removeEventListener('click', origSetup); $(id).addEventListener('click', restart) });
+  $('rst').onclick = restart; $('uback').addEventListener('click', () => go('test', { fresh: true }));
+  $('theme').addEventListener('click', () => { S.theme = document.documentElement.dataset.theme || 'system'; jset(KEY.set, S) });
+  $('mbtn').addEventListener('click', () => { if ($('drawer').classList.contains('open') && route !== 'test') { /* settings stay available from any section */ } });
+  if (jget(KEY.badges, null) === null) jset(KEY.badges, achDone(loadH(), jget(KEY.learn, {}), dayStr(Date.now())));
+  applySettings();
+  go(fromHash(), { push: false, scroll: false });
+  if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => { }));
+}
+window.vfApp = { go, startLesson, startDaily, get route() { return route }, get lesson() { return curLesson }, get daily() { return curDaily } };
+init();
+
+})();
+</script>
   <dialog id="authDlg">
     <div class="ah">
       <h2 class="ph">Welcome to Violet Fast</h2><button class="theme" id="aclose" type="button">Close</button>
@@ -1593,6 +1963,11 @@
     import { getAuth, onAuthStateChanged, signOut, GoogleAuthProvider, FacebookAuthProvider, signInWithPopup, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, RecaptchaVerifier, signInWithPhoneNumber } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
     import {
       getFirestore,
+      initializeFirestore,
+      persistentLocalCache,
+      persistentMultipleTabManager,
+      limit,
+      serverTimestamp,
       collection,
       addDoc,
       getDocs,
@@ -1601,24 +1976,49 @@
       deleteDoc,
       doc,
       getDoc,
-      setDoc,
-      limit
+      setDoc
     } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
     // 1) Paste your own Firebase project settings here (Firebase console > Project settings > Your apps > Web app)
     const firebaseConfig = { apiKey: "AIzaSyCRxd6n5UHnCLEP123OnPdvrlOOUCr4m-A", authDomain: "violet-fast.firebaseapp.com", projectId: "violet-fast", appId: "1:588734930789:web:022934fa0446e7617f8b8c" };
 
     const auth = getAuth(initializeApp(firebaseConfig));
-    const db = getFirestore(auth.app);
+    let db;
+    try { db = initializeFirestore(auth.app, { localCache: persistentLocalCache({ tabManager: persistentMultipleTabManager() }) }) } catch (e) { db = getFirestore(auth.app) }
 
+    const cleanRec = r => { const o = { t: Math.round(+r.t), w: +r.w, a: +r.a, d: +r.d, k: String(r.k).slice(0, 20), l: String(r.l).slice(0, 10) }; if (r.g) o.g = String(r.g).slice(0, 5); if (r.r != null) o.r = +r.r; if (r.e != null) o.e = +r.e; return o };
     window.vfSaveCloudHistory = async (record) => {
       const user = auth.currentUser;
       if (!user) return;
-
-      await addDoc(
-        collection(db, 'users', user.uid, 'history'),
-        record
-      );
+      await addDoc(collection(db, 'users', user.uid, 'history'), cleanRec(record));
+    };
+    const hkey = r => [r.t, r.w, r.a, r.d, r.k, r.l].join('|');
+    async function uploadMissing(u, merged, cloud) {
+      const have = new Set(cloud.map(hkey)); let ok = true;
+      for (const r of merged.slice(-200)) {
+        if (have.has(hkey(r))) continue;
+        try { await addDoc(collection(db, 'users', u.uid, 'history'), cleanRec(r)) } catch (e) { console.error('History upload failed:', e); ok = false; break }
+      }
+      if (ok) { try { localStorage.removeItem('vf-hist') } catch (e) { } }
+    }
+    const dayKey = () => new Date().toISOString().slice(0, 10);
+    window.vfSubmitScore = async (rec, daily) => {
+      const u = auth.currentUser;
+      if (!u || !PROF || !PROF.userId || PROF.showStats === false) return 'skip';
+      if (!(rec.a >= 90) || !(rec.w >= 1) || rec.w > 250) return 'skip';
+      const base = { owner: u.uid, username: PROF.userId, avatar: String(PROF.avatar || 'p9').slice(0, 30000) };
+      if (daily) { await setDoc(doc(db, 'daily', dayKey(), 'scores', u.uid), { ...base, w: rec.w, a: rec.a, updated: serverTimestamp() }); return 'daily' }
+      if (rec.d < 30 || ['custom', 'lesson'].includes(rec.k) || rec.l === 'easy') return 'skip';
+      const ref = doc(db, 'leaderboard', u.uid), sn = await getDoc(ref);
+      if (sn.exists() && sn.data().best >= rec.w) return 'nohigh';
+      await setDoc(ref, { ...base, best: rec.w, a: rec.a, d: rec.d, updated: serverTimestamp() });
+      return 'best';
+    };
+    window.vfLoadLB = async (type) => {
+      const q = type === 'daily'
+        ? query(collection(db, 'daily', dayKey(), 'scores'), orderBy('w', 'desc'), limit(20))
+        : query(collection(db, 'leaderboard'), orderBy('best', 'desc'), limit(20));
+      return (await getDocs(q)).docs.map(d => d.data());
     };
 
     window.vfClearCloudHistory = async () => {
@@ -1636,15 +2036,6 @@
       );
     };
 
-    window.vfLoadBoard = async () => {
-      const t = $('lbt'); t.innerHTML = '<tr><td>Loading…</td></tr>';
-      try {
-        const sn = await getDocs(query(collection(db, 'publicProfiles'), orderBy('best', 'desc'), limit(25)));
-        const rows = sn.docs.filter(d => d.data().show !== false && d.data().best > 0);
-        t.innerHTML = '<tr><th>#</th><th>User</th><th>Best WPM</th><th>Avg</th><th>Tests</th></tr>' + (rows.map((d, i) => { const x = d.data(); return `<tr><td>${i + 1}</td><td><a href="?u=${encodeURIComponent(d.id)}">${esc(d.id)}</a></td><td>${Number(x.best) || 0}</td><td>${Number(x.avg) || 0}</td><td>${Number(x.tests) || 0}</td></tr>` }).join('') || '<tr><td colspan="5">No public scores yet.</td></tr>');
-      } catch (e) { console.error(e); t.innerHTML = '<tr><td>Could not load the leaderboard. ' + esc(cloudMsg0(e)) + '</td></tr>' }
-    };
-    $('lbr').onclick = window.vfLoadBoard;
     const dlg = $('authDlg'), msg = $('amsg');
     let mode = 'in', conf = null, rv = null;
     const say = (t, bad = true) => { msg.textContent = t; msg.style.color = bad ? 'var(--bad)' : '#1f9d55' };
@@ -1717,7 +2108,7 @@
       await setDoc(doc(db, 'publicProfiles', p.userId), { owner: u.uid, avatar: p.avatar || 'p9', show, best: show ? best : 0, avg: show ? avg : 0, tests: show ? a.length : 0, updated: Date.now() });
     }
     window.vfSyncPublic = () => syncPublic().catch(e => console.error('Public profile sync failed:', e));
-    const PF = [['name', 'pn'], ['gender', 'pg'], ['age', 'pa'], ['city', 'pc'], ['country', 'pco'], ['job', 'po'], ['kbType', 'pk'], ['kbLayout', 'pl'], ['hand', 'ph'], ['method', 'pm'], ['skill', 'ps'], ['target', 'pt'], ['daily', 'pd'], ['bio', 'pb']];
+    const PF = [['name', 'pn'], ['gender', 'pg'], ['age', 'pa'], ['city', 'pc'], ['country', 'pco'], ['job', 'po'], ['kbType', 'pk'], ['kbLayout', 'pl'], ['hand', 'ph'], ['method', 'pm'], ['skill', 'ps'], ['target', 'pt'], ['daily', 'pd'], ['bio', 'pbio']];
     const cloudMsg0 = e => (e && e.code === 'permission-denied') ? 'Firestore blocked this. In Firebase open Firestore Database > Rules, paste the new rules, press Publish, then reload this page.' : (e && (e.code === 'unavailable' || e.code === 'failed-precondition' || e.code === 'not-found')) ? 'Firestore is not ready. In Firebase open Firestore Database and create the database first, then reload this page.' : 'Could not reach your profile in the cloud. Check your internet and Firestore rules, then try again.';
     const cloudMsg = e => cloudMsg0(e) + (e && e.code ? ' [' + e.code + ']' : '');
     async function autoId(u) {
@@ -1763,7 +2154,7 @@
         PF.forEach(([k]) => { data[k] = PROF[k] || '' });
         if (PROF.userId) data.userId = PROF.userId;
         await setDoc(doc(db, 'users', u.uid), data, { merge: true });
-        if (!PROF.userId) { try { await autoId(u); delete PROF.idError; $('puid').textContent = PROF.userId; $('pu').value = PROF.userId; $('avl').textContent = PROF.userId } catch (e) { console.error(e) } }
+        if (!PROF.userId) { try { await autoId(u); delete PROF.idError; $('puid').textContent = PROF.userId; $('pu').value = PROF.userId } catch (e) { console.error(e) } }
         await syncPublic();
         $('nm').value = PROF.name; try { localStorage.setItem('vf-name', PROF.name) } catch (_) { }
         m.style.color = '#1f9d55'; m.textContent = quiet ? 'Picture saved.' : 'Profile saved.';
@@ -1782,7 +2173,7 @@
         try { await syncPublic() } catch (e) { PROF.userId = old; throw e }
         await setDoc(doc(db, 'users', u.uid), { userId: want }, { merge: true });
         if (old && old !== want) { try { await deleteDoc(doc(db, 'publicProfiles', old)) } catch (e) { console.error(e) } }
-        delete PROF.idError; $('avl').textContent = want; $('puid').textContent = want; m.style.color = '#1f9d55'; m.textContent = 'Username saved.';
+        delete PROF.idError; $('puid').textContent = want; m.style.color = '#1f9d55'; m.textContent = 'Username saved.';
       } catch (e) { console.error(e); m.style.color = 'var(--bad)'; m.textContent = cloudMsg(e) }
     };
     function setAvatar(a) { if (!PROF) return; PROF.avatar = a; paintAv($('pav'), a); paintAv($('avbtn'), a); markSel(); saveProfile(true) }
@@ -1838,7 +2229,7 @@
         paintAv($('avbtn'), 'p9');
         try {
           await loadProfile(u);
-          paintAv($('avbtn'), PROF.avatar); $('avl').textContent = PROF.userId || PROF.name || 'My profile';
+          paintAv($('avbtn'), PROF.avatar);
           const nm = PROF.name || u.displayName || '';
           if (nm) { $('nm').value = nm; $('pn').value = nm }
         } catch (e) { console.error('Profile load failed:', e) }
@@ -1852,9 +2243,10 @@
           );
 
           const snapshot = await getDocs(historyQuery);
-          const cloudHistory = snapshot.docs.map(doc => doc.data()).filter(r => r && Number.isFinite(+r.t) && +r.w >= 0 && +r.w <= 300 && +r.a >= 0 && +r.a <= 100);
+          const cloudHistory = snapshot.docs.map(doc => doc.data());
 
-          const combined = [...loadH(), ...cloudHistory];
+          let anon = []; try { anon = JSON.parse(localStorage.getItem('vf-hist') || '[]') } catch (e) { }
+          const combined = [...loadH(), ...anon, ...cloudHistory];
           const uniqueHistory = new Map();
 
           for (const record of combined) {
@@ -1873,9 +2265,8 @@
           const mergedHistory = [...uniqueHistory.values()]
             .sort((a, b) => Number(a.t) - Number(b.t));
 
-          const ck = r => [r.t, r.w, r.a, r.d, r.k, r.l].join('|'), have = new Set(cloudHistory.map(ck));
-          for (const r of mergedHistory.filter(r => !have.has(ck(r))).slice(-100)) { try { await window.vfSaveCloudHistory(r) } catch (e) { console.error('Upload failed:', e); break } }
           saveH(mergedHistory);
+          await uploadMissing(u, mergedHistory, cloudHistory);
           renderH();
           window.vfSyncPublic();
         } catch (error) {
